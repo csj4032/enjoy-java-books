@@ -20,6 +20,10 @@ public class LowCaloricDishes {
 				new Dish("prawns", false, 400, Dish.Type.FISH),
 				new Dish("salmon", false, 450, Dish.Type.FISH));
 	}
+
+	public static void main(String[] args) {
+
+	}
 }
 
 
