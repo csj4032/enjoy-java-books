@@ -1,20 +1,18 @@
 package ch05;
 
-import lombok.Data;
-import lombok.ToString;
-
 import java.util.*;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 
 public class TraderTransaction {
-	Trader raoul = new Trader("Raoul", "Cambridge");
-	Trader mario = new Trader("Mario", "Milan");
-	Trader alan = new Trader("Alan", "Cambridge");
-	Trader brian = new Trader("Brian", "Cambridge");
 
-	List<Transaction> transactions = Arrays.asList(
+	static Trader raoul = new Trader("Raoul", "Cambridge");
+	static Trader mario = new Trader("Mario", "Milan");
+	static Trader alan = new Trader("Alan", "Cambridge");
+	static Trader brian = new Trader("Brian", "Cambridge");
+
+	static List<Transaction> transactions = Arrays.asList(
 			new Transaction(brian, 2011, 300),
 			new Transaction(raoul, 2012, 1000),
 			new Transaction(raoul, 2011, 400),
@@ -36,19 +34,4 @@ public class TraderTransaction {
 
 	Optional<Transaction> smallestTransaction = transactions.stream().min(Comparator.comparing(Transaction::getValue));
 
-}
-
-@Data
-@ToString
-class Trader {
-	private final String name;
-	private final String city;
-}
-
-@Data
-@ToString
-class Transaction {
-	private final Trader trader;
-	private final int year;
-	private final int value;
 }
