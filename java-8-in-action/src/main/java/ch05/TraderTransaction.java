@@ -4,12 +4,9 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.*;
 
 public class TraderTransaction {
 	Trader raoul = new Trader("Raoul", "Cambridge");
