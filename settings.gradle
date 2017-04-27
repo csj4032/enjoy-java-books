@@ -2,4 +2,5 @@ rootProject.name = 'enjoy-java8'
 include 'java-tobi-tv'
 include 'java-8-in-action'
 include 'java-8-other'
+include 'dynamicBeat'
 
