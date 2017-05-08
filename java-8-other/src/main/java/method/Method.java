@@ -2,16 +2,14 @@ package method;
 
 public class Method {
 
-	{
-		System.out.println("Instance Field : " + Method.class.getName());
-	}
-
-	void whoIs() {
-		System.out.println(Method.class.getName());
-	}
-
 	public static void main(String[] args) {
-		Method method1 = new Method();
-		Method method2 = new Method();
+		String s1 = "홍길동";
+		String s2 = "홍길동";
+		String s3 = "홍" + "길동";
+		String s4 = "홍";
+		s4 = s4 + "길동";
+		System.out.println(s1 == s2);
+		System.out.println(s1 == s3);
+		System.out.println(s1 == s4);
 	}
 }
