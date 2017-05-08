@@ -1,8 +1,10 @@
 package enumLookup;
 
+import com.google.common.base.Enums;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
+import java.util.function.Function;
 
 public enum CardSuit {
 
@@ -21,6 +23,9 @@ public enum CardSuit {
 		this.color = color;
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
 
 	public static CardSuit iterationFindByName(String name) {
 		for (CardSuit suit : CardSuit.values()) {
@@ -34,4 +39,31 @@ public enum CardSuit {
 
 	private static final Map<String, CardSuit> nameIndex = Maps.newHashMapWithExpectedSize(CardSuit.values().length);
 
+	static {
+		for (CardSuit suit : CardSuit.values()) {
+			nameIndex.put(suit.name(), suit);
+		}
+	}
+
+	public static CardSuit lookupByName(String name) {
+		return nameIndex.get(name);
+	}
+
+	public static CardSuit getIfPresent(String name) {
+		return Enums.getIfPresent(CardSuit.class, name).orNull();
+	}
+
+	private static final Map<String, CardSuit> displayNameIndex = Maps.newHashMapWithExpectedSize(CardSuit.values().length);
+
+	static {
+		for (CardSuit suit : CardSuit.values()) {
+			displayNameIndex.put(suit.getDisplayName(), suit);
+		}
+	}
+
+	private static final Function<String, CardSuit> func = EnumUtils.lookupMap(CardSuit.class, e -> e.getDisplayName());
+
+	public static CardSuit lookupByDisplayNameUtil(String displayName) {
+		return func.apply(displayName);
+	}
 }
