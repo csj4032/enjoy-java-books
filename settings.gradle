@@ -1,4 +1,5 @@
 rootProject.name = 'enjoy-java8'
+include 'cracking-the-coding-interview'
 include 'dynamicBeat'
 include 'effective-java'
 include 'java-8-in-action'
