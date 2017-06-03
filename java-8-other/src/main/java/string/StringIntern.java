@@ -29,6 +29,8 @@ public class StringIntern {
 		System.out.println(System.identityHashCode(s4));
 
 		validate("1", 1, 3);
+
+		Map map = new HashMap();
 	}
 
 
