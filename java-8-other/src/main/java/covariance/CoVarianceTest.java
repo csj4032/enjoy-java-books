@@ -1,5 +1,6 @@
 package covariance;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,5 +29,11 @@ public class CoVarianceTest {
 	private void testContraVariance(List<? super B> list) {
 		list.add(new C());
 		//C c = list.get(0);
+	}
+
+	private List<? super B> test(List<? extends B> list) {
+		List<A> list2 = new ArrayList();
+		list2.add(list.get(0));
+		return list2;
 	}
 }
