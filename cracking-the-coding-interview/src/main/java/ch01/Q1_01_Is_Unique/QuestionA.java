@@ -8,12 +8,7 @@ import java.util.Arrays;
  */
 public class QuestionA {
 
-	public static void main(String[] args) {
-		String[] words = {"abcde", "hello", "apple", "kite", "padle", "최봄사랑해해~"};
-		Arrays.asList(words).stream().forEach(w -> System.out.println(isUniqueChars(w)));
-	}
-
-	private static boolean isUniqueChars(String str) {
+	public static boolean isUniqueChars(String str) {
 		boolean[] char_set = new boolean[100000];
 		for (int i = 0; i < str.length(); i++) {
 			int val = str.charAt(i);
@@ -21,5 +16,10 @@ public class QuestionA {
 			char_set[val] = true;
 		}
 		return true;
+	}
+
+	public static void main(String[] args) {
+		String[] words = {"abcde", "hello", "apple", "kite", "padle", "최봄사랑해해~"};
+		Arrays.asList(words).stream().forEach(w -> System.out.println(isUniqueChars(w)));
 	}
 }
