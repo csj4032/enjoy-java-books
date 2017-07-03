@@ -13,4 +13,10 @@ public class Person {
 		this.setName("?");
 		this.setSsn("???-??-????");
 	}
+
+	public void display() {
+		System.out.println("Person Information:");
+		System.out.println("\tName:  " + this.getName());
+		System.out.println("\tSoc. Security No.:  " + this.getSsn());
+	}
 }
