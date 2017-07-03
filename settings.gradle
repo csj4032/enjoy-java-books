@@ -4,4 +4,5 @@ include 'dynamicBeat'
 include 'effective-java'
 include 'java-8-in-action'
 include 'java-8-other'
+include 'beginning-java-objects'
 
