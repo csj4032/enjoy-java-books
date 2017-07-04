@@ -1,10 +1,7 @@
 package ch14.srs;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 
-@Data
 public class Transcript {
 
 	private ArrayList<TranscriptEntry> transcriptEntries;
@@ -13,6 +10,14 @@ public class Transcript {
 	public Transcript(Student student) {
 		setStudentOwner(student);
 		transcriptEntries = new ArrayList<>();
+	}
+
+	public void setStudentOwner(Student s) {
+		studentOwner = s;
+	}
+
+	public Student getStudentOwner() {
+		return studentOwner;
 	}
 
 	public boolean verifyCompletion(Course course) {
@@ -42,9 +47,7 @@ public class Transcript {
 			System.out.println("\t(no entries)");
 		} else for (TranscriptEntry te : transcriptEntries) {
 			Section sec = te.getSection();
-
 			Course c = sec.getRepresentedCourse();
-
 			ScheduleOfClasses soc = sec.getOfferedIn();
 
 			System.out.println("\tSemester:        " + soc.getSemester());

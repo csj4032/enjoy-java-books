@@ -1,8 +1,5 @@
 package ch14.srs;
 
-import lombok.Data;
-
-@Data
 public class TranscriptEntry {
 	private String grade;
 	private Student student;
@@ -17,6 +14,38 @@ public class TranscriptEntry {
 		Transcript transcript = student.getTranscript();
 		this.setTranscript(transcript);
 		transcript.addTranscriptEntry(this);
+	}
+
+	public void setStudent(Student s) {
+		student = s;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setSection(Section s) {
+		section = s;
+	}
+
+	public Section getSection() {
+		return section;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setTranscript(Transcript t) {
+		transcript = t;
+	}
+
+	public Transcript getTranscript() {
+		return transcript;
 	}
 
 	public static boolean validateGrade(String grade) {

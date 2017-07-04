@@ -1,13 +1,11 @@
 package ch14.srs;
 
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
-@ToString
 public class Course {
 
 	private String courseNo;
@@ -49,8 +47,7 @@ public class Course {
 	}
 
 	public boolean hasPrerequisites() {
-		if (prerequisites.size() > 0) return true;
-		else return false;
+		return prerequisites.size() > 0 ? true : false;
 	}
 
 	public Collection<Course> getPrerequisites() {
@@ -63,8 +60,8 @@ public class Course {
 		return s;
 	}
 
-	public void addSection(Section s) {
-		offeredAsSection.add(s);
+	public void addSection(Section section) {
+		offeredAsSection.add(section);
 	}
 
 	public String toString() {

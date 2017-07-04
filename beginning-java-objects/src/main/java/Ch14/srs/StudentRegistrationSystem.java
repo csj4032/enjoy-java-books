@@ -59,6 +59,14 @@ public class StudentRegistrationSystem {
 		sec6 = c4.scheduleSection('R', "4:10 - 6:00 PM", "SCI241", 15);
 		sec7 = c5.scheduleSection('M', "4:10 - 6:00 PM", "ARTS25", 40);
 
+		scheduleOfClasses.addSection(sec1);
+		scheduleOfClasses.addSection(sec2);
+		scheduleOfClasses.addSection(sec3);
+		scheduleOfClasses.addSection(sec4);
+		scheduleOfClasses.addSection(sec5);
+		scheduleOfClasses.addSection(sec6);
+		scheduleOfClasses.addSection(sec7);
+
 		p3.agreeToTeach(sec1);
 		p2.agreeToTeach(sec2);
 		p1.agreeToTeach(sec3);
@@ -76,10 +84,48 @@ public class StudentRegistrationSystem {
 
 		EnrollmentStatus status = sec1.enroll(s1);
 		reportStatus(status);
+
+		attemptToEnroll(s1, sec2);
+		attemptToEnroll(s2, sec2);
+		attemptToEnroll(s2, sec3);
+		attemptToEnroll(s2, sec7);
+		attemptToEnroll(s3, sec1);
+
+		sec1.postGrade(s1, "C+");
+		sec1.postGrade(s3, "A");
+		sec2.postGrade(s2, "B+");
+		sec7.postGrade(s2, "A-");
+
+		System.out.println("====================");
+		System.out.println("Schedule of Classes:");
+		System.out.println("====================");
+		System.out.println();
+		scheduleOfClasses.display();
+
+		System.out.println("======================");
+		System.out.println("Professor Information:");
+		System.out.println("======================");
+		System.out.println();
+		p1.display();
+		p2.display();
+		p3.display();
+
+		System.out.println("====================");
+		System.out.println("Student Information:");
+		System.out.println("====================");
+		System.out.println();
+		s1.display();
+		s2.display();
+		s3.display();
 	}
 
 	private static void reportStatus(EnrollmentStatus enrollmentStatus) {
 		System.out.println("Status:  " + enrollmentStatus.value());
 		System.out.println();
+	}
+
+	private static void attemptToEnroll(Student s, Section sec) {
+		System.out.println("Student " + s.getName() + " is attempting to enroll in " + sec.toString());
+		reportStatus(sec.enroll(s));
 	}
 }
