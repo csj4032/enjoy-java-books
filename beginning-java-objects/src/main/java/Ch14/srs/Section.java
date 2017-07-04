@@ -43,6 +43,7 @@ public class Section {
 		}
 
 		Course course = this.getRepresentedCourse();
+
 		if (course.hasPrerequisites()) {
 			for (Course pre : course.getPrerequisites()) {
 				if (!transcript.verifyCompletion(pre)) {
@@ -51,9 +52,7 @@ public class Section {
 			}
 		}
 
-		if (!this.confirmSeatAvailability()) {
-			return EnrollmentStatus.secFull;
-		}
+		if (!this.confirmSeatAvailability()) return EnrollmentStatus.secFull;
 
 		enrolledStudents.put(student.getSsn(), student);
 		student.addSection(this);
@@ -109,9 +108,7 @@ public class Section {
 
 		TranscriptEntry transcriptEntry = assignedGrades.get(student);
 
-		if (transcriptEntry != null) {
-			grade = transcriptEntry.getGrade();
-		}
+		if (transcriptEntry != null) grade = transcriptEntry.getGrade();
 
 		return grade;
 	}
@@ -125,8 +122,7 @@ public class Section {
 	}
 
 	public boolean isSectionOf(Course course) {
-		if (course == representedCourse) return true;
-		else return false;
+		return (course == representedCourse) ? true : false;
 	}
 
 	public String toString() {

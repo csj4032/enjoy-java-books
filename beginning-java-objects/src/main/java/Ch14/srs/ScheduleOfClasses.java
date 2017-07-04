@@ -41,7 +41,6 @@ public class ScheduleOfClasses {
 	}
 
 	public boolean isEmpty() {
-		if (sectionsOffered.size() == 0) return true;
-		else return false;
+		return sectionsOffered.size() == 0 ? true : false;
 	}
 }
