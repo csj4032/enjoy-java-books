@@ -14,4 +14,6 @@ findProject(':netty:api-server')?.name = 'api-server'
 include 'netty:telnet-server'
 findProject(':netty:telnet-server')?.name = 'telnet-server'
 include 'java-chatting-programming'
+include 'growing-object-oriented-software-guided-by-tests'
+include 'goos'
 
