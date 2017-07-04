@@ -1,4 +1,4 @@
-package Ch14.srs;
+package ch14.srs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,5 +21,32 @@ public class Student extends Person {
 
 		this.setTranscript(new Transcript(this));
 		attends = new ArrayList<>();
+	}
+
+	public void display() {
+		super.display();
+		System.out.println("Student-Specific Information:");
+		System.out.println("\tMajor:  " + this.getMajor());
+		System.out.println("\tDegree:  " + this.getDegree());
+		this.displayCourseSchedule();
+		this.printTranscript();
+		System.out.println();
+	}
+
+	public boolean isCurrentlyEnrolledInSimilar(Section section) {
+		boolean foundMatch = false;
+		return foundMatch;
+	}
+
+	public void displayCourseSchedule() {
+		System.out.println("Course Schedule for " + this.getName());
+	}
+
+	public void printTranscript() {
+		this.getTranscript().display();
+	}
+
+	public String toString() {
+		return this.getName() + " (" + this.getSsn() + ") [" + this.getDegree() + " - " + this.getMajor() + "]";
 	}
 }

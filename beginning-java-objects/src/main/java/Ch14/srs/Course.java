@@ -1,9 +1,10 @@
-package Ch14.srs;
+package ch14.srs;
 
 import lombok.Data;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
 @ToString
@@ -41,5 +42,32 @@ public class Course {
 		}
 
 		System.out.println();
+	}
+
+	public void addPrerequisite(Course c) {
+		prerequisites.add(c);
+	}
+
+	public boolean hasPrerequisites() {
+		if (prerequisites.size() > 0) return true;
+		else return false;
+	}
+
+	public Collection<Course> getPrerequisites() {
+		return prerequisites;
+	}
+
+	public Section scheduleSection(char day, String time, String room, int capacity) {
+		Section s = new Section(offeredAsSection.size() + 1, day, time, this, room, capacity);
+		addSection(s);
+		return s;
+	}
+
+	public void addSection(Section s) {
+		offeredAsSection.add(s);
+	}
+
+	public String toString() {
+		return getCourseNo() + ":  " + getCourseName();
 	}
 }

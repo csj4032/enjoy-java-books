@@ -1,4 +1,4 @@
-package Ch14.srs;
+package ch14.srs;
 
 import lombok.Data;
 
@@ -29,6 +29,11 @@ public class Professor extends Person {
 
 	public void displayTeachingAssignments() {
 
+	}
+
+	public void agreeToTeach(Section s) {
+		teaches.add(s);
+		s.setInstructor(this);
 	}
 
 	public String toString() {

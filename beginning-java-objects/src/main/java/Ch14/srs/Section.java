@@ -1,4 +1,4 @@
-package Ch14.srs;
+package ch14.srs;
 
 import lombok.Data;
 
@@ -27,12 +27,45 @@ public class Section {
 
 		setInstructor(null);
 
-		enrolledStudents = new HashMap<String, Student>();
-		assignedGrades = new HashMap<Student, TranscriptEntry>();
+		enrolledStudents = new HashMap<>();
+		assignedGrades = new HashMap<>();
 	}
 
 	public String getFullSectionNo() {
 		return getRepresentedCourse().getCourseNo() + " - " + getSectionNo();
+	}
+
+	public EnrollmentStatus enroll(Student student) {
+		Transcript transcript = student.getTranscript();
+
+		if (student.isCurrentlyEnrolledInSimilar(this) || transcript.verifyCompletion(this.getRepresentedCourse())) {
+			return EnrollmentStatus.prevEnroll;
+		}
+
+		Course course = this.getRepresentedCourse();
+		if (course.hasPrerequisites()) {
+			for (Course pre : course.getPrerequisites()) {
+				if (!transcript.verifyCompletion(pre)) {
+					return EnrollmentStatus.prereq;
+				}
+			}
+		}
+
+		if (!this.confirmSeatAvailability()) {
+			return EnrollmentStatus.secFull;
+		}
+
+		return EnrollmentStatus.success;
+	}
+
+	private boolean confirmSeatAvailability() {
+		if (enrolledStudents.size() < getSeatingCapacity()) return true;
+		else return false;
+	}
+
+	public boolean isSectionOf(Course course) {
+		if (course == representedCourse) return true;
+		else return false;
 	}
 
 	public String toString() {
