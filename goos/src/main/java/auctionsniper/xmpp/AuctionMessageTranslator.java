@@ -31,7 +31,7 @@ public class AuctionMessageTranslator implements MessageListener {
 		}
 	}
 
-	private void translate(String messageBody) throws Exception {
+	private void translate(String messageBody) throws MissingValueException {
 		AuctionEvent event = AuctionEvent.from(messageBody);
 
 		String eventType = event.type();
@@ -44,17 +44,17 @@ public class AuctionMessageTranslator implements MessageListener {
 	}
 
 	private static class AuctionEvent {
-		private final Map<String, String> fields = new HashMap<String, String>();
+		private final Map<String, String> fields = new HashMap<>();
 
 		public String type() throws MissingValueException {
 			return get("Event");
 		}
 
-		public int currentPrice() throws Exception {
+		public int currentPrice() throws MissingValueException {
 			return getInt("CurrentPrice");
 		}
 
-		public int increment() throws Exception {
+		public int increment() throws MissingValueException {
 			return getInt("Increment");
 		}
 
@@ -66,7 +66,7 @@ public class AuctionMessageTranslator implements MessageListener {
 			return get("Bidder");
 		}
 
-		private int getInt(String fieldName) throws Exception {
+		private int getInt(String fieldName) throws MissingValueException {
 			return Integer.parseInt(get(fieldName));
 		}
 
