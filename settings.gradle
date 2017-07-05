@@ -1,6 +1,5 @@
 rootProject.name = 'enjoy-java8'
 include 'cracking-the-coding-interview'
-include 'dynamicBeat'
 include 'effective-java'
 include 'java-8-in-action'
 include 'java-8-other'
@@ -23,4 +22,3 @@ include 'technique-of-java-programmimg:gilbut-java-session2'
 findProject(':technique-of-java-programmimg:gilbut-java-session2')?.name = 'gilbut-java-session2'
 include 'technique-of-java-programmimg:gilbut-java-session3'
 findProject(':technique-of-java-programmimg:gilbut-java-session3')?.name = 'gilbut-java-session3'
-
