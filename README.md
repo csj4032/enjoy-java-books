@@ -4,5 +4,5 @@
 * https://github.com/gilbutITbook/006725
 ## Core Java For Impatient
 * https://github.com/gilbutITbook/006724
-## Tobi Tv
-* https://www.youtube.com/channel/UCcqH2RV1-9ebRBhmN_uaSNg
+## Cracking The Coding Interview
+* https://github.com/careercup/CtCI-6th-Edition
