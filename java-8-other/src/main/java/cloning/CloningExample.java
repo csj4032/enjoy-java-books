@@ -1,5 +1,8 @@
 package cloning;
 
+/**
+ * https://dzone.com/articles/java-cloning-copy-constructor-vs-cloning?edition=306229&utm_source=Daily%20Digest&utm_medium=email&utm_campaign=dd%202017-07-05
+ */
 public class CloningExample {
 	public static void main(String[] args) throws CloneNotSupportedException {
 
