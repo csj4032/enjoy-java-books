@@ -1,4 +1,4 @@
-package jooqZip;
+package jooq;
 
 import org.jooq.lambda.Seq;
 
