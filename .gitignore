@@ -5,5 +5,10 @@ goos/build
 dynamicBeat/build
 java-8-in-action/build
 java-8-other/build
+<<<<<<< Updated upstream
 java-concurrency-in-practice/build
 technique-of-java-programmimg/gilbut-java-session3/build
+=======
+technique-of-java-programmimg/gilbut-java-session3/build
+the-object-oriented-thought-process/build
+>>>>>>> Stashed changes

@@ -22,5 +22,9 @@ include 'technique-of-java-programmimg:gilbut-java-session2'
 findProject(':technique-of-java-programmimg:gilbut-java-session2')?.name = 'gilbut-java-session2'
 include 'technique-of-java-programmimg:gilbut-java-session3'
 findProject(':technique-of-java-programmimg:gilbut-java-session3')?.name = 'gilbut-java-session3'
+<<<<<<< Updated upstream
 include 'java-concurrency-in-practice'
 
+=======
+include 'the-object-oriented-thought-process'
+>>>>>>> Stashed changes
