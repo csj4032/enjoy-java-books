@@ -15,7 +15,6 @@ import java.util.concurrent.Future;
 import static java.nio.file.StandardOpenOption.READ;
 import static org.junit.Assert.assertEquals;
 
-
 public class AsyncFileTest {
 
 	@Test
