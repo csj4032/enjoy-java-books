@@ -6,3 +6,5 @@
 * https://github.com/gilbutITbook/006724
 ## Cracking The Coding Interview
 * https://github.com/careercup/CtCI-6th-Edition
+## 자바 코딩, 이럴 땐 이렇게
+* URL : https://github.com/wikibook/java-coding-with-pmd
