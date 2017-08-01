@@ -25,3 +25,5 @@ findProject(':technique-of-java-programmimg:gilbut-java-session3')?.name = 'gilb
 include 'java-concurrency-in-practice'
 include 'the-object-oriented-thought-process'
 include 'java-jungsuk'
+include 'java-coding-with-pmd'
+
