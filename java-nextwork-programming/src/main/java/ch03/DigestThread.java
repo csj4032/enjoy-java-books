@@ -1,3 +1,5 @@
+package ch03;
+
 public class DigestThread extends Thread implements Digest {
 
 	private String filename;
@@ -8,7 +10,7 @@ public class DigestThread extends Thread implements Digest {
 
 	@Override
 	public void run() {
-		getDigestString(filename);
+		System.out.println(getDigestString(filename));
 	}
 
 	public static void main(String[] args) {

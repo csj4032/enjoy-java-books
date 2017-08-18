@@ -1,3 +1,5 @@
+package ch03;
+
 public class DigestRunnable implements Digest, Runnable {
 
 	private String filename;
