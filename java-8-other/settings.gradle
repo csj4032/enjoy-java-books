@@ -1,3 +1,0 @@
-include '../netty/api-server'
-findProject(':../netty/api-server')?.name = 'api-server'
-
