@@ -35,6 +35,7 @@ public class Stack implements Cloneable {
 	public Stack clone() {
 		try {
 			Stack result = (Stack) super.clone();
+			// 릴리스 1.5부터는 배열에 Clone을 호출하면 반환되는 배열의 컴파일 시점 (compile-time) 자료형은 복제 대상 배열의 자료형과 같다.
 			result.elements = elements.clone();
 			return result;
 		} catch (CloneNotSupportedException e) {
