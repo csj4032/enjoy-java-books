@@ -2,15 +2,11 @@ package ch05;
 
 import ch03.ExecuteAround;
 import ch04.Dish;
-import com.google.common.base.Stopwatch;
-import org.apache.commons.lang3.time.StopWatch;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,11 +43,10 @@ public class NumberStream {
 				.flatMap(a -> IntStream.rangeClosed(a, 1000000).parallel().mapToObj(b -> new double[]{a, b, Math.sqrt(a * a + b * b)}).filter(t -> t[2] % 1 == 0));
 
 		List<double[]> doubles = new ArrayList<>();
-		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
+
 		//pythagoreanTriples.limit(5).forEach(t -> System.out.println(Arrays.toString(t)));
 		//pythagoreanTriples2.limit(50000).forEach(t -> doubles.add(t));
-		stopWatch.stop();
+
 		//System.out.println(doubles.size());
 		//System.out.println(stopWatch.toString());
 
