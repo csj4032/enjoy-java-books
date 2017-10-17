@@ -12,8 +12,7 @@ public class PrintAnnotation {
 		} catch (Exception ex) {
 			throw new IllegalArgumentException(ex);
 		}
-		return element.getAnnotation(annotationType
-				.asSubclass(Annotation.class));
+		return element.getAnnotation(annotationType.asSubclass(Annotation.class));
 	}
 
 	public static void main(String[] args) throws Exception {
