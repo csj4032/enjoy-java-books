@@ -1,4 +1,4 @@
-group 'junit-in-action'
+group 'java-refactoring-for-beginner'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
