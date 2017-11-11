@@ -1,8 +1,5 @@
 dependencies {
-    compile group: 'com.google.guava', name: 'guava', version: '21.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
-    compile group: 'org.jooq', name: 'jool', version: '0.9.12'
     compile group: 'io.vavr', name: 'vavr', version: '0.9.0'
     testCompile 'com.jayway.awaitility:awaitility:1.7.0'
 }

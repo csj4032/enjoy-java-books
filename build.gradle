@@ -14,7 +14,8 @@ allprojects {
     }
 
     dependencies {
-        compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+        //compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
+        compile files ('lib/lombok-edge.jar')
         compile group: 'com.google.guava', name: 'guava', version: '21.0'
         compile group: 'org.jooq', name: 'jool', version: '0.9.12'
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
