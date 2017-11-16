@@ -1,9 +1,6 @@
 package ch15.srs;
 
-import ch14.srs.Course;
 import ch14.srs.*;
-
-import java.util.ArrayList;
 
 public class StudentRegistrationSystem {
 

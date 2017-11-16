@@ -1,13 +1,30 @@
 package chapter04.item13;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ThreadNonSafe implements Runnable {
 
 	private int index;
 	private Member member;
 
+	public static final Number[] numbers = {1, 2, 3, 4, 5};
+	public static final List<String> numberList;
+	public static final List<String> unmodifiableListNumberList;
+
+	static {
+		numberList = Arrays.asList("one", "two", "three");
+		//numberList = new ArrayList<>(Arrays.asList("one", "two", "three"));
+		unmodifiableListNumberList = Collections.unmodifiableList(numberList);
+	}
+
 	public ThreadNonSafe(int index, Member member) {
+		//numberList.add("four");
+		numberList.remove("four");
+		//unmodifiableListNumberList.add("four");
+
 		this.index = index;
 		this.member = member;
 	}

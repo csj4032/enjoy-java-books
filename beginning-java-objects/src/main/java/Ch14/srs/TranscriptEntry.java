@@ -1,4 +1,4 @@
-package ch14.srs;
+package Ch14.srs;
 
 public class TranscriptEntry {
 	private String grade;
