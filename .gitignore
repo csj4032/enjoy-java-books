@@ -1,6 +1,7 @@
 .gradle
 .idea
 *.iml
+agile-software-development/patterns/command/activeObject/out/
 beginning-java-objects/build
 beginning-java-objects/out
 cracking-the-coding-interview/build
@@ -9,8 +10,6 @@ effective-java/build
 effective-java/out
 goos/build
 goos/out
-dynamicBeat/build
-dynamicBeat/out
 java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
