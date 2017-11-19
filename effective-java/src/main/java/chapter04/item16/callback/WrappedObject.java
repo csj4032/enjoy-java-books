@@ -1,4 +1,4 @@
-package chapter04.item18.callback;
+package chapter04.item16.callback;
 
 public class WrappedObject implements SomethingWithCallback {
 
