@@ -1,6 +1,8 @@
 package chapter05.item29;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Favorites {
@@ -16,12 +18,12 @@ public class Favorites {
 		return type.cast(favorites.get(type));
 	}
 
-	// Typesafe heterogeneous container pattern - client
 	public static void main(String[] args) {
 		Favorites f = new Favorites();
 		f.putFavorite(String.class, "Java");
 		f.putFavorite(Integer.class, 0xcafebabe);
 		f.putFavorite(Class.class, Favorites.class);
+		f.putFavorite(List.class, new ArrayList());
 
 		String favoriteString = f.getFavorite(String.class);
 		int favoriteInteger = f.getFavorite(Integer.class);
