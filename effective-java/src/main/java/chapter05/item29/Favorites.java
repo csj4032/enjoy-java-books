@@ -24,6 +24,7 @@ public class Favorites {
 		f.putFavorite(Integer.class, 0xcafebabe);
 		f.putFavorite(Class.class, Favorites.class);
 		f.putFavorite(List.class, new ArrayList());
+		//f.putFavorite(Class<String>.class, Favorites.class);
 
 		String favoriteString = f.getFavorite(String.class);
 		int favoriteInteger = f.getFavorite(Integer.class);
