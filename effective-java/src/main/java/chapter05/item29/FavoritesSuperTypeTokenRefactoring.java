@@ -1,5 +1,7 @@
 package chapter05.item29;
 
+import org.springframework.core.ResolvableType;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -48,5 +50,10 @@ public class FavoritesSuperTypeTokenRefactoring {
 		System.out.println(f.getFavorite(new TypeReference<List<Integer>>(){}));
 		System.out.println(f.getFavorite(new TypeReference<List<String>>(){}));
 		System.out.println(f.getFavorite(new TypeReference<List<List<String>>>(){}));
+
+		ResolvableType resolvableType = ResolvableType.forInstance(new TypeReference<List<String>>(){});
+		System.out.println(resolvableType.getSuperType().getGeneric(0).getType());
+		System.out.println(resolvableType.getSuperType().getGeneric(0).getNested(2).getType());
+		System.out.println(resolvableType.getSuperType().hasUnresolvableGenerics());
 	}
 }
