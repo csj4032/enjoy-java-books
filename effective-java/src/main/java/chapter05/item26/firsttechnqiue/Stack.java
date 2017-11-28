@@ -35,7 +35,7 @@ public class Stack<E> {
 
 	public static void main(String[] args) {
 		Stack<String> stack = new Stack<>();
-		for (String arg : args)
+		for (String arg : new String[]{"a","b"})
 			stack.push(arg);
 
 		while (!stack.isEmpty())
