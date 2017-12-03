@@ -1,7 +1,5 @@
 package ch15.srs;
 
-import ch14.srs.*;
-
 public class StudentRegistrationSystem {
 
 	public static Faculty faculty = new Faculty();
