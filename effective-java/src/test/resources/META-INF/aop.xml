@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="chapter06.item35.log.LogAspect"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="chapter06.item35.log.*"/>
+        </weaver>
+    </aspects>
+</aspectj>
