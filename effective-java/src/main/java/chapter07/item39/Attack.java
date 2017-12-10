@@ -25,5 +25,9 @@ public class Attack {
 		val boo = 1;
 
 		log.info("{}, {}", foo, boo);
+
+		Date startSub = new DateSub();
+		Date endSub = new DateSub();
+		PeriodClone pc = new PeriodClone(startSub, endSub);
 	}
 }
