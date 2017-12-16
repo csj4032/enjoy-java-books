@@ -1,4 +1,9 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.akhikhl.gretty' version '1.4.2'
+}
+
 dependencies {
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
-    compile files('lib/jcip-annotations-src.jar')
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
 }

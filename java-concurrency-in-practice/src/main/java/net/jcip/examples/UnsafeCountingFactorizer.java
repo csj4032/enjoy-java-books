@@ -1,6 +1,6 @@
 package net.jcip.examples;
 
-import net.jcip.annotations.ThreadSafe;
+import net.jcip.annotations.NotThreadSafe;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.Servlet;
@@ -11,14 +11,19 @@ import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-@ThreadSafe
-public class StatelessFactorizer extends GenericServlet implements Servlet {
+@NotThreadSafe
+public class UnsafeCountingFactorizer extends GenericServlet implements Servlet {
+	private long count = 0;
 
-	@Override
-	public void service(ServletRequest req, ServletResponse res) throws IOException {
+	public long getCount() {
+		return count;
+	}
+
+	public void service(ServletRequest req, ServletResponse resp) throws IOException {
 		BigInteger i = extractFromRequest(req);
 		BigInteger[] factors = factor(i);
-		encodeIntoResponse(res, factors);
+		++count;
+		encodeIntoResponse(resp, factors);
 	}
 
 	void encodeIntoResponse(ServletResponse res, BigInteger[] factors) throws IOException {
@@ -26,7 +31,8 @@ public class StatelessFactorizer extends GenericServlet implements Servlet {
 		PrintWriter printWriter = res.getWriter();
 		printWriter.print("<html>");
 		printWriter.print("<body>");
-		printWriter.print("<h2> Stateless " + Arrays.toString(factors) + "</h2>");
+		printWriter.print("<h2> UnsafeCounting " + Arrays.toString(factors) + "</h2>");
+		printWriter.print("<h2> UnsafeCounting " + count + "</h2>");
 		printWriter.print("</body>");
 		printWriter.print("</html>");
 	}
@@ -36,6 +42,7 @@ public class StatelessFactorizer extends GenericServlet implements Servlet {
 	}
 
 	BigInteger[] factor(BigInteger i) {
-		return new BigInteger[]{i};
+		// Doesn't really factor
+		return new BigInteger[] { i };
 	}
 }
