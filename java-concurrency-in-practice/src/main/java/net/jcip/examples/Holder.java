@@ -10,7 +10,6 @@ public class Holder {
 
 	public void assertSanity() {
 		if (n != n) {
-			System.out.println("!!!!!");
 			throw new AssertionError("This statement is false");
 		}
 	}

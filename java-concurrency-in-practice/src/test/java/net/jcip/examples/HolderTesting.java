@@ -24,7 +24,7 @@ class HolderThread implements Runnable {
 	@Override
 	public void run() {
 		for (int i = 0; i < 50000000; i++) {
-			//System.out.println(name + " = " + i);
+			System.out.println(name + " = " + i);
 			holder = new Holder(i);
 			holder.assertSanity();
 		}
