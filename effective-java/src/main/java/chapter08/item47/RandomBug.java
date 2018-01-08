@@ -1,6 +1,7 @@
 package chapter08.item47;
 
 import java.util.Random;
+import java.util.Iterator;
 
 public class RandomBug {
 
