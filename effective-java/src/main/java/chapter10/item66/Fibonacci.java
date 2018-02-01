@@ -1,5 +1,8 @@
 package chapter10.item66;
 
+import lombok.experimental.var;
+import lombok.val;
+
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
@@ -8,6 +11,11 @@ public class Fibonacci extends RecursiveTask<Integer> {
 	final int n;
 
 	Fibonacci(int n) {
+		val a = "a";
+		//final String a = "a";
+
+
+
 		this.n = n;
 	}
 
