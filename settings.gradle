@@ -36,4 +36,6 @@ findProject(':agile-software-development:patterns:command')?.name = 'command'
 include 'activeObject'
 include 'agile-software-development:patterns:command:activeObejct'
 findProject(':agile-software-development:patterns:command:activeObejct')?.name = 'activeObejct'
+include 'agile-software-development:refractoring'
+findProject(':agile-software-development:refractoring')?.name = 'refractoring'
 
