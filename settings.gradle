@@ -38,4 +38,6 @@ include 'agile-software-development:patterns:command:activeObejct'
 findProject(':agile-software-development:patterns:command:activeObejct')?.name = 'activeObejct'
 include 'agile-software-development:refractoring'
 findProject(':agile-software-development:refractoring')?.name = 'refractoring'
+include 'agile-software-development:bowling-game'
+findProject(':agile-software-development:bowling-game')?.name = 'bowling-game'
 

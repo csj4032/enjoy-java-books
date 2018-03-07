@@ -2,6 +2,7 @@
 .idea
 *.iml
 agile-software-development/patterns/command/activeObject/out/
+agile-software-development/bowling-game/out
 beginning-java-objects/build
 beginning-java-objects/out
 cracking-the-coding-interview/build
