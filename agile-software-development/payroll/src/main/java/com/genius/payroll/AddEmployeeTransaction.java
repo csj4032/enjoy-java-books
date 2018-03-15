@@ -1,6 +1,6 @@
 package com.genius.payroll;
 
-public abstract class AddEmployeeTransaction implements Transction {
+public abstract class AddEmployeeTransaction implements Transaction {
 
 	private int itsEmpId;
 	private String itsName;
@@ -12,13 +12,17 @@ public abstract class AddEmployeeTransaction implements Transction {
 		this.itsAddress = itsAddress;
 	}
 
-	@Override
-	public void transaction() {
+	abstract PaymentClassification getClassification();
 
-	}
+	abstract PaymentSchedule getSchedule();
 
 	@Override
 	public void execute() {
-
+		PaymentClassification paymentClassification = getClassification();
+		PaymentSchedule paymentSchedule = getSchedule();
+		Employee employee = new Employee(itsEmpId, itsName, itsAddress);
+		employee.setClassification(paymentClassification);
+		employee.setSchedule(paymentSchedule);
+		PayrollDatabase.AddEmployee(itsEmpId, employee);
 	}
 }

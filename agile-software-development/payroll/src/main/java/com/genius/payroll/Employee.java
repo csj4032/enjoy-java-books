@@ -1,12 +1,36 @@
 package com.genius.payroll;
 
-public class Employee {
+import lombok.Getter;
+import lombok.Setter;
 
-	private int itsEmpid;
-	private String itsName;
-	private String itsAddress;
-	private PaymentClassification itsClassification;
-	private PaymentSchedule itsSchedule;
-	private PaymentMethod itsPaymentMethod;
-	private Affiliation itsAffiliation;
+import java.util.Date;
+
+@Getter
+@Setter
+public class Employee {
+	private int empId;
+	private String name;
+	private String address;
+	private PaymentClassification classification;
+	private PaymentSchedule schedule;
+	private PaymentMethod paymentMethod;
+	private Affiliation affiliation;
+
+	public Employee(int empId, String name, String address) {
+		this.empId = empId;
+		this.name = name;
+		this.address = address;
+		this.affiliation = new NoAffiliation();
+		this.classification = null;
+		this.schedule = null;
+		this.paymentMethod = null;
+	}
+
+	boolean isPayDate(Date payDate) {
+		return false;
+	}
+
+	public void payday(Paycheck paycheck) {
+
+	}
 }

@@ -1,4 +1,6 @@
 package com.genius.payroll;
 
-public class Affiliation {
+public interface Affiliation {
+
+	double CalculateDeductions(Paycheck paycheck);
 }

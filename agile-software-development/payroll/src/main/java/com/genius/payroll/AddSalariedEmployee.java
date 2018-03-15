@@ -8,4 +8,12 @@ public class AddSalariedEmployee extends AddEmployeeTransaction {
 		super(itsEmpId, itsName, itsAddress);
 		this.salary = salary;
 	}
+
+	public PaymentClassification getClassification() {
+		return new SalariedClassification(salary);
+	}
+
+	public PaymentSchedule getSchedule() {
+		return new MonthlySchedule();
+	}
 }

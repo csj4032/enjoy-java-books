@@ -9,7 +9,13 @@ public class AddHourlyEmployee extends AddEmployeeTransaction {
 		this.hourlyRate = hourlyRate;
 	}
 
-	public PaymentClassfication getClassification() {
+	@Override
+	PaymentClassification getClassification() {
+		return null;
+	}
+
+	@Override
+	public PaymentSchedule getSchedule() {
 		return null;
 	}
 }
