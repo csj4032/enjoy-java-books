@@ -19,11 +19,7 @@ public class TestSleepCommand extends TestCase {
 
 	@Test
 	public void testSleep() throws Exception {
-		Command wakeup = new Command() {
-			public void execute() {
-				commandExecuted = true;
-			}
-		};
+		Command wakeup = () -> commandExecuted = true;
 		ActiveObjectEngine e = new ActiveObjectEngine();
 		SleepCommand c = new SleepCommand(1000, e, wakeup);
 		e.addCommand(c);
