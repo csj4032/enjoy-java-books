@@ -1,16 +1,19 @@
 package com.genius.payroll;
 
+import lombok.Getter;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HourlyClassification implements PaymentClassification {
 
-	private final double hourlyRate;
+	@Getter
+	private final double rate;
 	private Map<LocalDate, TimeCard> timeCards = new HashMap<>();
 
 	public HourlyClassification(double hourlyRate) {
-		this.hourlyRate = hourlyRate;
+		this.rate = hourlyRate;
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class HourlyClassification implements PaymentClassification {
 		double hours = timeCard.getHours();
 		double overtime = Math.max(0.0, hours - 8.0);
 		double straightTime = hours - overtime;
-		return (straightTime * hourlyRate) + (overtime * hours * 1.5);
+		return (straightTime * rate) + (overtime * hours * 1.5);
 	}
 
 	public void addTimeCard(TimeCard timeCard) {

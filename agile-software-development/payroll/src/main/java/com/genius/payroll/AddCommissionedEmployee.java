@@ -4,6 +4,7 @@ public class AddCommissionedEmployee extends AddEmployeeTransaction {
 
 	private final double salary;
 	private final double commissionRate;
+	private PaymentClassification paymentClassification;
 
 	public AddCommissionedEmployee(long empId, String name, String address, double salary, double commissionRate) {
 		super(empId, name, address);

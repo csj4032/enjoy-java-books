@@ -6,17 +6,15 @@ import lombok.Getter;
 public class AddHourlyEmployee extends AddEmployeeTransaction {
 
 	private double hourlyRate;
-	private PaymentClassification hourlyClassification;
 
 	public AddHourlyEmployee(long empId, String name, String address, double hourlyRate) {
 		super(empId, name, address);
 		this.hourlyRate = hourlyRate;
-		hourlyClassification = new HourlyClassification(hourlyRate);
 	}
 
 	@Override
 	public PaymentClassification getClassification() {
-		return hourlyClassification;
+		return new HourlyClassification(hourlyRate);
 	}
 
 	@Override

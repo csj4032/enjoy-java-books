@@ -51,7 +51,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testTimeCardTransaction() throws InvalidEmployeeException {
 		long empId = 2;
 		LocalDate date = LocalDate.of(2001, 12, 31);
@@ -61,7 +60,10 @@ public class PayrollTest {
 		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(date, 8.0, empId);
 		timeCardTransaction.execute();
 
-		HourlyClassification hourlyClassification = (HourlyClassification) addHourlyEmployee.getClassification();
+		Employee employee = PayrollDatabase.getEmployee(empId);
+		assertNotNull(employee);
+
+		HourlyClassification hourlyClassification = (HourlyClassification) employee.getClassification();
 		TimeCard timeCard = hourlyClassification.getTimeCard(date);
 		assertThat(8.0, is(timeCard.getHours()));
 	}
@@ -111,6 +113,15 @@ public class PayrollTest {
 		AddCommissionedEmployee addCommissionedEmployee = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
 		addCommissionedEmployee.execute();
 
-		ChangeHourlyTransaction changeHourlyTransaction;
+		ChangeHourlyTransaction changeHourlyTransaction = new ChangeHourlyTransaction(empId, 27.52);
+		changeHourlyTransaction.execute();
+
+		Employee employee = PayrollDatabase.getEmployee(empId);
+
+		HourlyClassification hourlyClassification = (HourlyClassification) employee.getClassification();
+		assertThat(27.52, is(hourlyClassification.getRate()));
+
+		WeeklySchedule paymentSchedule = (WeeklySchedule) employee.getSchedule();
+		assertNotNull(paymentSchedule);
 	}
 }
