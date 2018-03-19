@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Employee {
-	private int empId;
+	private long empId;
 	private String name;
 	private String address;
 	private PaymentClassification classification;
@@ -16,7 +16,7 @@ public class Employee {
 	private PaymentMethod paymentMethod;
 	private Affiliation affiliation;
 
-	public Employee(int empId, String name, String address) {
+	public Employee(long empId, String name, String address) {
 		this.empId = empId;
 		this.name = name;
 		this.address = address;
