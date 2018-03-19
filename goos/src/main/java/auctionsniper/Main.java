@@ -24,7 +24,7 @@ public class Main {
 	@SuppressWarnings("unused")
 	private Chat notToBeGCd;
 
-	public Main() throws Exception {
+	public Main() {
 		startUserInterface();
 	}
 
@@ -36,11 +36,7 @@ public class Main {
 	private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
 		Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), new MessageListener() {
 			public void processMessage(Chat chat, Message message) {
-				SwingUtilities.invokeLater(new Runnable() {
-					public void run() {
-						ui.showStatus(MainWindow.STATUS_LOST);
-					}
-				});
+				SwingUtilities.invokeLater(() -> ui.showStatus(MainWindow.STATUS_LOST));
 			}
 		});
 		this.notToBeGCd = chat;
@@ -58,11 +54,7 @@ public class Main {
 		return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
 	}
 
-	private void startUserInterface() throws Exception {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				ui = new MainWindow();
-			}
-		});
+	private void startUserInterface() {
+		SwingUtilities.invokeLater(() -> ui = new MainWindow());
 	}
 }
