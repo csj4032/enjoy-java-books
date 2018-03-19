@@ -92,6 +92,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testChangeNameTransaction() {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -102,5 +103,14 @@ public class PayrollTest {
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
 		assertThat("Bob", is(employee.getName()));
+	}
+
+	@Test
+	public void testChangeHourlyTransaction() {
+		long empId = 4l;
+		AddCommissionedEmployee addCommissionedEmployee = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
+		addCommissionedEmployee.execute();
+
+		ChangeHourlyTransaction changeHourlyTransaction;
 	}
 }
