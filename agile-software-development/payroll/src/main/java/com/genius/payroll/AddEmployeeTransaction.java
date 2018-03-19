@@ -2,14 +2,14 @@ package com.genius.payroll;
 
 public abstract class AddEmployeeTransaction implements Transaction {
 
-	private long itsEmpId;
-	private String itsName;
-	private String itsAddress;
+	private long empId;
+	private String name;
+	private String address;
 
-	public AddEmployeeTransaction(long itsEmpId, String itsName, String itsAddress) {
-		this.itsEmpId = itsEmpId;
-		this.itsName = itsName;
-		this.itsAddress = itsAddress;
+	public AddEmployeeTransaction(long empId, String name, String address) {
+		this.empId = empId;
+		this.name = name;
+		this.address = address;
 	}
 
 	abstract PaymentClassification getClassification();
@@ -21,10 +21,10 @@ public abstract class AddEmployeeTransaction implements Transaction {
 		PaymentClassification paymentClassification = getClassification();
 		PaymentSchedule paymentSchedule = getSchedule();
 		PaymentMethod paymentMethod = new HoldMethod();
-		Employee employee = new Employee(itsEmpId, itsName, itsAddress);
+		Employee employee = new Employee(empId, name, address);
 		employee.setClassification(paymentClassification);
 		employee.setSchedule(paymentSchedule);
 		employee.setPaymentMethod(paymentMethod);
-		PayrollDatabase.AddEmployee(itsEmpId, employee);
+		PayrollDatabase.addEmployee(empId, employee);
 	}
 }

@@ -1,17 +1,22 @@
 package com.genius.payroll;
 
+import lombok.Getter;
+
+@Getter
 public class AddHourlyEmployee extends AddEmployeeTransaction {
 
 	private double hourlyRate;
+	private PaymentClassification hourlyClassification;
 
-	public AddHourlyEmployee(int itsEmpId, String itsName, String itsAddress, double hourlyRate) {
-		super(itsEmpId, itsName, itsAddress);
+	public AddHourlyEmployee(long empId, String name, String address, double hourlyRate) {
+		super(empId, name, address);
 		this.hourlyRate = hourlyRate;
+		hourlyClassification = new HourlyClassification(hourlyRate);
 	}
 
 	@Override
-	PaymentClassification getClassification() {
-		return null;
+	public PaymentClassification getClassification() {
+		return hourlyClassification;
 	}
 
 	@Override

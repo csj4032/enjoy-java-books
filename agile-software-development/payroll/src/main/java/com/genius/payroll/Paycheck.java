@@ -3,6 +3,7 @@ package com.genius.payroll;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
 
@@ -10,14 +11,14 @@ import java.util.Map;
 @Setter
 public class Paycheck {
 
-	private Date payPeriodStartDate;
-	private Date payPeriodEndDate;
+	private LocalDate payPeriodStartDate;
+	private LocalDate payPeriodEndDate;
 	private double grossPay;
 	private double netPay;
 	private double deductions;
 	private Map<String, String> fields;
 
-	public Paycheck(Date payPeriodStart, Date payPeriodEnd) {
+	public Paycheck(LocalDate payPeriodStart, LocalDate payPeriodEnd) {
 		this.payPeriodStartDate = payPeriodStart;
 		this.payPeriodEndDate = payPeriodEnd;
 	}
