@@ -51,6 +51,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testTimeCardTransaction() throws InvalidEmployeeException {
 		long empId = 2;
 		LocalDate date = LocalDate.of(2001, 12, 31);
@@ -63,5 +64,43 @@ public class PayrollTest {
 		HourlyClassification hourlyClassification = (HourlyClassification) addHourlyEmployee.getClassification();
 		TimeCard timeCard = hourlyClassification.getTimeCard(date);
 		assertThat(8.0, is(timeCard.getHours()));
+	}
+
+	@Test
+	@Ignore
+	public void testAddServiceCharge() {
+		long empId = 2;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+
+		Employee employee = PayrollDatabase.getEmployee(empId);
+		assertThat("Bill", is(employee.getName()));
+
+		UnionAffiliation unionAffiliation = new UnionAffiliation(12.5);
+		employee.setAffiliation(unionAffiliation);
+
+		long memberId = 86l;
+		LocalDate date = LocalDate.of(2001, 12, 1);
+		PayrollDatabase.addUnionMember(memberId, employee);
+
+		ServiceChargeTransaction serviceChargeTransaction = new ServiceChargeTransaction(memberId, date, 12.95);
+		serviceChargeTransaction.execute();
+
+		ServiceCharge serviceCharge = unionAffiliation.getServiceCharge(date);
+
+		assertThat(12.95, is(serviceCharge.getAmount()));
+	}
+
+	@Test
+	public void testChangeNameTransaction() {
+		long empId = 2;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+
+		ChangeNameTransaction changeNameTransaction = new ChangeNameTransaction(empId, "Bob");
+		changeNameTransaction.execute();
+
+		Employee employee = PayrollDatabase.getEmployee(empId);
+		assertThat("Bob", is(employee.getName()));
 	}
 }
