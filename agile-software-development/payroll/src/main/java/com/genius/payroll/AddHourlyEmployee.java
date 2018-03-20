@@ -19,6 +19,6 @@ public class AddHourlyEmployee extends AddEmployeeTransaction {
 
 	@Override
 	public PaymentSchedule getSchedule() {
-		return null;
+		return new WeeklySchedule();
 	}
 }

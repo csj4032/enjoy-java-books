@@ -19,7 +19,7 @@ public class PaydayTransaction implements Transaction {
 	@Override
 	public void execute() {
 		PayrollDatabase.getAllEmployeeIds().stream()
-				.filter(e -> (PayrollDatabase.getEmployee(e).isPayDate(payDate)))
+				.filter(e -> PayrollDatabase.getEmployee(e).isPayDate(payDate))
 				.forEach(e -> {
 					Employee employee = PayrollDatabase.getEmployee(e);
 					Paycheck paycheck = new Paycheck(employee.getPayPeriodStartDate(payDate), payDate);
