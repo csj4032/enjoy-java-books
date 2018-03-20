@@ -1,0 +1,6 @@
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.15.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.15.Final'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.11'
+}

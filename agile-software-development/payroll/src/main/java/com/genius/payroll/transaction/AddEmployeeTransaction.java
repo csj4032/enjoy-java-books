@@ -1,4 +1,8 @@
-package com.genius.payroll;
+package com.genius.payroll.transaction;
+
+import com.genius.payroll.*;
+import com.genius.payroll.domain.Employee;
+import com.genius.payroll.persistence.PayrollDatabase;
 
 public abstract class AddEmployeeTransaction implements Transaction {
 
@@ -12,9 +16,9 @@ public abstract class AddEmployeeTransaction implements Transaction {
 		this.address = address;
 	}
 
-	abstract PaymentClassification getClassification();
+	protected abstract PaymentClassification getClassification();
 
-	abstract PaymentSchedule getSchedule();
+	protected abstract PaymentSchedule getSchedule();
 
 	@Override
 	public void execute() {

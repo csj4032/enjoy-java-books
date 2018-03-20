@@ -1,5 +1,9 @@
-package com.genius.payroll;
+package com.genius.payroll.transaction;
 
+import com.genius.payroll.Paycheck;
+import com.genius.payroll.persistence.PayrollDatabase;
+import com.genius.payroll.Transaction;
+import com.genius.payroll.domain.Employee;
 import lombok.ToString;
 
 import java.time.LocalDate;

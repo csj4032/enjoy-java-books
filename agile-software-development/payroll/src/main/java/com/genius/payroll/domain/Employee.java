@@ -1,22 +1,36 @@
-package com.genius.payroll;
+package com.genius.payroll.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.genius.payroll.*;
+import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
 @Setter
 @ToString
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "EMPLOYEE")
 public class Employee {
-	private long empId;
+
+	@Id
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	private Long empId;
+	@Column(name = "NAME")
 	private String name;
+	@Column(name = "ADDRESS")
 	private String address;
+	@Transient
 	private PaymentClassification classification;
+	@Transient
 	private PaymentSchedule schedule;
+	@Transient
 	private PaymentMethod paymentMethod;
+	@Transient
 	private Affiliation affiliation;
 
 	public Employee(long empId, String name, String address) {
@@ -29,7 +43,7 @@ public class Employee {
 		this.paymentMethod = null;
 	}
 
-	boolean isPayDate(LocalDate payDate) {
+	public boolean isPayDate(LocalDate payDate) {
 		return schedule.isPayDate(payDate);
 	}
 

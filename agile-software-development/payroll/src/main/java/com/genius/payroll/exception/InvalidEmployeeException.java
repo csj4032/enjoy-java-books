@@ -1,4 +1,6 @@
-package com.genius.payroll;
+package com.genius.payroll.exception;
+
+import com.genius.payroll.exception.EmployeeDatabaseException;
 
 public class InvalidEmployeeException extends EmployeeDatabaseException {
 

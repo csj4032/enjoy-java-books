@@ -1,5 +1,7 @@
 package com.genius.payroll;
 
+import com.genius.payroll.transaction.AddEmployeeTransaction;
+
 public class AddCommissionedEmployee extends AddEmployeeTransaction {
 
 	private final double salary;
@@ -13,12 +15,12 @@ public class AddCommissionedEmployee extends AddEmployeeTransaction {
 	}
 
 	@Override
-	PaymentClassification getClassification() {
+	protected PaymentClassification getClassification() {
 		return new CommissionedClassification(salary, commissionRate);
 	}
 
 	@Override
-	PaymentSchedule getSchedule() {
+	protected PaymentSchedule getSchedule() {
 		return new BiweeklySchedule();
 	}
 }

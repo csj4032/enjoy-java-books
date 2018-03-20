@@ -1,5 +1,7 @@
 package com.genius.payroll;
 
+import com.genius.payroll.transaction.AddEmployeeTransaction;
+
 public class AddSalariedEmployee extends AddEmployeeTransaction {
 
 	private double salary;

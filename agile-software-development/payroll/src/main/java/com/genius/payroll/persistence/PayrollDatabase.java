@@ -1,5 +1,8 @@
-package com.genius.payroll;
+package com.genius.payroll.persistence;
 
+import com.genius.payroll.domain.Employee;
+
+import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +14,19 @@ public class PayrollDatabase {
 	private static Map<Long, Long> unionMembers = new HashMap<>();
 
 	public static Employee getEmployee(long empId) {
-		return employees.get(empId);
+		EntityManager entityManager = PersistenceManager.getEntityManagerFactory().createEntityManager();
+		return entityManager.find(Employee.class, empId);
+		//return employees.get(empId);
 	}
 
 	public static void addEmployee(long empId, Employee employee) {
-		employees.putIfAbsent(empId, employee);
+		EntityManager entityManager = PersistenceManager.getEntityManagerFactory().createEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.persist(employee);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		//PersistenceManager.shutdown();
+		//employees.putIfAbsent(empId, employee);
 	}
 
 	public static void deleteEmployee(long empId) {

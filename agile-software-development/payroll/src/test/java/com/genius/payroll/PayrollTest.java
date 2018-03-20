@@ -1,5 +1,9 @@
 package com.genius.payroll;
 
+import com.genius.payroll.domain.Employee;
+import com.genius.payroll.exception.InvalidEmployeeException;
+import com.genius.payroll.persistence.PayrollDatabase;
+import com.genius.payroll.transaction.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -11,7 +15,6 @@ import static org.junit.Assert.*;
 public class PayrollTest {
 
 	@Test
-	@Ignore
 	public void testAddSalariedEmployee() {
 		long empId = 1L;
 		AddEmployeeTransaction addEmployeeTransaction = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
@@ -307,6 +310,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testServiceChargesSpanningMultiplePayPeriods() throws InvalidEmployeeException {
 		long empId = 1l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.24);

@@ -1,4 +1,4 @@
-package com.genius.payroll;
+package com.genius.payroll.exception;
 
 public class EmployeeDatabaseException extends Exception {
 
