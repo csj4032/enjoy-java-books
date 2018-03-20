@@ -179,6 +179,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testPaySingleHourlyEmployeeNoTimeCards() {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -186,5 +187,31 @@ public class PayrollTest {
 		LocalDate payDate = LocalDate.of(2001, 11, 9);
 		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
 		paydayTransaction.execute();
+
+		validateHourlyPayCheck(paydayTransaction, empId, payDate, 0.0);
+	}
+
+	@Test
+	public void testPaySingleHourlyEmployeeOneTimeCard() throws InvalidEmployeeException {
+		long empId = 2;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+		LocalDate payDate = LocalDate.of(2001, 11, 9);
+
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 2.0, empId);
+		timeCardTransaction.execute();
+
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+		validateHourlyPayCheck(paydayTransaction, empId, payDate, 30.5);
+	}
+
+	private void validateHourlyPayCheck(PaydayTransaction paydayTransaction, long empId, LocalDate payDate, double pay) {
+		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
+		assertThat(payDate, is(paycheck.getPayPeriodEndDate()));
+		assertThat(pay, is(paycheck.getGrossPay()));
+		assertThat("Hold", is(paycheck.getField("Disposition")));
+		assertThat(0.0, is(paycheck.getDeductions()));
+		assertThat(pay, is(paycheck.getNetPay()));
 	}
 }

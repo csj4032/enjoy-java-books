@@ -18,12 +18,11 @@ public class HourlyClassification implements PaymentClassification {
 
 	@Override
 	public double calculatePay(Paycheck paycheck) {
-		timeCards.values().stream()
-				.filter(e -> (paycheck.getPayPeriodStartDate().isAfter(e.getDate())))
-				.filter(e -> (paycheck.getPayPeriodEndDate().isBefore(e.getDate())))
+		return timeCards.values().stream()
+				.filter(e -> (paycheck.getPayPeriodStartDate().minusDays(1).isBefore(e.getDate())))
+				.filter(e -> (paycheck.getPayPeriodEndDate().plusDays(1).isAfter(e.getDate())))
 				.mapToDouble(e -> calculatePayForTime(e))
 				.sum();
-		return 0;
 	}
 
 	private double calculatePayForTime(TimeCard timeCard) {
