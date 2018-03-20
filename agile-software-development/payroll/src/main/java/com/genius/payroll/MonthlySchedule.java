@@ -1,6 +1,7 @@
 package com.genius.payroll;
 
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 
 public class MonthlySchedule implements PaymentSchedule {
 
@@ -10,7 +11,8 @@ public class MonthlySchedule implements PaymentSchedule {
 	}
 
 	private boolean isLastDayOfMonth(LocalDate payDate) {
-		return !payDate.plusDays(1).getMonth().equals(payDate.getMonth());
+		//return !payDate.plusDays(1).getMonth().equals(payDate.getMonth());
+		return payDate.equals(payDate.with(TemporalAdjusters.lastDayOfMonth()));
 	}
 
 	@Override

@@ -262,6 +262,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testSalariedUnionMemberDues() {
 		long empId = 1;
 		AddSalariedEmployee addSalariedEmployee = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
@@ -279,6 +280,68 @@ public class PayrollTest {
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
 
 		assertThat(1000 - (fridays * 9.42), is(paycheck.getNetPay()));
+	}
+
+	@Test
+	@Ignore
+	public void testHourlyUnionMemberServiceCharge() throws InvalidEmployeeException {
+		long empId = 1l;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.24);
+		addHourlyEmployee.execute();
+
+		int memberId = 7734;
+		ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(empId, memberId, 9.42);
+		changeMemberTransaction.execute();
+		LocalDate payDate = LocalDate.of(2001, 11, 9);
+		ServiceChargeTransaction serviceChargeTransaction = new ServiceChargeTransaction(memberId, payDate, 19.42);
+		serviceChargeTransaction.execute();
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 8.0, empId);
+		timeCardTransaction.execute();
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
+		assertThat(paycheck.getPayPeriodEndDate(), is(payDate));
+		assertThat(8 * 15.24, is(paycheck.getGrossPay()));
+		assertThat(9.42 + 19.42, is(paycheck.getDeductions()));
+		assertThat((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
+	}
+
+	@Test
+	public void testServiceChargesSpanningMultiplePayPeriods() throws InvalidEmployeeException {
+		long empId = 1l;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.24);
+		addHourlyEmployee.execute();
+		int memberId = 7734;
+		ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(empId, memberId, 9.42);
+		changeMemberTransaction.execute();
+
+		LocalDate earlyDate = LocalDate.of(2001, 11, 2);
+		LocalDate payDate = LocalDate.of(2001, 11, 9);
+		LocalDate lateDate = LocalDate.of(2001, 11, 16);
+
+		ServiceChargeTransaction serviceChargeTransaction = new ServiceChargeTransaction(memberId, payDate, 19.42);
+		serviceChargeTransaction.execute();
+
+		ServiceChargeTransaction serviceChargeTransactionEarly = new ServiceChargeTransaction(memberId, earlyDate, 100.00);
+		serviceChargeTransactionEarly.execute();
+
+		ServiceChargeTransaction serviceChargeTransactionLate = new ServiceChargeTransaction(memberId, lateDate, 200.00);
+		serviceChargeTransactionLate.execute();
+
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 8.0, empId);
+		timeCardTransaction.execute();
+
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+
+		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
+
+		assertThat(paycheck.getPayPeriodEndDate(), is(payDate));
+		assertThat(8 * 15.24, is(paycheck.getGrossPay()));
+		assertThat("Hold", is(paycheck.getField("Disposition")));
+		assertThat(9.42 + 19.42, is(paycheck.getDeductions()));
+		assertThat((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
+
 	}
 
 	private void validateHourlyPayCheck(PaydayTransaction paydayTransaction, long empId, LocalDate payDate, double pay) {
