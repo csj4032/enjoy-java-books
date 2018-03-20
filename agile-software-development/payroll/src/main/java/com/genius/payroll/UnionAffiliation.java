@@ -11,10 +11,10 @@ public class UnionAffiliation implements Affiliation {
 	@Getter
 	private long memberId;
 	@Getter
-	private long dues;
+	private double dues;
 	private Map<LocalDate, ServiceCharge> serviceCharges = new HashMap<>();
 
-	public UnionAffiliation(long memberId, long dues) {
+	public UnionAffiliation(long memberId, double dues) {
 		this.memberId = memberId;
 		this.dues = dues;
 	}

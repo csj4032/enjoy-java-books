@@ -1,7 +1,10 @@
 package com.genius.payroll;
 
+import lombok.Getter;
+
 public abstract class ChangeEmployeeTransaction implements Transaction {
 
+	@Getter
 	private long empId;
 
 	public ChangeEmployeeTransaction(long empId) {
