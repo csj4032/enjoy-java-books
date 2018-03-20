@@ -1,4 +1,4 @@
-package com.genius.payroll;
+package com.genius.payroll.transaction;
 
 import com.genius.payroll.exception.InvalidEmployeeException;
 

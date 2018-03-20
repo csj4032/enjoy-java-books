@@ -1,7 +1,6 @@
 package com.genius.payroll.transaction;
 
 import com.genius.payroll.persistence.PayrollDatabase;
-import com.genius.payroll.Transaction;
 import com.genius.payroll.UnionAffiliation;
 import com.genius.payroll.domain.Employee;
 

@@ -1,5 +1,9 @@
-package com.genius.payroll;
+package com.genius.payroll.transaction;
 
+import com.genius.payroll.BiweeklySchedule;
+import com.genius.payroll.CommissionedClassification;
+import com.genius.payroll.PaymentClassification;
+import com.genius.payroll.PaymentSchedule;
 import com.genius.payroll.transaction.AddEmployeeTransaction;
 
 public class AddCommissionedEmployee extends AddEmployeeTransaction {
