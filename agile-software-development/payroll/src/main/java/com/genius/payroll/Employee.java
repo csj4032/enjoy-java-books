@@ -2,11 +2,14 @@ package com.genius.payroll;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
 @Setter
+@ToString
 public class Employee {
 	private long empId;
 	private String name;
@@ -26,11 +29,21 @@ public class Employee {
 		this.paymentMethod = null;
 	}
 
-	boolean isPayDate(Date payDate) {
-		return false;
+	boolean isPayDate(LocalDate payDate) {
+		return schedule.isPayDate(payDate);
+	}
+
+	public LocalDate getPayPeriodStartDate(LocalDate payPeriodEndDate) {
+		return schedule.getPayPeriodStartDate(payPeriodEndDate);
 	}
 
 	public void payday(Paycheck paycheck) {
-
+		double grossPay = classification.calculatePay(paycheck);
+		double deductions = affiliation.calculateDeductions(paycheck);
+		double netPay = grossPay - deductions;
+		paycheck.setGrossPay(grossPay);
+		paycheck.setDeductions(deductions);
+		paycheck.setNetPay(netPay);
+		paymentMethod.pay(paycheck);
 	}
 }

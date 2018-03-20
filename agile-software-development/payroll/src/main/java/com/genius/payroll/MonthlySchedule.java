@@ -10,7 +10,7 @@ public class MonthlySchedule implements PaymentSchedule {
 	}
 
 	private boolean isLastDayOfMonth(LocalDate payDate) {
-		return payDate.plusDays(1).getMonth().equals(payDate.getMonth());
+		return !payDate.plusDays(1).getMonth().equals(payDate.getMonth());
 	}
 
 	@Override

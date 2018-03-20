@@ -1,7 +1,9 @@
 package com.genius.payroll;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PayrollDatabase {
 
@@ -33,7 +35,11 @@ public class PayrollDatabase {
 		return employees.get(unionMembers.get(memberId));
 	}
 
-	public void removeUnionMember(long memberId) {
+	public static void removeUnionMember(long memberId) {
 		unionMembers.remove(memberId);
+	}
+
+	public static List<Long> getAllEmployeeIds() {
+		return employees.keySet().stream().collect(Collectors.toList());
 	}
 }
