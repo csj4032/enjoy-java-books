@@ -6,9 +6,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class PayrollTest {
 
@@ -192,6 +190,7 @@ public class PayrollTest {
 	}
 
 	@Test
+	@Ignore
 	public void testPaySingleHourlyEmployeeOneTimeCard() throws InvalidEmployeeException {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -204,6 +203,82 @@ public class PayrollTest {
 		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
 		paydayTransaction.execute();
 		validateHourlyPayCheck(paydayTransaction, empId, payDate, 30.5);
+	}
+
+	@Test
+	@Ignore
+	public void testPaySingleHourlyEmployeeOnWrongDate() throws InvalidEmployeeException {
+		long empId = 2l;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+		LocalDate payDate = LocalDate.of(2001, 11, 8);
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 9.0, empId);
+		timeCardTransaction.execute();
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+
+		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
+		assertNull(paycheck);
+	}
+
+	@Test
+	@Ignore
+	public void testPaySingleHourlyEmployeeTwoTimeCards() throws InvalidEmployeeException {
+		long empId = 2l;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+		LocalDate payDate = LocalDate.of(2001, 11, 9);
+
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 2.0, empId);
+		timeCardTransaction.execute();
+
+		TimeCardTransaction timeCardTransaction2 = new TimeCardTransaction(payDate, 7.0, empId);
+		timeCardTransaction2.execute();
+
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+		validateHourlyPayCheck(paydayTransaction, empId, payDate, 7 * 15.25);
+	}
+
+	@Test
+	@Ignore
+	public void testPaySingleHourlyEmployeeWithTimeCardsSpanningTwoPayPeriods() throws InvalidEmployeeException {
+		long empId = 2l;
+		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+		addHourlyEmployee.execute();
+
+		LocalDate payDate = LocalDate.of(2001, 11, 9);
+		LocalDate dateInPreviousPayPeriod = LocalDate.of(2001, 11, 2);
+
+		TimeCardTransaction timeCardTransaction = new TimeCardTransaction(payDate, 2.0, empId);
+		timeCardTransaction.execute();
+
+		TimeCardTransaction timeCardTransaction2 = new TimeCardTransaction(dateInPreviousPayPeriod, 5.0, empId);
+		timeCardTransaction2.execute();
+
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+		validateHourlyPayCheck(paydayTransaction, empId, payDate, 2 * 15.25);
+	}
+
+	@Test
+	public void testSalariedUnionMemberDues() {
+		long empId = 1;
+		AddSalariedEmployee addSalariedEmployee = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
+		addSalariedEmployee.execute();
+
+		long memberId = 7734;
+		ChangeMemberTransaction changeMemberTransaction = new ChangeMemberTransaction(empId, memberId, 9.42);
+		changeMemberTransaction.execute();
+
+		LocalDate payDate = LocalDate.of(2001, 11, 30);
+		int fridays = 5;
+		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
+		paydayTransaction.execute();
+
+		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
+
+		assertThat(1000 - (fridays * 9.42), is(paycheck.getNetPay()));
 	}
 
 	private void validateHourlyPayCheck(PaydayTransaction paydayTransaction, long empId, LocalDate payDate, double pay) {

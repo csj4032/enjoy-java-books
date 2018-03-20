@@ -5,7 +5,7 @@ public class ChangeMemberTransaction extends ChangeAffiliationTransaction {
 	private long memberId;
 	private double dues;
 
-	public ChangeMemberTransaction(long empId, int memberId, double dues) {
+	public ChangeMemberTransaction(long empId, long memberId, double dues) {
 		super(empId);
 		this.memberId = memberId;
 		this.dues = dues;
