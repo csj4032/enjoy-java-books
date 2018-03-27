@@ -1,5 +1,10 @@
 package com.genius.payroll;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class DirectMethod implements PaymentMethod {
 
 	private String bank;

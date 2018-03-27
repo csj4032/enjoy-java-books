@@ -17,7 +17,7 @@ import java.util.Date;
 public class Employee {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue
 	@Column(name = "ID")
 	private Long empId;
 	@Column(name = "NAME")
