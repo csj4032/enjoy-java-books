@@ -1,6 +1,6 @@
 package bigO;
 
-public class Practise12 {
+public class AdditionExample12 {
 
 	int numChars = 26;
 
@@ -33,7 +33,7 @@ public class Practise12 {
 	}
 
 	public static void main(String[] args) {
-		Practise12 practise = new Practise12();
+		AdditionExample12 practise = new AdditionExample12();
 		practise.printSortedStrings(2, "");
 	}
 }
