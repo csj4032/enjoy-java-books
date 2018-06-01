@@ -48,4 +48,3 @@ include 'agile-software-development:patterns:templateMethod:ftoc-row'
 findProject(':agile-software-development:patterns:templateMethod:ftoc-row')?.name = 'ftoc-row'
 include 'agile-software-development:payroll'
 findProject(':agile-software-development:payroll')?.name = 'payroll'
-
