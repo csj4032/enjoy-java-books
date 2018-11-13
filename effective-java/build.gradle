@@ -4,4 +4,6 @@ dependencies {
     compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.13'
     compile group: 'org.aspectj', name: 'aspectjtools', version: '1.8.13'
     compile group: 'org.aspectj', name: 'aspectjrt', version: '1.8.13'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.3.0'
 }
