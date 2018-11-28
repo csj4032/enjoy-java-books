@@ -3,6 +3,7 @@ package chapter02.item01;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+// 서비스 등록과 접근이 사용되는 객체 생성 불가능 클래스
 public class Services {
 
 	private Services() {
