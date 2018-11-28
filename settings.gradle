@@ -51,3 +51,5 @@ findProject(':agile-software-development:payroll')?.name = 'payroll'
 include 'spring-5-recipes'
 include 'spring-5-recipes:ch01'
 findProject(':spring-5-recipes:ch01')?.name = 'ch01'
+include 'effective-java-edition3'
+
