@@ -6,7 +6,6 @@ public class GenericFunctionType {
 		GenericFunctionType genericFunctionType = new GenericFunctionType();
 
 		// 함수형 인터페이스를 위한 제네릭 함수 타입은 메서드 참조 표현식으로는 구현 할 수 있음
-		// 왜 ?
 		genericFunctionType.methodReferenceExpression(String::new);
 
 		// 메서드 시그니처
