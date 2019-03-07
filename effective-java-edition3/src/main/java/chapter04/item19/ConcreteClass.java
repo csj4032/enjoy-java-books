@@ -4,7 +4,8 @@ public class ConcreteClass implements StandardInterface {
 
 	@Override
 	public void write() {
-
+		//isExisted();
+		helperIsExisted();
 	}
 
 	@Override
