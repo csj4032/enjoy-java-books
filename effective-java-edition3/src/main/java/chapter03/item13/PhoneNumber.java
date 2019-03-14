@@ -31,8 +31,8 @@ public class PhoneNumber implements Cloneable, Comparator {
 	}
 
 	public int compareTo(PhoneNumber pn) {
-		//return Comparator.comparingInt((PhoneNumber p) -> p.areaCode).thenComparingInt(p -> p.prefix).thenComparingInt(p -> p.lineNum).compare(this, pn);
-		return COMPARATOR.compare(this, pn);
+		return Comparator.comparingInt((PhoneNumber p) -> p.areaCode).thenComparingInt(p -> p.prefix).thenComparingInt(p -> p.lineNum).compare(this, pn);
+		//return COMPARATOR.compare(this, pn);
 	}
 
 	@Override
