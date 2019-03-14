@@ -16,5 +16,7 @@ public class JavaDatabaseConnectivity {
  		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306", null);
 		Statement statement = connection.createStatement();
 		statement.execute("");
+
+
 	}
 }
