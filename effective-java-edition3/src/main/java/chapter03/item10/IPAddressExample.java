@@ -8,5 +8,11 @@ public class IPAddressExample {
 		URL url = new URL("http://local-alimy.choibom.com");
 		URL url1 = new URL("http://localhost");
 		System.out.println(url.equals(url1));
+
+		String a = new String("A");
+		String b = new String("A");
+
+		String c = "A";
+		String d = "A";
 	}
 }

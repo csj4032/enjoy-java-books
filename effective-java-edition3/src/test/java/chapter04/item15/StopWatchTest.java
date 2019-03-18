@@ -2,6 +2,8 @@ package chapter04.item15;
 
 import org.junit.Test;
 
+import java.util.function.Function;
+
 public class StopWatchTest {
 
 	@Test
@@ -25,6 +27,12 @@ public class StopWatchTest {
 		}
 		stopWatchObject.stop();
 		Time time = stopWatchObject.getElapsedTime();
-		System.out.println(time.getNano());
+		System.out.println(time.getMacro());
+
+
+		Function<String, String> append = (var string) -> string + " ";
+		Function<String, String> append2 = (string) -> string + " ";
+		Function<String, String> append3 = (String s) -> s + " ";
+
 	}
 }

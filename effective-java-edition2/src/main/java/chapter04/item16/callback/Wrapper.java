@@ -19,7 +19,7 @@ public class Wrapper implements SomethingWithCallback {
 
 	@Override
 	public void call() {
-		System.out.println("WrappedObject call");
+		System.out.println("Wrapper call");
 		wrappedObject.call();
 	}
 }
