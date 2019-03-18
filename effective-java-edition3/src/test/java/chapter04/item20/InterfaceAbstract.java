@@ -7,17 +7,9 @@ public class InterfaceAbstract {
 	@Test
 	public void method() {
 		Abstract abstractSub = new AbstractSub();
-		abstractSub.abstraceMethod();
+		abstractSub.abstractMethod();
 
 		Interface interfaceImpl = new InterfaceImpl();
 		interfaceImpl.defaultMethod();
-
-		Interface anyClass = new AnyClass();
-		anyClass.defaultMethod();
-		((AnyClass) anyClass).abstraceMethod();
-
-		Abstract absClass = new AnyClass();
-		absClass.abstraceMethod();
-		((AnyClass) absClass).defaultMethod();
 	}
 }

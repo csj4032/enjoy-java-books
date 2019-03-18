@@ -1,8 +1,7 @@
 package chapter04.item20;
 
-public class Abstract {
+abstract class Abstract {
 
-	public String abstraceMethod() {
-		return "abstraceMethod";
-	}
+	abstract void abstractMethod();
+
 }
