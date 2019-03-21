@@ -5,13 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static chapter05.item28.Reifiable.varargsGenericMethod;
+import static chapter05.item28.Reifiable.varargsMethod;
+
 public class ReifiableTest {
 
 	@Test
 	public void reifiableMethod() {
-		Reifiable reifiable = new Reifiable();
-		List<String> list1 = new ArrayList<>();
-		List<String> list2 = new ArrayList<>();
-		reifiable.varargsMethod(list1, list2);
+		List<Object> list = new ArrayList<>();
+		list.add(1);
+		varargsMethod("A", "B");
+		varargsGenericMethod(list);
 	}
 }

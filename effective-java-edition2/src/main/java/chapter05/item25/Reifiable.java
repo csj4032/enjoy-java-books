@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ArrayGeneric {
+public class Reifiable {
 
 	public static void main(String[] args) {
 
@@ -18,7 +18,7 @@ public class ArrayGeneric {
 		List<?>[] l1 = new List<?>[2];
 		l1[0] = Arrays.asList("one", "two", "tree");
 		l1[1] = Arrays.asList(1, 2, 3);
-		refiable(l1);
+		reifiable(l1);
 
 		// 컴파일 불가능
 		//List<String>[] l2 = new ArrayList<String>[1];
@@ -27,7 +27,7 @@ public class ArrayGeneric {
 		//varargs(Arrays.asList("가"));
 	}
 
-	private static void refiable(List<?>[] l1) {
+	private static void reifiable(List<?>[] l1) {
 		System.out.println(l1[0]);
 		System.out.println(l1[1]);
 
