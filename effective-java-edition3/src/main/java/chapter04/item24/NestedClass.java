@@ -37,6 +37,7 @@ public class NestedClass {
 	public void localClass() {
 		class LocalClass {
 			private String local;
+
 			LocalClass(String local) {
 				this.local = local;
 				System.out.println(this.local);

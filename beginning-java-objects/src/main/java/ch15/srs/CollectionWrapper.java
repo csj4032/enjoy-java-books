@@ -24,9 +24,6 @@ public abstract class CollectionWrapper {
 					line = bIn.readLine();
 				}
 			}
-
-			bIn.close();
-
 		} catch (FileNotFoundException e) {
 			outcome = false;
 		} catch (IOException e) {
