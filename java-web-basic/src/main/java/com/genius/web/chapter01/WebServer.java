@@ -11,6 +11,8 @@ public class WebServer {
 	private static final String HTTP_RESPONSE = "HTTP/1.1 200 OK\r\n\r\n";
 
 	public static void main(String[] args) throws IOException {
+
+		Integer.valueOf("1");
 		ServerSocket serverConnect = new ServerSocket(PORT);
 		while (true) {
 			try (
