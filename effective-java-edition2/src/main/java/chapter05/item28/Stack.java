@@ -1,9 +1,8 @@
 package chapter05.item28;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 public class Stack<E> {
 
