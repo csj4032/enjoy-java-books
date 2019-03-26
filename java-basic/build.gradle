@@ -1,4 +1,4 @@
-group 'java-web-basic'
+group 'java-basic'
 version '1.0-SNAPSHOT'
 
 buildscript {

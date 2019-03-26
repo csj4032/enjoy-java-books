@@ -1,4 +1,4 @@
-package com.genius.web.chapter01;
+package com.genius.basic.chapter01;
 
 import java.io.*;
 import java.net.ServerSocket;
