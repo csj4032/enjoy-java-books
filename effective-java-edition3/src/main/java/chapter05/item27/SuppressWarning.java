@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SuppressWarning {
 
-	private Object[] elements;
+	private Number[] elements;
 	private int size;
 
 	public <E> E[] toArray(E[] a) {
@@ -14,7 +14,7 @@ public class SuppressWarning {
 		return result;
 	}
 
-	public void setElements(Object[] elements) {
+	public void setElements(Number[] elements) {
 		this.elements = elements;
 	}
 }

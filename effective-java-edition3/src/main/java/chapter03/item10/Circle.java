@@ -11,4 +11,13 @@ public class Circle extends Shape {
 		Circle circle = (Circle) o;
 		return circle.radius == this.radius;
 	}
+
+
+	public String aa(String a) {
+		return "";
+	}
+
+	public String aa(String a, String b) {
+		return "";
+	}
 }

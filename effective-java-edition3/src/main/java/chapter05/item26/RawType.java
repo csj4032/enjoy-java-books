@@ -2,10 +2,19 @@ package chapter05.item26;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RawType {
 
 	public void rawType() {
+		List rawList = new ArrayList();
+
+		List<Object> objects = new ArrayList<>();
+		objects.add("!");
+		objects.add(1);
+
+
+
 		List<String[]> strings = new ArrayList<>();
 		strings.add(new String[]{"a"});
 		System.out.println(strings);
