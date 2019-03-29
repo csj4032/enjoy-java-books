@@ -1,3 +1,0 @@
-ext {
-    lombokVersion = '1.16.22'
-}

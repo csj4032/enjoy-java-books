@@ -3,11 +3,11 @@ package ch13;
 import lombok.ToString;
 
 @ToString
-public class Student extends Person {
+public class Professor extends Person {
 
 	private String name;
 
-	public Student(String name) {
+	public Professor(String name) {
 		this.name = name;
 	}
 }
