@@ -1,4 +1,4 @@
-package ch06;
+package com.genius;
 
 import lombok.Data;
 
