@@ -1,6 +1,5 @@
 package chapter04.item24;
 
-
 import org.junit.jupiter.api.Test;
 
 public class NestedClassTest {

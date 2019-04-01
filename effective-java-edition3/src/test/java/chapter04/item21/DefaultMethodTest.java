@@ -1,6 +1,5 @@
 package chapter04.item21;
 
-
 import org.junit.jupiter.api.Test;
 
 public class DefaultMethodTest {

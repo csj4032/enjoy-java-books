@@ -1,7 +1,5 @@
 package chapter05.item28;
 
-
-
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
