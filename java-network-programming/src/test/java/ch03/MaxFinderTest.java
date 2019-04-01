@@ -1,12 +1,11 @@
 package ch03;
 
-
+import chap03.MultithreadedMaxFinder;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class MaxFinderTest {
 

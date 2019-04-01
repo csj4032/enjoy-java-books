@@ -51,7 +51,7 @@ findProject(':netty:telnet-server')?.name = 'telnet-server'
 
 include 'java-chatting-programming'
 include 'growing-object-oriented-software-guided-by-tests'
-include 'learning-network-programming'
+include 'pro-java-7-nio-2'
 
 include 'technique-of-java-programmimg:gilbut-java-session1'
 findProject(':technique-of-java-programmimg:gilbut-java-session1')?.name = 'gilbut-java-session1'
