@@ -1,12 +1,12 @@
 package com.genius.weakhashmap;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 
 import static com.jayway.awaitility.Awaitility.await;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class WeakHashMapUnitTest {
 

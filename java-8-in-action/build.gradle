@@ -2,7 +2,7 @@ dependencies {
     compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
     compile group: 'com.google.errorprone', name: 'error_prone_core', version: '2.0.19'
     compile group: 'io.reactivex', name: 'rxjava', version: '1.2.9'
-    compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '9.0.0.M19'
+    compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '9.0.17'
     compile group: 'org.reactivestreams', name: 'reactive-streams', version: '1.0.0'
     compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
 }

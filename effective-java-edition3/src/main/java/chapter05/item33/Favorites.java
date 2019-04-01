@@ -19,5 +19,6 @@ public class Favorites {
 
 	public static void main(String[] args) {
 		Favorites favorites = new Favorites();
+		favorites.putFavorite(Integer.class, 1);
 	}
 }

@@ -2,6 +2,8 @@
 .idea
 *.iml
 agile-software-development/patterns/command/activeObject/out/
+agile-software-development/payroll/out
+agile-software-development/refactoring/out
 agile-software-development/bowling-game/out
 beginning-java-objects/build
 beginning-java-objects/out
@@ -17,13 +19,16 @@ java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
 java-8-other/out
+java-basic/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build
 java-concurrency-in-practice/out
 java-jungsuk/build
 java-jungsuk/out
-spring-5-recopes
+java-network-programming/out
+java-refactoring-for-beginner/out
+netty/example/out
 technique-of-java-programmimg/gilbut-java-session3/build
 technique-of-java-programmimg/gilbut-java-session3/out
 the-object-oriented-thought-process/build

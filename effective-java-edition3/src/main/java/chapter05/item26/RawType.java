@@ -13,8 +13,6 @@ public class RawType {
 		objects.add("!");
 		objects.add(1);
 
-
-
 		List<String[]> strings = new ArrayList<>();
 		strings.add(new String[]{"a"});
 		System.out.println(strings);

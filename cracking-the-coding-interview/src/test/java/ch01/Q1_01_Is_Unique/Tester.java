@@ -1,13 +1,14 @@
 package ch01.Q1_01_Is_Unique;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Tester {
 
 	@Test
 	public void test() {
-		Assert.assertEquals(true, QuestionA.isUniqueChars("fal"));
-		Assert.assertEquals(false, QuestionA.isUniqueChars("fall"));
+		assertEquals(true, QuestionA.isUniqueChars("fal"));
+		assertEquals(false, QuestionA.isUniqueChars("fall"));
 	}
 }

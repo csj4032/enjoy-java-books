@@ -4,13 +4,12 @@ import com.genius.payroll.domain.Employee;
 import com.genius.payroll.exception.InvalidEmployeeException;
 import com.genius.payroll.persistence.PayrollDatabase;
 import com.genius.payroll.transaction.*;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static net.bytebuddy.matcher.ElementMatchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PayrollTest {
 
@@ -21,11 +20,11 @@ public class PayrollTest {
 		addEmployeeTransaction.execute();
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
-		assertThat("Bob", is(employee.getName()));
+		assertEquals("Bob", is(employee.getName()));
 
 		PaymentClassification paymentClassification = employee.getClassification();
 		SalariedClassification salariedClassification = (SalariedClassification) paymentClassification;
-		assertThat(1000.00, is(salariedClassification.getSalary()));
+		assertEquals(1000.00, is(salariedClassification.getSalary()));
 
 		PaymentSchedule paymentSchedule = employee.getSchedule();
 		MonthlySchedule monthlySchedule = (MonthlySchedule) paymentSchedule;
@@ -37,14 +36,13 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testDeleteEmployee() {
 		long empId = 3;
 		AddCommissionedEmployee addCommissionedEmployee = new AddCommissionedEmployee(empId, "Lance", "Home", 2500.00, 3.2);
 		addCommissionedEmployee.execute();
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
-		assertThat(employee.getAddress(), is("Home"));
+		assertEquals(employee.getAddress(), is("Home"));
 
 		DeleteEmployeeTransaction deleteEmployeeTransaction = new DeleteEmployeeTransaction(empId);
 		deleteEmployeeTransaction.execute();
@@ -52,7 +50,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testTimeCardTransaction() throws InvalidEmployeeException {
 		long empId = 2;
 		LocalDate date = LocalDate.of(2001, 12, 31);
@@ -67,18 +64,17 @@ public class PayrollTest {
 
 		HourlyClassification hourlyClassification = (HourlyClassification) employee.getClassification();
 		TimeCard timeCard = hourlyClassification.getTimeCard(date);
-		assertThat(8.0, is(timeCard.getHours()));
+		assertEquals(8.0, is(timeCard.getHours()));
 	}
 
 	@Test
-	@Ignore
 	public void testAddServiceCharge() {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
 		addHourlyEmployee.execute();
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
-		assertThat("Bill", is(employee.getName()));
+		assertEquals("Bill", is(employee.getName()));
 
 		UnionAffiliation unionAffiliation = new UnionAffiliation(12.5);
 		employee.setAffiliation(unionAffiliation);
@@ -92,11 +88,10 @@ public class PayrollTest {
 
 		ServiceCharge serviceCharge = unionAffiliation.getServiceCharge(date);
 
-		assertThat(12.95, is(serviceCharge.getAmount()));
+		assertEquals(12.95, is(serviceCharge.getAmount()));
 	}
 
 	@Test
-	@Ignore
 	public void testChangeNameTransaction() {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -106,11 +101,10 @@ public class PayrollTest {
 		changeNameTransaction.execute();
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
-		assertThat("Bob", is(employee.getName()));
+		assertEquals("Bob", is(employee.getName()));
 	}
 
 	@Test
-	@Ignore
 	public void testChangeHourlyTransaction() {
 		long empId = 4l;
 		AddCommissionedEmployee addCommissionedEmployee = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
@@ -122,14 +116,13 @@ public class PayrollTest {
 		Employee employee = PayrollDatabase.getEmployee(empId);
 
 		HourlyClassification hourlyClassification = (HourlyClassification) employee.getClassification();
-		assertThat(27.52, is(hourlyClassification.getRate()));
+		assertEquals(27.52, is(hourlyClassification.getRate()));
 
 		WeeklySchedule paymentSchedule = (WeeklySchedule) employee.getSchedule();
 		assertNotNull(paymentSchedule);
 	}
 
 	@Test
-	@Ignore
 	public void testChangeMemberTransaction() {
 		long empId = 2;
 		int memberId = 7734;
@@ -141,14 +134,13 @@ public class PayrollTest {
 
 		Employee employee = PayrollDatabase.getEmployee(empId);
 		UnionAffiliation unionAffiliation = (UnionAffiliation) employee.getAffiliation();
-		assertThat(99.42, is(unionAffiliation.getDues()));
+		assertEquals(99.42, is(unionAffiliation.getDues()));
 
 		Employee member = PayrollDatabase.getUnionMember(memberId);
-		assertThat(employee, is(member));
+		assertEquals(employee, is(member));
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleSalariedEmployee() {
 		long empId = 1;
 		AddSalariedEmployee addSalariedEmployee = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
@@ -160,14 +152,13 @@ public class PayrollTest {
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
 
 		//assertThat(paycheck.getPayDate(), is(payDate));
-		assertThat(1000.00, is(paycheck.getGrossPay()));
-		assertThat(0.0, is(paycheck.getDeductions()));
-		assertThat(1000.00, is(paycheck.getNetPay()));
-		assertThat("Hold", is(paycheck.getField("Disposition")));
+		assertEquals(1000.00, is(paycheck.getGrossPay()));
+		assertEquals(0.0, is(paycheck.getDeductions()));
+		assertEquals(1000.00, is(paycheck.getNetPay()));
+		assertEquals("Hold", is(paycheck.getField("Disposition")));
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleSalariedEmployeeOnWrongDate() {
 		long empId = 1;
 		AddSalariedEmployee addSalariedEmployee = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
@@ -180,7 +171,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleHourlyEmployeeNoTimeCards() {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -193,7 +183,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleHourlyEmployeeOneTimeCard() throws InvalidEmployeeException {
 		long empId = 2;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -209,7 +198,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleHourlyEmployeeOnWrongDate() throws InvalidEmployeeException {
 		long empId = 2l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -225,7 +213,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleHourlyEmployeeTwoTimeCards() throws InvalidEmployeeException {
 		long empId = 2l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -244,7 +231,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPaySingleHourlyEmployeeWithTimeCardsSpanningTwoPayPeriods() throws InvalidEmployeeException {
 		long empId = 2l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
@@ -265,7 +251,6 @@ public class PayrollTest {
 	}
 
 	@Test
-	@Ignore
 	public void testSalariedUnionMemberDues() {
 		long empId = 1;
 		AddSalariedEmployee addSalariedEmployee = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
@@ -282,11 +267,10 @@ public class PayrollTest {
 
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
 
-		assertThat(1000 - (fridays * 9.42), is(paycheck.getNetPay()));
+		assertEquals(1000 - (fridays * 9.42), is(paycheck.getNetPay()));
 	}
 
 	@Test
-	@Ignore
 	public void testHourlyUnionMemberServiceCharge() throws InvalidEmployeeException {
 		long empId = 1l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.24);
@@ -303,14 +287,13 @@ public class PayrollTest {
 		PaydayTransaction paydayTransaction = new PaydayTransaction(payDate);
 		paydayTransaction.execute();
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
-		assertThat(paycheck.getPayPeriodEndDate(), is(payDate));
-		assertThat(8 * 15.24, is(paycheck.getGrossPay()));
-		assertThat(9.42 + 19.42, is(paycheck.getDeductions()));
-		assertThat((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
+		assertEquals(paycheck.getPayPeriodEndDate(), is(payDate));
+		assertEquals(8 * 15.24, is(paycheck.getGrossPay()));
+		assertEquals(9.42 + 19.42, is(paycheck.getDeductions()));
+		assertEquals((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
 	}
 
 	@Test
-	@Ignore
 	public void testServiceChargesSpanningMultiplePayPeriods() throws InvalidEmployeeException {
 		long empId = 1l;
 		AddHourlyEmployee addHourlyEmployee = new AddHourlyEmployee(empId, "Bill", "Home", 15.24);
@@ -340,20 +323,20 @@ public class PayrollTest {
 
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
 
-		assertThat(paycheck.getPayPeriodEndDate(), is(payDate));
-		assertThat(8 * 15.24, is(paycheck.getGrossPay()));
-		assertThat("Hold", is(paycheck.getField("Disposition")));
-		assertThat(9.42 + 19.42, is(paycheck.getDeductions()));
-		assertThat((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
+		assertEquals(paycheck.getPayPeriodEndDate(), is(payDate));
+		assertEquals(8 * 15.24, is(paycheck.getGrossPay()));
+		assertEquals("Hold", is(paycheck.getField("Disposition")));
+		assertEquals(9.42 + 19.42, is(paycheck.getDeductions()));
+		assertEquals((8 * 15.24) - (9.42 + 19.42), is(paycheck.getNetPay()));
 
 	}
 
 	private void validateHourlyPayCheck(PaydayTransaction paydayTransaction, long empId, LocalDate payDate, double pay) {
 		Paycheck paycheck = paydayTransaction.getPayCheck(empId);
-		assertThat(payDate, is(paycheck.getPayPeriodEndDate()));
-		assertThat(pay, is(paycheck.getGrossPay()));
-		assertThat("Hold", is(paycheck.getField("Disposition")));
-		assertThat(0.0, is(paycheck.getDeductions()));
-		assertThat(pay, is(paycheck.getNetPay()));
+		assertEquals(payDate, is(paycheck.getPayPeriodEndDate()));
+		assertEquals(pay, is(paycheck.getGrossPay()));
+		assertEquals("Hold", is(paycheck.getField("Disposition")));
+		assertEquals(0.0, is(paycheck.getDeductions()));
+		assertEquals(pay, is(paycheck.getNetPay()));
 	}
 }

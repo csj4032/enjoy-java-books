@@ -1,7 +1,6 @@
 package chapter06.item35;
 
 import chapter06.item35.log.LogTarget;
-import org.junit.Test;
 
 public class LogAspectTest {
 

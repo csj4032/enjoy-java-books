@@ -1,16 +1,16 @@
 package com.genius;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GameTest {
 
 	private Game game;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		game = new Game();
 	}

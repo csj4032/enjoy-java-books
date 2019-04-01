@@ -1,21 +1,13 @@
 package agile.patterns.command.activeObject;
 
-import junit.framework.TestCase;
-import junit.textui.TestRunner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TestSleepCommand extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-	public static void main(String[] args) {
-		TestRunner.main(new String[]{"TestSleepCommand"});
-	}
+public class TestSleepCommand {
 
 	private boolean commandExecuted = false;
-
-	public TestSleepCommand(String name) {
-		super(name);
-	}
 
 	@Test
 	public void testSleep() throws Exception {
@@ -27,9 +19,9 @@ public class TestSleepCommand extends TestCase {
 		e.run();
 		long stop = System.currentTimeMillis();
 		long sleepTime = (stop - start);
-		Assert.assertFalse(sleepTime > 1000);
-		Assert.assertTrue(sleepTime < 1100);
-		Assert.assertTrue(commandExecuted);
+		assertFalse(sleepTime > 1000);
+		assertTrue(sleepTime < 1100);
+		assertTrue(commandExecuted);
 		//assert("SleepTime " + sleepTime + " expected > 1000",sleepTime > 1000);
 		//assert("SleepTime " + sleepTime + " expected < 1100",sleepTime < 1100);
 		//assert("Command Executed",commandExecuted);

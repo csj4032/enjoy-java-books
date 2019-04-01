@@ -2,7 +2,7 @@ package com.genius.payroll;
 
 import com.genius.payroll.domain.Employee;
 import com.genius.payroll.domain.Member;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

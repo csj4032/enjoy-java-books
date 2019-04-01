@@ -1,7 +1,8 @@
 package chapter02.item01;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Item01Test {
 
@@ -15,8 +16,8 @@ public class Item01Test {
 		Service s2 = Services.newInstance("comp");
 		Service s3 = Services.newInstance("comp");
 
-		Assert.assertEquals(s1.toString(), "Default Service");
-		Assert.assertEquals(s2, s3);
+		assertEquals(s1.toString(), "Default Service");
+		assertEquals(s2, s3);
 
 		System.out.printf("%s, %s, %s%n", s1, s2, s3);
 	}
