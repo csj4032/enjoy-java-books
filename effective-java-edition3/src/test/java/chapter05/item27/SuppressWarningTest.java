@@ -1,6 +1,6 @@
 package chapter05.item27;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 

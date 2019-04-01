@@ -1,6 +1,6 @@
 package chapter05.item26;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RawTypeTest {
 
