@@ -29,7 +29,6 @@ public class ChargenServer {
 			rotation[i + 95 - ' '] = i;
 		}
 
-
 		Selector selector;
 		try (ServerSocketChannel serverChannel = ServerSocketChannel.open();) {
 			ServerSocket ss = serverChannel.socket();
