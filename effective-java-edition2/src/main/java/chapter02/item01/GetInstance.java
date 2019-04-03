@@ -2,7 +2,7 @@ package chapter02.item01;
 
 import java.util.List;
 
-public class Item01 {
+public class GetInstance {
 
 	public List getInstacne() {
 		return null;

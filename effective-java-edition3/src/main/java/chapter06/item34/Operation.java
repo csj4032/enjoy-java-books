@@ -2,6 +2,7 @@ package chapter06.item34;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public enum Operation {
 
@@ -50,6 +51,16 @@ public enum Operation {
 
 	public static Operation fromString(String symbol) {
 		return stringToEnum.get(symbol);
+	}
+
+	public static Operation inverse(Operation op) {
+		return switch (op) {
+			case PLUS -> Operation.PLUS;
+			case MINUS -> Operation.MINUS;
+			case TIMES -> Operation.TIMES;
+			case DIVIDE -> Operation.DIVIDE;
+			default -> throw new AssertionError();
+		};
 	}
 
 	public static void main(String[] args) {
