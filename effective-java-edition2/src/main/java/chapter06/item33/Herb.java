@@ -35,7 +35,7 @@ public class Herb {
 		// Using an EnumMap to associate data with an enum - Page 162
 		Map<Type, Set<Herb>> herbsByType = new EnumMap(Herb.Type.class);
 		for (Herb.Type t : Herb.Type.values())
-			herbsByType.put(t, new HashSet<Herb>());
+			herbsByType.put(t, new HashSet<>());
 		for (Herb h : garden)
 			herbsByType.get(h.type).add(h);
 		System.out.println(herbsByType);

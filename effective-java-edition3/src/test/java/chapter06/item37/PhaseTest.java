@@ -1,6 +1,5 @@
 package chapter06.item37;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
@@ -9,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static chapter06.item37.Transition.*;
+import static chapter06.item37.Transition.formList;
+import static chapter06.item37.Transition.formMap;
 import static java.util.stream.Collectors.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
