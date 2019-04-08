@@ -1,16 +1,23 @@
 package chapter06.item39;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class RunTests {
 
+	static Logger logger = LoggerFactory.getLogger(RunTests.class);
+
 	public static void main(String[] args) throws ClassNotFoundException {
+		logger.debug("{}");
 		int tests = 0;
 		int passed = 0;
 		Class testClass = Class.forName(args[0]);
 
 		for (Method m : testClass.getDeclaredMethods()) {
+			String.format("A","A");
 			if (m.isAnnotationPresent(Tester.class)) {
 				tests++;
 				try {

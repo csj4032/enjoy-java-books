@@ -7,7 +7,7 @@ import java.util.List;
 public class AbstractSubClass {
 
 	public AbstractSubClass() {
-		System.out.println("Abstract Sub Class");
+		System.out.println("AbstractClass Sub Class");
 	}
 
 	public static void main(String[] args) {
