@@ -1,8 +1,7 @@
 package chapter07.item45;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Arrays;
 
 public class Anagrams {
 

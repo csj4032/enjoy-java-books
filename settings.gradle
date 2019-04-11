@@ -29,6 +29,9 @@ include 'beginning-java-objects:ch16'
 findProject(':beginning-java-objects:ch16')?.name = 'ch16'
 
 include 'cracking-the-coding-interview'
+include 'cracking-the-coding-interview:ch01'
+findProject(':cracking-the-coding-interview:ch01')?.name = 'ch01'
+
 include 'effective-java-edition2'
 include 'effective-java-edition3'
 include 'goos'
