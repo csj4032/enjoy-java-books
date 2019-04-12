@@ -1,23 +1,20 @@
 package ch01;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(value = Parameterized.class)
-public class ParameterizedTest {
+public class ParameterizedTests {
 
 	private double expected;
 	private double valueOne;
 	private double valueTwo;
 
-	@Parameters
+	@ParameterizedTest
 	public static Collection<Integer[]> getTestParameters() {
 		return Arrays.asList(new Integer[][]{
 				{2, 1, 1},
@@ -26,7 +23,7 @@ public class ParameterizedTest {
 		});
 	}
 
-	public ParameterizedTest(double expected, double valueOne, double valueTwo) {
+	public ParameterizedTests(double expected, double valueOne, double valueTwo) {
 		this.expected = expected;
 		this.valueOne = valueOne;
 		this.valueTwo = valueTwo;
