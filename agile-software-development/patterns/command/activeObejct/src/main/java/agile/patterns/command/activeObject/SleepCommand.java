@@ -5,7 +5,7 @@ public class SleepCommand implements Command {
 	private long sleepTime = 0;
 	private long startTime = 0;
 	private final ActiveObjectEngine engine;
-	private Command wakeupCommand = null;
+	private Command wakeupCommand;
 	private boolean started = false;
 
 	public SleepCommand(long milliseconds, ActiveObjectEngine e, Command wakeupCommand) {

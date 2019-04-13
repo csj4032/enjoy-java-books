@@ -1,4 +1,4 @@
-package ch13;
+package com.genius;
 
 import lombok.ToString;
 
