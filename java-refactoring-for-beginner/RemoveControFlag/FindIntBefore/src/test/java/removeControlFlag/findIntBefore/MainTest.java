@@ -1,5 +1,6 @@
 package removeControlFlag.findIntBefore;
 
+import removeControlFlag.findIntAfter1.FindInt;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +10,7 @@ public class MainTest {
 	@Test
 	public void testFound() {
 		int[] data = {1, 9, 0, 2, 6, 7, 4, 5};
-		boolean actual = removeControlFlag.findIntBefore.FindInt.find(data, 5);
+		boolean actual = FindInt.find(data, 5);
 		boolean expected = true;
 		assertEquals(expected, actual);
 	}
@@ -17,6 +18,6 @@ public class MainTest {
 	@Test
 	public void testNoFound() {
 		int[] data = {1, 9, 0, 2, 5, 6, 7, 4, 3};
-		assertEquals(false, removeControlFlag.findIntBefore.FindInt.find(data, 10));
+		assertEquals(false, FindInt.find(data, 10));
 	}
 }

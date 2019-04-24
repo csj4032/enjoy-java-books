@@ -1,4 +1,8 @@
 rootProject.name = 'enjoy-java-books'
+
+include 'advanced-object-oriented-programming:chap01'
+findProject(':advanced-object-oriented-programming:chap01')?.name = 'chap01'
+
 include 'agile-software-development:payroll'
 findProject(':agile-software-development:payroll')?.name = 'payroll'
 include 'agile-software-development'
@@ -41,7 +45,13 @@ include 'java-coding-with-pmd'
 include 'java-concurrency-in-practice'
 include 'java-jungsuk'
 include 'java-network-programming'
+
 include 'java-refactoring-for-beginner'
+include 'java-refactoring-for-beginner:RemoveControFlag:FindIntAfter1'
+findProject(':java-refactoring-for-beginner:RemoveControFlag:FindIntAfter1')?.name = 'FindIntAfter1'
+include 'java-refactoring-for-beginner:RemoveControFlag:FindIntBefore'
+findProject(':java-refactoring-for-beginner:RemoveControFlag:FindIntBefore')?.name = 'FindIntBefore'
+
 include 'java-basic'
 include 'junit-in-action'
 include 'netty'

@@ -1,4 +1,4 @@
-package removeControlFlag.findIntBefore;
+package removeControlFlag.findIntAfter1;
 
 public class FindInt {
 

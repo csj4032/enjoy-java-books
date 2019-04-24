@@ -16,7 +16,6 @@ public class CollectionClassifier {
 		return "Collection";
 	}
 
-	// 오버로딩을 사용할 때는 혼란스럽지 않게 사용할 수 있도록 주의해야 한다.
 	public static void main(String[] args) {
 		Collection<?>[] collections = {new HashSet<String>(), new ArrayList<String>(), new HashMap<String, String>().values()};
 
