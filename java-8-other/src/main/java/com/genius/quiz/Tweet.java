@@ -1,6 +1,6 @@
 package com.genius.quiz;
 
-public class tweet {
+public class Tweet {
 
 	public static void main(String[] args) {
 		int x = 1;
@@ -9,7 +9,7 @@ public class tweet {
 
 		StringBuilder s = new StringBuilder("test");
 		StringBuilder t = s;
-		s.append("tweet");
+		s.append("Tweet");
 
 		if (x != y) {
 			System.out.println("why is equal to y?");
