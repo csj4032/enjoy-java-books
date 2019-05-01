@@ -20,10 +20,8 @@ public class HashMapTest {
 	private static Map<Writer, List<Article>> hashMap = new HashMap();
 	private static Map<Writer, List<Article>> identityHashMap = new IdentityHashMap();
 	private static Map<Writer, List<Article>> weakHashMap = new WeakHashMap<>();
-	private static Map<Writer, List<Article>> weakHashMap2 = new HashMap<>();
 	private static Map<Writer, List<Article>> concurrentHashMap = new ConcurrentHashMap<>();
 	private static Writer weakHash = new Writer(10000, "");
-	private static Writer weakHash2 = new Writer(10000, "");
 	private static Writer identity = new Writer(10000, "");
 
 	@BeforeAll
@@ -39,12 +37,12 @@ public class HashMapTest {
 			concurrentHashMap.put(writer, articles);
 		}
 		weakHashMap.put(weakHash, null);
-		weakHashMap2.put(weakHash2, null);
 	}
 
 	@Test
 	@Order(1)
-	public void size() {
+	@DisplayName("키를 이용한 값 가져오기")
+	public void get() {
 		Writer writer = new Writer(1, "name1");
 		List<Article> articles = hashMap.get(writer);
 		assertEquals(100, articles.size());
@@ -52,6 +50,7 @@ public class HashMapTest {
 
 	@Test
 	@Order(2)
+	@DisplayName("IdentityMap, HashMap 키를 이용한 값 가져오기")
 	public void identityHashMapContainsKey() {
 		Writer writer = new Writer(1, "name1");
 		assertTrue(hashMap.containsKey(writer));
@@ -66,7 +65,8 @@ public class HashMapTest {
 
 	@Test
 	@Order(3)
-	public void givenHashMapWhenSumParallelThenError() throws Exception {
+	@DisplayName("HashMap Thread Safe ?")
+	public void hashMap() throws Exception {
 		Map<String, Integer> map = new HashMap<>();
 		List<Integer> sumList = parallelSum100(map, 100);
 		log.info("{}", sumList.stream().distinct().count());
@@ -77,7 +77,8 @@ public class HashMapTest {
 
 	@Test
 	@Order(4)
-	public void givenConcurrentMapWhenSumParallelThenCorrect() throws Exception {
+	@DisplayName("ConcurrentHashMap Thread Safe ?")
+	public void currentHashMap() throws Exception {
 		Map<String, Integer> map = new ConcurrentHashMap<>();
 		List<Integer> sumList = parallelSum100(map, 1000);
 		log.info("{}", sumList.stream().distinct().count());
@@ -88,14 +89,12 @@ public class HashMapTest {
 
 	@Test
 	@Order(5)
+	@DisplayName("약한참조")
 	public void weakHashMap() {
 		weakHash = null;
-		weakHash2 = null;
 		System.gc();
-		System.out.println(weakHashMap);
-		System.out.println(weakHashMap2);
-		Assertions.assertEquals(0, weakHashMap.size());
-		Assertions.assertEquals(1, weakHashMap2.size());
+		log.info("{}", weakHashMap);
+		Assertions.assertTrue(weakHashMap.isEmpty());
 	}
 
 	private List<Integer> parallelSum100(Map<String, Integer> map, int executionTimes) throws InterruptedException {

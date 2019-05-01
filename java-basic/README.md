@@ -1,13 +1,3 @@
----
-title: 자바 초급편
-description: 자바를 처음 배우는 분들에게
-categories:
- - study
-tags:
- - java
-comments: true
----
-
 # 자바
 
 ## 자바란?

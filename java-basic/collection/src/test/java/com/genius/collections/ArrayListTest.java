@@ -163,7 +163,7 @@ public class ArrayListTest {
 
 	@Test
 	@Order(14)
-	@DisplayName("알골달송한 리스트 삭제")
+	@DisplayName("삭제 메소드 오브로딩")
 	public void removeIntObject() {
 		Integer index = 1;
 		// remove object

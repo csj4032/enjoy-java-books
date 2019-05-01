@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
-@DisplayName("LinedList")
+@DisplayName("LinkedList")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LinkedListTest {
 

@@ -29,6 +29,6 @@ public class PriorityQueueTest {
 	public void sort() {
 		log.info("priorityQueueId : {} ", priorityQueueId);
 		log.info("priorityQueueSubject : {}", priorityQueueSubject);
-		log.info("priorityQueueSubject : {}", priorityQueueContents);
+		log.info("priorityQueueContents : {}", priorityQueueContents);
 	}
 }

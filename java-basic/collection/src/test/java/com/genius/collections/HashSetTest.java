@@ -27,6 +27,7 @@ public class HashSetTest {
 	public void uniqueOfHashCode() {
 		Article article = new Article(0, "제목", "내용");
 		Article article1 = new Article(0, "제목1", "내용1");
+		article.equals(article1);
 		hashSet.add(article);
 		hashSet.add(article1);
 		Assertions.assertEquals(1, hashSet.size());
