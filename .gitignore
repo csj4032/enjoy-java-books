@@ -1,12 +1,12 @@
 .gradle
 .idea
 *.iml
-agile-software-development/patterns/command/activeObject/out/
+agile-software-development/patterns/command/activeObject/out
 agile-software-development/payroll/out
 agile-software-development/refactoring/out
 agile-software-development/bowling-game/out
-beginning-java-objects/build
-beginning-java-objects/out
+beginning-java-objects/ch13/out
+beginning-java-objects/ch15/out
 cracking-the-coding-interview/build
 cracking-the-coding-interview/out
 effective-java-edition2/build
@@ -19,7 +19,8 @@ java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
 java-8-other/out
-java-basic/out
+java-basic/collection/out
+java-basic/introduction/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build

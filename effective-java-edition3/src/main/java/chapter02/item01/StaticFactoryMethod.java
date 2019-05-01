@@ -13,4 +13,17 @@ public class StaticFactoryMethod {
 	private StaticFactoryMethod() {
 
 	}
+
+
+	StaticFactoryMethod(int a ) {
+
+	}
+
+	StaticFactoryMethod(int a,int b ) {
+
+	}
+
+	StaticFactoryMethod(int a,int b ,int c) {
+
+	}
 }
