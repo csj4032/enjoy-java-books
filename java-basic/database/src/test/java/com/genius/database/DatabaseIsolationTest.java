@@ -19,15 +19,7 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static com.genius.database.DatabaseConnectionTest.DATASOURCE;
-import static com.genius.database.DatabaseConnectionTest.JDBC_URL;
-import static com.genius.database.DatabaseConnectionTest.PASSWORD;
-import static com.genius.database.DatabaseConnectionTest.PREPARED_INSERT_SQL;
-import static com.genius.database.DatabaseConnectionTest.PREPARED_SELECT_COUNT_SQL;
-import static com.genius.database.DatabaseConnectionTest.PREPARED_SELECT_SQL;
-import static com.genius.database.DatabaseConnectionTest.USER_NAME;
-import static com.genius.database.DatabaseConnectionTest.getConnection;
-import static com.genius.database.DatabaseConnectionTest.truncateArticle;
+import static com.genius.database.DatabaseConnectionTest.*;
 import static java.sql.Connection.TRANSACTION_READ_COMMITTED;
 import static java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 import static java.sql.Connection.TRANSACTION_SERIALIZABLE;
@@ -40,7 +32,6 @@ public class DatabaseIsolationTest {
 	private static final String SUBJECT_0 = "제목";
 	private static final String SUBJECT_1 = "제목1";
 	private static final String SUBJECT_2 = "제목2";
-	private static final String PREPARED_UPDATE_SQL = "UPDATE ARTICLE SET SUBJECT = ? WHERE ID = ?";
 	private static Connection CONNECTION;
 
 	@BeforeAll

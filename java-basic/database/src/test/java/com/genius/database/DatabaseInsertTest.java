@@ -56,9 +56,16 @@ public class DatabaseInsertTest {
 	@Test
 	@Order(2)
 	@DisplayName("PrepareStatement")
-	public void prepareStatement() {
-		Article article = Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build();
-		try (Connection connection = DATASOURCE.getConnection(); PreparedStatement statement = connection.prepareStatement(PREPARED_INSERT_SQL)) {
+	public void prepareStatement() throws SQLException {
+		insertArticle(Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build());
+	}
+
+	public static void insertArticle(Article article) throws SQLException {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = DATASOURCE.getConnection();
+			statement = connection.prepareStatement(PREPARED_INSERT_SQL);
 			statement.setInt(1, article.getGrp());
 			statement.setInt(2, article.getOrdinal());
 			statement.setInt(3, article.getLevel());
@@ -68,6 +75,9 @@ public class DatabaseInsertTest {
 			statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			statement.close();
+			connection.close();
 		}
 	}
 }

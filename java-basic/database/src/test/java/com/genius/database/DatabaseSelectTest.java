@@ -19,16 +19,13 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static com.genius.database.DatabaseConnectionTest.DATASOURCE;
-import static com.genius.database.DatabaseConnectionTest.PREPARED_SELECT_SQL;
-import static com.genius.database.DatabaseConnectionTest.getConnection;
+import static com.genius.database.DatabaseConnectionTest.*;
 
 @Slf4j
 @DisplayName("Select")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseSelectTest {
 
-    private static final String PREPARED_INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (?, ?, ?, ?, ?, ?, NOW());";
     private static final int DUMMY_SIZE = 10000;
 
     @BeforeAll
@@ -38,16 +35,8 @@ public class DatabaseSelectTest {
     }
 
     @AfterEach
-    public void init() {
+    public void afterEach() {
         truncateArticle();
-    }
-
-    private static void truncateArticle() {
-        try (Connection connection = DATASOURCE.getConnection(); PreparedStatement statement = connection.prepareStatement(PREPARED_INSERT_SQL)) {
-            statement.execute("TRUNCATE ARTICLE");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     private static void dummyArticle() throws SQLException {
