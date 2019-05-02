@@ -9,40 +9,43 @@ import org.junit.jupiter.api.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
+import static com.genius.database.DatabaseConnectionTest.DATASOURCE;
+import static com.genius.database.DatabaseConnectionTest.INSERT_SQL;
+import static com.genius.database.DatabaseConnectionTest.JDBC_DRIVER;
+import static com.genius.database.DatabaseConnectionTest.JDBC_URL;
+import static com.genius.database.DatabaseConnectionTest.PASSWORD;
+import static com.genius.database.DatabaseConnectionTest.PREPARED_INSERT_SQL;
+import static com.genius.database.DatabaseConnectionTest.USER_NAME;
+import static com.genius.database.DatabaseConnectionTest.getConnection;
+import static com.genius.database.DatabaseConnectionTest.truncateArticle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DisplayName("데이터베이스 접속")
+@DisplayName("Insert")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseInsertTest {
 
-	private static final String JDBC_URL = "jdbc:mariadb://db.choibom.com:3306/study";
-	private static final String USER_NAME = "study";
-	private static final String PASSWORD = "study";
-	private static final HikariDataSource dataSource = new HikariDataSource();
-	private static Connection connection;
-	private static final String INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (${grp}, ${ordinal}, ${level}, '${subject}', ${authorId}, ${status}, NOW());";
-
 	@BeforeAll
 	public static void setUp() throws SQLException {
-		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
-		dataSource.setJdbcUrl(JDBC_URL);
-		dataSource.setUsername(USER_NAME);
-		dataSource.setPassword(PASSWORD);
-		connection = dataSource.getConnection();
+		getConnection();
+	}
 
+	@AfterAll
+	public static void after() {
+		truncateArticle();
 	}
 
 	@Test
 	@Order(1)
 	@DisplayName("Statement")
-	public void statement() throws SQLException {
+	public void statement() {
 		StringSubstitutor stringSubstitutor = new StringSubstitutor(new ObjectMapper().convertValue(Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build(), Map.class));
-		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
+		try (Connection connection = DATASOURCE.getConnection(); Statement statement = connection.createStatement()) {
 			statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
 			statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
 		} catch (SQLException e) {
@@ -52,19 +55,19 @@ public class DatabaseInsertTest {
 
 	@Test
 	@Order(2)
-	@DisplayName("Commit Rollback")
-	public void commitRollback() throws SQLException {
-		StringSubstitutor stringSubstitutor = new StringSubstitutor(new ObjectMapper().convertValue(Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build(), Map.class));
-		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement()) {
-			connection.setAutoCommit(false);
-			statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
-			statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
-			connection.commit();
+	@DisplayName("PrepareStatement")
+	public void prepareStatement() {
+		Article article = Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build();
+		try (Connection connection = DATASOURCE.getConnection(); PreparedStatement statement = connection.prepareStatement(PREPARED_INSERT_SQL)) {
+			statement.setInt(1, article.getGrp());
+			statement.setInt(2, article.getOrdinal());
+			statement.setInt(3, article.getLevel());
+			statement.setString(4, article.getSubject());
+			statement.setInt(5, article.getAuthorId());
+			statement.setInt(6, article.getStatus());
+			statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			connection.rollback();
-			connection.setAutoCommit(true);
 		}
 	}
 }
