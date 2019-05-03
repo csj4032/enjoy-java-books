@@ -1,4 +1,4 @@
-package com.genius.database;
+package com.genius.database.domain;
 
 import java.time.LocalDateTime;
 

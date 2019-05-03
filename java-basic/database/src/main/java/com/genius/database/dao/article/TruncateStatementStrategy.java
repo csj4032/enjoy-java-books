@@ -1,4 +1,6 @@
-package com.genius.database;
+package com.genius.database.dao.article;
+
+import com.genius.database.datasource.core.StatementStrategy;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

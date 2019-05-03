@@ -1,4 +1,4 @@
-package com.genius.database;
+package com.genius.database.datasource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +10,12 @@ public class HomeConnectionManager implements ConnectionManager {
 	public static final String USERNAME = "study";
 	public static final String PASSWORD = "study";
 
-	public Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+	public Connection getConnection() {
+		try {
+			return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

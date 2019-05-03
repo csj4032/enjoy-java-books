@@ -1,9 +1,19 @@
-package com.genius.database;
+package com.genius.database.dao;
 
-import org.junit.jupiter.api.*;
+import com.genius.database.dao.article.ArticleDao;
+import com.genius.database.datasource.HomeConnectionManager;
+import com.genius.database.datasource.core.GeniusJdbcTemplate;
+import com.genius.database.domain.Article;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import java.sql.SQLDataException;
-import java.sql.SQLException;
 
 @DisplayName("ArticleDao")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -16,7 +26,7 @@ public class ArticleDaoTest {
 
 	@BeforeAll
 	public static void setUp() {
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		GeniusJdbcTemplate jdbcTemplate = new GeniusJdbcTemplate();
 		jdbcTemplate.setConnectionManager(new HomeConnectionManager());
 		articleDao = new DaoFactory().articleDao();
 		articleDao.setJdbcTemplate(jdbcTemplate);
@@ -53,7 +63,7 @@ public class ArticleDaoTest {
 
 	@Test
 	@Order(4)
-	@DisplayName("특정 아이디 아티클 조회")
+	@DisplayName("특정 아이디 아티클 조회 실패")
 	public void getFailure() {
 		Assertions.assertThrows(SQLDataException.class, () -> articleDao.get(1));
 	}

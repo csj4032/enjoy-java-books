@@ -1,4 +1,4 @@
-package com.genius.database;
+package com.genius.database.datasource;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

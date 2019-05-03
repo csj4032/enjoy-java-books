@@ -1,5 +1,10 @@
 package com.genius.database;
 
+import com.genius.database.datasource.CloseManager;
+import com.genius.database.datasource.ConnectionManager;
+import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.domain.Article;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,40 +32,15 @@ import static com.genius.database.DatabaseConnectionTest.*;
 public class DatabaseSelectTest {
 
     private static final int DUMMY_SIZE = 10000;
+    private static ConnectionManager connectionManager;
+    private static CloseManager closeManager;
 
     @BeforeAll
     public static void setUp() throws SQLException {
-        getConnection();
-        dummyArticle();
-    }
-
-    @AfterEach
-    public void afterEach() {
+        connectionManager = new HikariConnectionManager();
+        closeManager = new CloseManager();
         truncateArticle();
-    }
-
-    private static void dummyArticle() throws SQLException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = DATASOURCE.getConnection();
-            statement = connection.prepareStatement(PREPARED_INSERT_SQL);
-            for (int i = 1; i <= DUMMY_SIZE; i++) {
-                Article article = Article.builder().grp(i).ordinal(1).level(1).subject("제목_" + i).authorId(i).status(1).build();
-                statement.setInt(1, article.getGrp());
-                statement.setInt(2, article.getOrdinal());
-                statement.setInt(3, article.getLevel());
-                statement.setString(4, article.getSubject());
-                statement.setInt(5, article.getAuthorId());
-                statement.setInt(6, article.getStatus());
-                statement.executeQuery();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) connection.close();
-            if (statement != null) statement.close();
-        }
+        dummyArticle();
     }
 
     @Test
@@ -72,7 +52,7 @@ public class DatabaseSelectTest {
         ResultSet resultSet = null;
         List<Article> articles = new ArrayList<>();
         try {
-            connection = DATASOURCE.getConnection();
+            connection = connectionManager.getConnection();
             preparedStatement = connection.prepareStatement(PREPARED_SELECT_SQL);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -89,10 +69,31 @@ public class DatabaseSelectTest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (resultSet != null) resultSet.close();
-            if (preparedStatement != null) preparedStatement.close();
-            if (connection != null) connection.close();
+            closeManager.close(connection, preparedStatement, resultSet);
         }
         Assertions.assertEquals(DUMMY_SIZE, articles.size());
+    }
+
+    private static void dummyArticle() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = connectionManager.getConnection();
+            preparedStatement = connection.prepareStatement(PREPARED_INSERT_SQL);
+            for (int i = 1; i <= DUMMY_SIZE; i++) {
+                Article article = Article.builder().grp(i).ordinal(1).level(1).subject("제목_" + i).authorId(i).status(1).build();
+                preparedStatement.setInt(1, article.getGrp());
+                preparedStatement.setInt(2, article.getOrdinal());
+                preparedStatement.setInt(3, article.getLevel());
+                preparedStatement.setString(4, article.getSubject());
+                preparedStatement.setInt(5, article.getAuthorId());
+                preparedStatement.setInt(6, article.getStatus());
+                preparedStatement.executeQuery();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeManager.close(connection, preparedStatement);
+        }
     }
 }

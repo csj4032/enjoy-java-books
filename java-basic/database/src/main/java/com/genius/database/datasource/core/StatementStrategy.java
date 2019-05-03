@@ -1,4 +1,4 @@
-package com.genius.database;
+package com.genius.database.datasource.core;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

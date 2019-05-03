@@ -1,8 +1,15 @@
 package com.genius.database;
 
+import com.genius.database.datasource.CloseManager;
+import com.genius.database.datasource.ConnectionManager;
+import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.OfficeConnectionManager;
 import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.pool.HikariProxyConnection;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -18,47 +25,57 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseConnectionTest {
 
-	public static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-	public static final String JDBC_URL = "jdbc:mariadb://localhost:3306/study";
-	public static final String USER_NAME = "study";
-	public static final String PASSWORD = "study";
-	public static HikariDataSource DATASOURCE;
-	public static final String INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (${grp}, ${ordinal}, ${level}, '${subject}', ${authorId}, ${status}, NOW());";
-	public static final String PREPARED_INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (?, ?, ?, ?, ?, ?, NOW());";
-	public static final String PREPARED_SELECT_SQL = "SELECT ID, GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE FROM ARTICLE;";
-	public static final String PREPARED_SELECT_COUNT_SQL = "SELECT COUNT(*) CNT FROM ARTICLE;";
-	public static final String PREPARED_UPDATE_SQL = "UPDATE ARTICLE SET SUBJECT = ? WHERE ID = ?";
+    public static final String JDBC_URL = "jdbc:mariadb://localhost:3306/study";
+    public static final String USER_NAME = "study";
+    public static final String PASSWORD = "study";
+    public static final String INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (${grp}, ${ordinal}, ${level}, '${subject}', ${authorId}, ${status}, NOW());";
+    public static final String PREPARED_INSERT_SQL = "INSERT INTO ARTICLE (GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE) VALUES (?, ?, ?, ?, ?, ?, NOW());";
+    public static final String PREPARED_SELECT_SQL = "SELECT ID, GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE FROM ARTICLE;";
+    public static final String PREPARED_SELECT_COUNT_SQL = "SELECT COUNT(*) CNT FROM ARTICLE;";
+    public static final String PREPARED_UPDATE_SQL = "UPDATE ARTICLE SET SUBJECT = ? WHERE ID = ?";
+    public static final String PREPARED_TRUNCATE_SQL = "TRUNCATE ARTICLE";
 
-	@Test
-	@DisplayName("데이터베이스 접속")
-	public void connectionTest() throws SQLException {
-		Connection connection = DriverManager.getConnection(JDBC_URL, USER_NAME, PASSWORD);
-		assertTrue(connection.isValid(1000));
-		assertEquals("study", connection.getCatalog());
-		assertEquals(null, connection.getSchema());
-	}
+    private ConnectionManager connectionManager = new HikariConnectionManager();
 
-	@Test
-	@DisplayName("HikariCP JDBC Connection Pool")
-	public void connectionPoolTest() throws SQLException {
-		Connection connection = getConnection();
-		assertEquals("study", connection.getCatalog());
-	}
+    @Test
+    @Order(1)
+    @DisplayName("Database Connection")
+    public void connectionTest() throws SQLException {
+        Connection connection = DriverManager.getConnection(JDBC_URL, USER_NAME, PASSWORD);
+        assertTrue(connection.isValid(1000));
+        assertEquals("study", connection.getCatalog());
+        assertEquals(null, connection.getSchema());
+    }
 
-	public static Connection getConnection() throws SQLException {
-		DATASOURCE = new HikariDataSource();
-		DATASOURCE.setDriverClassName(JDBC_DRIVER);
-		DATASOURCE.setJdbcUrl(JDBC_URL);
-		DATASOURCE.setUsername(USER_NAME);
-		DATASOURCE.setPassword(PASSWORD);
-		return DATASOURCE.getConnection();
-	}
+    @Test
+    @Order(2)
+    @DisplayName("Database ConnectionManager")
+    public void connectionManagerTest() throws SQLException {
+        OfficeConnectionManager officeConnectionManager = new OfficeConnectionManager();
+        Connection connection = officeConnectionManager.getConnection();
+        assertEquals("study", connection.getCatalog());
+        assertEquals(null, connection.getSchema());
+    }
 
-	public static void truncateArticle() {
-		try (Connection connection = DATASOURCE.getConnection(); PreparedStatement statement = connection.prepareStatement(PREPARED_INSERT_SQL)) {
-			statement.execute("TRUNCATE ARTICLE");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    @Test
+    @Order(3)
+    @DisplayName("HikariCP JDBC Connection Pool")
+    public void connectionPoolTest() throws SQLException {
+        Connection connection = connectionManager.getConnection();
+        assertEquals("study", connection.getCatalog());
+    }
+
+    public static void truncateArticle() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = new HikariConnectionManager().getConnection();
+            statement = connection.prepareStatement(PREPARED_TRUNCATE_SQL);
+            statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            new CloseManager().close(connection, statement);
+        }
+    }
 }

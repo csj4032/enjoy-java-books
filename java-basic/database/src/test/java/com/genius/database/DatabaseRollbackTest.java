@@ -1,5 +1,10 @@
 package com.genius.database;
 
+import com.genius.database.datasource.CloseManager;
+import com.genius.database.datasource.ConnectionManager;
+import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.domain.Article;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,20 +20,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
-import static com.genius.database.DatabaseConnectionTest.DATASOURCE;
 import static com.genius.database.DatabaseConnectionTest.PREPARED_INSERT_SQL;
-import static com.genius.database.DatabaseConnectionTest.getConnection;
 import static com.genius.database.DatabaseConnectionTest.truncateArticle;
 
 @DisplayName("Rollback")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseRollbackTest {
 
+    private static ConnectionManager connectionManager;
+    private static CloseManager closeManager;
     private static final String PREPARED_SELECT_SQL = "SELECT COUNT(*) AS CNT FROM ARTICLE";
 
     @BeforeAll
-    public static void setUp() throws SQLException {
-        getConnection();
+    public static void setUp() {
+        connectionManager = new HikariConnectionManager();
+        closeManager = new CloseManager();
         truncateArticle();
     }
 
@@ -45,7 +51,7 @@ public class DatabaseRollbackTest {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = DATASOURCE.getConnection();
+            connection = connectionManager.getConnection();
             statement = connection.prepareStatement(PREPARED_INSERT_SQL);
             for (int i = 1; i <= 10; i++) {
                 Article article = Article.builder().grp(i).ordinal(1).level(1).subject("제목_" + i).authorId(i).status(1).build();
@@ -63,8 +69,7 @@ public class DatabaseRollbackTest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
-            if (statement != null) statement.close();
+            closeManager.close(connection, statement);
         }
         int cnt = getCount();
         Assertions.assertEquals(index, cnt);
@@ -78,7 +83,7 @@ public class DatabaseRollbackTest {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = DATASOURCE.getConnection();
+            connection = connectionManager.getConnection();
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(PREPARED_INSERT_SQL);
             for (int i = 1; i <= 10; i++) {
@@ -102,11 +107,8 @@ public class DatabaseRollbackTest {
                 ex.printStackTrace();
             }
         } finally {
-            if (connection != null) {
-                connection.setAutoCommit(true);
-                connection.close();
-            }
-            if (statement != null) statement.close();
+            connection.setAutoCommit(true);
+            closeManager.close(connection, statement);
         }
         int cnt = getCount();
         Assertions.assertEquals(0, cnt);
@@ -117,7 +119,7 @@ public class DatabaseRollbackTest {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            connection = DATASOURCE.getConnection();
+            connection = connectionManager.getConnection();
             statement = connection.prepareStatement(PREPARED_SELECT_SQL);
             resultSet = statement.executeQuery();
             resultSet.first();
@@ -125,9 +127,7 @@ public class DatabaseRollbackTest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
-            if (statement != null) statement.close();
-            if (resultSet != null) resultSet.close();
+            closeManager.close(connection, statement, resultSet);
         }
         return 0;
     }

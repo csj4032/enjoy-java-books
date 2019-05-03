@@ -21,7 +21,7 @@ public class ChargenServer {
 		} catch (RuntimeException ex) {
 			port = DEFAULT_PORT;
 		}
-		System.out.println("Listening for connections on port " + port);
+		System.out.println("Listening for isolationConnections on port " + port);
 
 		byte[] rotation = new byte[95 * 2];
 		for (byte i = ' '; i <= '~'; i++) {
@@ -60,7 +60,7 @@ public class ChargenServer {
 					if (key.isAcceptable()) {
 						ServerSocketChannel server = (ServerSocketChannel) key.channel();
 						SocketChannel client = server.accept();
-						System.out.println("Accepted connection from " + client);
+						System.out.println("Accepted isolationConnection from " + client);
 						client.configureBlocking(false);
 						SelectionKey key2 = client.register(selector, SelectionKey.OP_WRITE);
 						ByteBuffer buffer = ByteBuffer.allocate(74);
