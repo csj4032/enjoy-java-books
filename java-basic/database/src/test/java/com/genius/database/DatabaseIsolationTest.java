@@ -1,8 +1,8 @@
 package com.genius.database;
 
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
 import org.junit.jupiter.api.Assertions;
@@ -37,13 +37,13 @@ public class DatabaseIsolationTest {
     private static final String SUBJECT_0 = "제목";
     private static final String SUBJECT_1 = "제목1";
     private static final String SUBJECT_2 = "제목2";
-    private static ConnectionManager connectionManager;
+    private static DataBaseManager connectionManager;
     private static CloseManager closeManager;
     private static Connection isolationConnection;
 
     @BeforeAll
     public static void setUp() throws SQLException {
-        connectionManager = new HikariConnectionManager();
+        connectionManager = new HikariDataBaseManager();
         closeManager = new CloseManager();
         isolationConnection = connectionManager.getConnection();
         truncateArticle();

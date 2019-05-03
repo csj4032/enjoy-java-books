@@ -1,6 +1,6 @@
 package com.genius.database.dao.article;
 
-import com.genius.database.datasource.ConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
 import com.genius.database.datasource.core.GeniusJdbcTemplate;
 import com.genius.database.datasource.core.GeniusRowMapper;
 import com.genius.database.datasource.core.StatementStrategy;
@@ -22,7 +22,7 @@ public class ArticleDao {
 
     private GeniusJdbcTemplate jdbcTemplate;
 
-    public ArticleDao(ConnectionManager connectionManager) {
+    public ArticleDao(DataBaseManager connectionManager) {
         this.jdbcTemplate = new GeniusJdbcTemplate();
         jdbcTemplate.setConnectionManager(connectionManager);
     }

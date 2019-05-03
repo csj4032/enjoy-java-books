@@ -1,7 +1,7 @@
 package com.genius.database;
 
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +20,11 @@ import static com.genius.database.DatabaseInsertTest.insertArticle;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseUpdateTest {
 
-    private static ConnectionManager connectionManager;
+    private static DataBaseManager connectionManager;
 
     @BeforeAll
     public static void setUp() throws SQLException {
-        connectionManager = new HikariConnectionManager();
+        connectionManager = new HikariDataBaseManager();
         insertArticle(Article.builder().grp(1).ordinal(1).level(1).authorId(1).subject("").status(1).build());
     }
 

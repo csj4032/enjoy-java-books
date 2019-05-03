@@ -1,11 +1,10 @@
 package com.genius.database;
 
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -32,12 +31,12 @@ import static com.genius.database.DatabaseConnectionTest.*;
 public class DatabaseSelectTest {
 
     private static final int DUMMY_SIZE = 10000;
-    private static ConnectionManager connectionManager;
+    private static DataBaseManager connectionManager;
     private static CloseManager closeManager;
 
     @BeforeAll
     public static void setUp() throws SQLException {
-        connectionManager = new HikariConnectionManager();
+        connectionManager = new HikariDataBaseManager();
         closeManager = new CloseManager();
         truncateArticle();
         dummyArticle();

@@ -1,11 +1,9 @@
 package com.genius.database;
 
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
-import com.genius.database.datasource.OfficeConnectionManager;
-import com.zaxxer.hikari.HikariDataSource;
-import com.zaxxer.hikari.pool.HikariProxyConnection;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
+import com.genius.database.datasource.OfficeDataBaseManager;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -35,7 +33,7 @@ public class DatabaseConnectionTest {
     public static final String PREPARED_UPDATE_SQL = "UPDATE ARTICLE SET SUBJECT = ? WHERE ID = ?";
     public static final String PREPARED_TRUNCATE_SQL = "TRUNCATE ARTICLE";
 
-    private ConnectionManager connectionManager = new HikariConnectionManager();
+    private DataBaseManager connectionManager = new HikariDataBaseManager();
 
     @Test
     @Order(1)
@@ -49,9 +47,9 @@ public class DatabaseConnectionTest {
 
     @Test
     @Order(2)
-    @DisplayName("Database ConnectionManager")
+    @DisplayName("Database DataBaseManager")
     public void connectionManagerTest() throws SQLException {
-        OfficeConnectionManager officeConnectionManager = new OfficeConnectionManager();
+        OfficeDataBaseManager officeConnectionManager = new OfficeDataBaseManager();
         Connection connection = officeConnectionManager.getConnection();
         assertEquals("study", connection.getCatalog());
         assertEquals(null, connection.getSchema());
@@ -69,7 +67,7 @@ public class DatabaseConnectionTest {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
-            connection = new HikariConnectionManager().getConnection();
+            connection = new HikariDataBaseManager().getConnection();
             statement = connection.prepareStatement(PREPARED_TRUNCATE_SQL);
             statement.executeQuery();
         } catch (SQLException e) {

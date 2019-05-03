@@ -2,8 +2,8 @@ package com.genius.database;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
 import org.apache.commons.text.StringSubstitutor;
@@ -28,12 +28,12 @@ import static com.genius.database.DatabaseConnectionTest.PREPARED_INSERT_SQL;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseInsertTest {
 
-    private static ConnectionManager connectionManager;
+    private static DataBaseManager connectionManager;
     private static CloseManager closeManager;
 
     @BeforeAll
     public static void setUp() {
-        connectionManager = new HikariConnectionManager();
+        connectionManager = new HikariDataBaseManager();
         closeManager = new CloseManager();
     }
 

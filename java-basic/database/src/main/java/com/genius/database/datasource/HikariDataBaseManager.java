@@ -5,7 +5,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class HikariConnectionManager implements ConnectionManager {
+import javax.sql.DataSource;
+
+public class HikariDataBaseManager implements DataBaseManager {
 
     private static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     private static final String JDBC_URL = "jdbc:mariadb://db.choibom.com:3306/study";
@@ -14,16 +16,20 @@ public class HikariConnectionManager implements ConnectionManager {
 
     @Override
     public Connection getConnection() {
+        try {
+            return getDataSource().getConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public DataSource getDataSource() {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setDriverClassName(JDBC_DRIVER);
         hikariDataSource.setJdbcUrl(JDBC_URL);
         hikariDataSource.setUsername(USER_NAME);
         hikariDataSource.setPassword(PASSWORD);
-        try {
-            return hikariDataSource.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return hikariDataSource;
     }
 }

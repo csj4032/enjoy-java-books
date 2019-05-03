@@ -1,8 +1,8 @@
 package com.genius.database;
 
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
-import com.genius.database.datasource.HikariConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
+import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
 import org.junit.jupiter.api.AfterEach;
@@ -27,13 +27,13 @@ import static com.genius.database.DatabaseConnectionTest.truncateArticle;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DatabaseRollbackTest {
 
-    private static ConnectionManager connectionManager;
+    private static DataBaseManager connectionManager;
     private static CloseManager closeManager;
     private static final String PREPARED_SELECT_SQL = "SELECT COUNT(*) AS CNT FROM ARTICLE";
 
     @BeforeAll
     public static void setUp() {
-        connectionManager = new HikariConnectionManager();
+        connectionManager = new HikariDataBaseManager();
         closeManager = new CloseManager();
         truncateArticle();
     }

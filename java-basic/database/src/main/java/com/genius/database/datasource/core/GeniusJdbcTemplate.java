@@ -1,7 +1,7 @@
 package com.genius.database.datasource.core;
 
 import com.genius.database.datasource.CloseManager;
-import com.genius.database.datasource.ConnectionManager;
+import com.genius.database.datasource.DataBaseManager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 
 public class GeniusJdbcTemplate {
 
-    private ConnectionManager connectionManager;
+    private DataBaseManager connectionManager;
 
-    public void setConnectionManager(ConnectionManager connectionManager) {
+    public void setConnectionManager(DataBaseManager connectionManager) {
         this.connectionManager = connectionManager;
     }
 

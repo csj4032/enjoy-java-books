@@ -1,7 +1,7 @@
 package com.genius.database.dao;
 
 import com.genius.database.dao.article.ArticleDao;
-import com.genius.database.datasource.HomeConnectionManager;
+import com.genius.database.datasource.HomeDataBaseManager;
 import com.genius.database.datasource.core.GeniusJdbcTemplate;
 import com.genius.database.domain.Article;
 
@@ -27,7 +27,7 @@ public class ArticleDaoTest {
 	@BeforeAll
 	public static void setUp() {
 		GeniusJdbcTemplate jdbcTemplate = new GeniusJdbcTemplate();
-		jdbcTemplate.setConnectionManager(new HomeConnectionManager());
+		jdbcTemplate.setConnectionManager(new HomeDataBaseManager());
 		articleDao = new DaoFactory().articleDao();
 		articleDao.setJdbcTemplate(jdbcTemplate);
 		articleDao.truncate();
