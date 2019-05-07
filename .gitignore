@@ -7,8 +7,7 @@ agile-software-development/refactoring/out
 agile-software-development/bowling-game/out
 beginning-java-objects/ch13/out
 beginning-java-objects/ch15/out
-cracking-the-coding-interview/build
-cracking-the-coding-interview/out
+cracking-the-coding-interview/ch01/out
 effective-java-edition2/build
 effective-java-edition2/out
 effective-java-edition3/build
@@ -19,6 +18,7 @@ java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
 java-8-other/out
+java-basic/aspect/out
 java-basic/collection/out
 java-basic/database/out
 java-basic/introduction/out
@@ -29,6 +29,8 @@ java-concurrency-in-practice/out
 java-jungsuk/build
 java-jungsuk/out
 java-network-programming/out
+java-refactoring-for-beginner/removeControlFlag/findIntAfter1/out
+java-refactoring-for-beginner/removeControlFlag/findIntBefore/out
 java-refactoring-for-beginner/out
 junit-in-action/out
 netty/example/out
