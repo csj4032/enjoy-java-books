@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class JavaDatabaseConnectivity {
 
-	public boolean isolationConnection() throws SQLException {
+	public boolean connection() throws SQLException {
 		// 서비스 제공자 프레임워크는 다양한 서비스 제공자들이 하나의 서비스를 구성하는 시스템
 		// 1. 서비스 인터페이스 (java.sql.isolationConnection)
 		// 4. 서비스 제공자 인터페이스 (Driver)
