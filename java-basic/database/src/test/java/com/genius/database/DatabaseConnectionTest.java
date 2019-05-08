@@ -31,6 +31,7 @@ public class DatabaseConnectionTest {
     public static final String PREPARED_SELECT_SQL = "SELECT ID, GRP, ORDINAL, LEVEL, SUBJECT, AUTHOR_ID, STATUS, REG_DATE FROM ARTICLE;";
     public static final String PREPARED_SELECT_COUNT_SQL = "SELECT COUNT(*) CNT FROM ARTICLE;";
     public static final String PREPARED_UPDATE_SQL = "UPDATE ARTICLE SET SUBJECT = ? WHERE ID = ?";
+    public static final String PREPARED_DELETE_SQL = "DELETE ARTICLE WHERE ID = ?";
     public static final String PREPARED_TRUNCATE_SQL = "TRUNCATE ARTICLE";
 
     private DataBaseManager connectionManager = new HikariDataBaseManager();

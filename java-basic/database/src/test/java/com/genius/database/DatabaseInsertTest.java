@@ -7,7 +7,6 @@ import com.genius.database.datasource.HikariDataBaseManager;
 import com.genius.database.domain.Article;
 
 import org.apache.commons.text.StringSubstitutor;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -23,6 +22,7 @@ import java.util.Map;
 
 import static com.genius.database.DatabaseConnectionTest.INSERT_SQL;
 import static com.genius.database.DatabaseConnectionTest.PREPARED_INSERT_SQL;
+import static com.genius.database.DatabaseConnectionTest.truncateArticle;
 
 @DisplayName("Insert")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -35,10 +35,7 @@ public class DatabaseInsertTest {
     public static void setUp() {
         connectionManager = new HikariDataBaseManager();
         closeManager = new CloseManager();
-    }
-
-    @AfterAll
-    public static void after() {
+        truncateArticle();
     }
 
     @Test
@@ -48,7 +45,6 @@ public class DatabaseInsertTest {
         StringSubstitutor stringSubstitutor = new StringSubstitutor(new ObjectMapper().convertValue(Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build(), Map.class));
         try (Connection connection = connectionManager.getConnection(); Statement statement = connection.createStatement()) {
             statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
-            statement.executeUpdate(stringSubstitutor.replace(INSERT_SQL));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,11 +53,11 @@ public class DatabaseInsertTest {
     @Test
     @Order(2)
     @DisplayName("PrepareStatement")
-    public void prepareStatement() throws SQLException {
+    public void prepareStatement() {
         insertArticle(Article.builder().grp(1).ordinal(1).level(1).subject("제목").authorId(1).status(1).build());
     }
 
-    public static void insertArticle(Article article) throws SQLException {
+    public static void insertArticle(Article article) {
         Connection connection = null;
         PreparedStatement statement = null;
         try {

@@ -26,13 +26,14 @@ public class UserDaoTest {
     public static void setUp() {
         UserDao userDao = new DaoFactory().userDao();
         userService = new UserServiceImpl(userDao);
+        userService.truncate();
     }
 
     @Test
     @Order(1)
     @DisplayName("SAVE REQUIRED")
     public void save() {
-        //userService.save(User.builder().name("Genius").build());
+        userService.save(User.builder().name("Genius").build());
     }
 
     @Test
@@ -52,7 +53,7 @@ public class UserDaoTest {
     @Test
     @Order(4)
     @DisplayName("REQUIRED (REQUIRES_NEW NOT_SUPPORT) : Update")
-    public void saveAndUpdate() throws SQLException {
-        userService.saveAndUpdate(User.builder().name("Genius").build(), User.builder().id(1).name("Spring").build());
+    public void saveAndUpdateCase1() {
+        Assertions.assertThrows(SQLException.class, () -> userService.saveAndUpdate(User.builder().name("Genius").build(), User.builder().id(1).name("Spring").build()));
     }
 }

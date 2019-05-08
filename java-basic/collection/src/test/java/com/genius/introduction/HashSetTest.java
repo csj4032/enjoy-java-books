@@ -1,4 +1,4 @@
-package com.genius.collections;
+package com.genius.introduction;
 
 import org.junit.jupiter.api.*;
 

@@ -17,12 +17,12 @@ import java.sql.SQLException;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static com.genius.database.DatabaseConnectionTest.PREPARED_UPDATE_SQL;
+import static com.genius.database.DatabaseConnectionTest.PREPARED_DELETE_SQL;
 
 @Slf4j
-@DisplayName("Update")
+@DisplayName("Delete")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class DatabaseUpdateTest {
+public class DatabaseDeleteTest {
 
     private static DataBaseManager connectionManager;
 
@@ -33,16 +33,15 @@ public class DatabaseUpdateTest {
 
     @Test
     @Order(1)
-    @DisplayName("UPDATE ARTICLE")
-    public void updateArticle() {
+    @DisplayName("DELETE ARTICLE")
+    public void deleteArticle() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int result = 0;
         try {
             connection = connectionManager.getConnection();
             preparedStatement = getPreparedStatement(connection);
-            preparedStatement.setString(1, "제목_1");
-            preparedStatement.setInt(2, 1);
+            preparedStatement.setInt(1, 1);
             result = preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -67,7 +66,7 @@ public class DatabaseUpdateTest {
 
     private PreparedStatement getPreparedStatement(Connection connection) throws SQLException {
         PreparedStatement preparedStatement;
-        preparedStatement = connection.prepareStatement(PREPARED_UPDATE_SQL);
+        preparedStatement = connection.prepareStatement(PREPARED_DELETE_SQL);
         return preparedStatement;
     }
 }

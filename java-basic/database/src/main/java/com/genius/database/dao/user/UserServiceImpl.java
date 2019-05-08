@@ -3,7 +3,6 @@ package com.genius.database.dao.user;
 import com.genius.database.domain.User;
 
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void truncate() {
+        userDao.truncate();
+    }
+
+    @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public User get(long id) {
         DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
@@ -48,9 +52,9 @@ public class UserServiceImpl implements UserService {
         DefaultTransactionDefinition defaultTransactionDefinition = new DefaultTransactionDefinition();
         defaultTransactionDefinition.setPropagationBehavior(3);
         defaultTransactionDefinition.setName("save");
-        userDao.insert(user);
+        int result = userDao.insert(user);
         dataSourceTransactionManager.commit(dataSourceTransactionManager.getTransaction(defaultTransactionDefinition));
-        return 0;
+        return result;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class UserServiceImpl implements UserService {
         defaultTransactionDefinition.setName("update");
         dataSourceTransactionManager.getTransaction(defaultTransactionDefinition);
         userDao.update(user);
-        if(1==1) {
+        if (1 == 1) {
             dataSourceTransactionManager.rollback(dataSourceTransactionManager.getTransaction(defaultTransactionDefinition));
             throw new SQLException();
         }

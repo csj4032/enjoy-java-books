@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface UserService {
 
+    void truncate();
+
     User get(long id);
 
     List<User> getByName(String name);
 
-    int save(User user) throws SQLException;
+    int save(User user);
 
     int update(User genius) throws SQLException;
 

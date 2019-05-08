@@ -22,6 +22,10 @@ public class UserDao {
         return jdbcTemplate;
     }
 
+    public void truncate() {
+        jdbcTemplate.execute("TRUNCATE USER");
+    }
+
     public User findById(long id) {
         return jdbcTemplate.queryForObject("SELECT ID, NAME FROM USER WHERE ID = ?", User.class, id);
     }

@@ -1,4 +1,4 @@
-package com.genius.collections;
+package com.genius.introduction;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
