@@ -4,6 +4,7 @@
 * 1991년에 썬의 엔지니어들에 의해서 고안된 오크라는 언어에서부터 시작
 * 1995년도에 처음 썬 마이크로시스템즈에서 자바 언어를 발표
 ## 자바 특징
+* Simple, Object oriented, Distributed, Multithreaded, Dynamic, Architecture neutral, Portable, High performance, Robust, Secure
 ### 이식성이 높은 언어
 * 바이트 코드(byte code)라고 부르는 특별한 포맷으로 변환
 * Solaris, Windows, MacOS뿐 아니라 자바 컴파일러가 작동 가능한 어떤 운영체제에서 컴파일된 자바 프로그램 일지라도, 결과인 바이트 코드는 같으므로 JVM이 지원되는 컴퓨터라면 어디에서나 실행 가능   
@@ -17,11 +18,15 @@
 * 핵심 기능 코드 작성에 집중
 
 ### 다양한 애플리케이션을 개발 가능
+
 ### 멀티 스레드를 쉽게 구현 할 수 있다.
+
 ### 동적 로딩을 지원한다.
 
 ### 자바 프로그램의 작동 원리
+
 #### 컴파일과 실행
+
 #### 자바 가상 머신
 
 ### 자바 개발환경 구축하기
@@ -39,6 +44,8 @@
 ### 블록과 명령문 (Block and Statement)
 
 ## 클래스, 인터페이스, 추상클래스 (Class, Interface, AbstractClass)
+### 객체(Object)
+* 
 ### 클래스
 ### 메서드
 ### 인터페이스
