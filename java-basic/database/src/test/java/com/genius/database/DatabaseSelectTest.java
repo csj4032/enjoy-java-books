@@ -54,6 +54,7 @@ public class DatabaseSelectTest {
             connection = connectionManager.getConnection();
             preparedStatement = connection.prepareStatement(PREPARED_SELECT_SQL);
             resultSet = preparedStatement.executeQuery();
+            resultSet.first();
             while (resultSet.next()) {
                 long id = resultSet.getLong("ID");
                 int grp = resultSet.getInt("GRP");

@@ -1,4 +1,4 @@
-package com.genius.introduction;
+package com.genius.collection;
 
 import lombok.*;
 
