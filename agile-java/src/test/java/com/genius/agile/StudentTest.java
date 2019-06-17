@@ -11,6 +11,10 @@ public class StudentTest {
 	public void create() {
 		Student student = new Student("genius");
 		Assertions.assertNotNull(student);
+
+		var secondStudentName = "Spring";
+		var secondStudent = new Student(secondStudentName);
+		Assertions.assertEquals(secondStudentName, secondStudent.getName());
 	}
 
 	@Test

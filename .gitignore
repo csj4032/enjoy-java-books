@@ -21,7 +21,9 @@ java-8-other/out
 java-basic/aspect/out
 java-basic/collection/out
 java-basic/database/out
+java-basic/duality/out
 java-basic/introduction/out
+java-basic/thread/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build
