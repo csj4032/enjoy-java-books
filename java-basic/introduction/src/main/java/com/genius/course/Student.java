@@ -1,4 +1,4 @@
-package com.genius.intro.course;
+package com.genius.course;
 
 public class Student {
 

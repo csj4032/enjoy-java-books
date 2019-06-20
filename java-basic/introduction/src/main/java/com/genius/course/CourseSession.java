@@ -1,4 +1,4 @@
-package com.genius.intro.course;
+package com.genius.course;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
