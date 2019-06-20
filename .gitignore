@@ -1,10 +1,13 @@
 .gradle
 .idea
 *.iml
+agile-java/out
 agile-software-development/patterns/command/activeObject/out
 agile-software-development/payroll/out
 agile-software-development/refactoring/out
 agile-software-development/bowling-game/out
+beginning-java-objects/ch06/build
+beginning-java-objects/ch06/out
 beginning-java-objects/ch13/out
 beginning-java-objects/ch15/out
 cracking-the-coding-interview/ch01/out
