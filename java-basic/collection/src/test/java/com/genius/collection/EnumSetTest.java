@@ -16,7 +16,4 @@ public class EnumSetTest {
 		Set<CollectionEnumSet> set = EnumSet.allOf(CollectionEnumSet.class);
 		Assertions.assertEquals(10, set.size());
 	}
-
-
-
 }

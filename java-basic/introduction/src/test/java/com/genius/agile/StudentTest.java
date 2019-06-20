@@ -1,5 +1,7 @@
 package com.genius.agile;
 
+import com.genius.intro.course.Student;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

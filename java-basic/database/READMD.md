@@ -15,6 +15,14 @@
     * Template Method
     * Factory (IoC)
 
+#### 순서
+1. JDBC를 이용한 등록과 조회
+2. 관심사분리 (중복 코드 메소드 추출 Connection)
+3. 상속을 통한 DAO 확장
+4. Connection 클래스 분리
+5. Connection 인터페이스 도입
+6. Object Factory 활용
+
 ### Isolation Level
 
 | Isolation Level  | Transaction | Dirty Reads  | Non-Repeatable Reads  |  Phantom Reads  |

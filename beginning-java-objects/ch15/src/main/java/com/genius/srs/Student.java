@@ -19,27 +19,19 @@ public class Student extends Person {
 	public Student(String ssn) {
 
 		String line;
-		String pathToFile = "data" + ssn + ".dat";
+		String pathToFile = "data/" + ssn + ".dat";
 
-		try (BufferedReader bIn = new BufferedReader(new FileReader(pathToFile));) {
-
+		try (BufferedReader bIn = new BufferedReader(new FileReader(pathToFile))) {
 			line = bIn.readLine();
 			if (line != null) parseData(line);
-
 			attends = new ArrayList();
-
 			line = bIn.readLine();
-
 			while (line != null) {
 				parseData2(line);
 				line = bIn.readLine();
 			}
-
-			bIn.close();
-		} catch (FileNotFoundException f) {
-
-		} catch (IOException i) {
-
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 		setTranscript(new Transcript(this));
 	}
@@ -129,7 +121,7 @@ public class Student extends Person {
 
 	public boolean persist() {
 		PrintWriter pw = null;
-		try (FileOutputStream fos = new FileOutputStream(getSsn() + ".dat");) {
+		try (FileOutputStream fos = new FileOutputStream(getSsn() + ".dat")) {
 			pw = new PrintWriter(fos);
 			pw.println(getSsn() + "\t" + getName() + "\t" + getMajor() + "\t" + getDegree());
 

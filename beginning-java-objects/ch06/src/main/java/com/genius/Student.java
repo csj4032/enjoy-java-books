@@ -4,10 +4,15 @@ import lombok.Data;
 
 @Data
 public class Student {
-	private String idNo;
-	private String name;
+    private final String idNo;
+    private final String name;
 
-	public Student(String name) {
-		this.name = name;
-	}
+    public Student(String name) {
+        this("", name);
+    }
+
+    public Student(String idNo, String name) {
+        this.idNo = idNo;
+        this.name = name;
+    }
 }

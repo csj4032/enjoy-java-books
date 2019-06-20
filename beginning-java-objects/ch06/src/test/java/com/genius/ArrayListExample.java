@@ -10,7 +10,7 @@ public class ArrayListExample {
 
 	@Test
 	public void arrayListTest() {
-		var students = List.of(new Student("홍길등"), new Student("안철수"));
+		var students = List.of(new Student("Herbie"), new Student("Clem"), new Student("Oscar"));
 		for (var student : students) {
 			log.info("{}", student);
 		}
