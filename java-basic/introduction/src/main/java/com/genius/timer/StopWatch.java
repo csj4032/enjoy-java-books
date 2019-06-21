@@ -4,8 +4,8 @@ public class StopWatch {
     public long startTime;
     public long endTime;
 
-    public long getElapsedTime() {
-        return endTime - startTime;
+    public Time getElapsedTime() {
+        return new Time(endTime - startTime);
     }
 
     public void setStartTime(long startTime) {

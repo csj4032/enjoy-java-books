@@ -15,21 +15,23 @@ public class StopWatchTest {
     @Test
     public void elapsedTime() throws InterruptedException {
         StopWatch stopWatch = new StopWatch();
-        stopWatch.startTime = System.currentTimeMillis();
+        stopWatch.startTime = System.nanoTime();
 
         Thread.sleep(1000);
 
-        stopWatch.endTime = System.currentTimeMillis();
+        stopWatch.endTime = System.nanoTime();
         System.out.println("Elapsed Time : " + (stopWatch.endTime - stopWatch.startTime));
 
-        stopWatch.startTime = System.currentTimeMillis();
+        stopWatch.startTime = System.nanoTime();
         Thread.sleep(1000);
-        stopWatch.endTime = System.currentTimeMillis();
-        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime());
+        stopWatch.endTime = System.nanoTime();
+        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getNanoTime());
 
-        stopWatch.setStartTime(System.currentTimeMillis());
+        stopWatch.setStartTime(System.nanoTime());
         Thread.sleep(1000);
-        stopWatch.setEndTime(System.currentTimeMillis());
-        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime());
+        stopWatch.setEndTime(System.nanoTime());
+        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getNanoTime());
+        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getMillTime());
+
     }
 }
