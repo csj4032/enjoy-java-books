@@ -6,6 +6,10 @@ import java.util.List;
 
 public class CourseSession {
 
+	public static final String NEWLINE = System.getProperty("line.separator");
+	public static final String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-" + NEWLINE;
+	public static final String ROSTER_REPORT_FOOT = NEWLINE + "# students = ";
+
 	private final String department;
 	private final String number;
 	private final LocalDate startDate;
@@ -49,5 +53,21 @@ public class CourseSession {
 
 	public LocalDate getEndDate() {
 		return startDate.plusDays(16 * 7 - 3);
+	}
+
+	public String getRosterReport() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(ROSTER_REPORT_HEADER);
+
+		Student student = students.get(0);
+		stringBuilder.append(student.getName());
+		stringBuilder.append(NEWLINE);
+
+		student = students.get(1);
+		stringBuilder.append(student.getName());
+		stringBuilder.append(NEWLINE);
+
+		stringBuilder.append(ROSTER_REPORT_FOOT + students.size() + NEWLINE);
+		return stringBuilder.toString();
 	}
 }

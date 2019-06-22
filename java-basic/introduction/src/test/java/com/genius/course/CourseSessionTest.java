@@ -1,12 +1,11 @@
 package com.genius.course;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CourseSessionTest {
 
 	private static CourseSession session;
@@ -19,12 +18,14 @@ public class CourseSessionTest {
 	}
 
 	@Test
+	@Order(1)
 	public void testCreate() {
 		Assertions.assertEquals("ENGL", session.getDepartment());
 		Assertions.assertEquals("101", session.getNumber());
 	}
 
 	@Test
+	@Order(2)
 	public void testEnrollStudents() {
 
 		Assertions.assertEquals(0, session.getNumberOfStudents());
@@ -52,8 +53,20 @@ public class CourseSessionTest {
 	}
 
 	@Test
+	@Order(3)
 	public void testCourseDate() {
 		CourseSession session = new CourseSession("ABCD", "102", startDate);
 		Assertions.assertEquals(startDate.plusDays(109), session.getEndDate());
+	}
+
+	@Test
+	@Order(4)
+	public void testRosterReport() {
+		session = new CourseSession("ENGL", "101");
+		session.enroll(new Student("A"));
+		session.enroll(new Student("B"));
+
+		String rosterReport = session.getRosterReport();
+		Assertions.assertEquals(CourseSession.ROSTER_REPORT_HEADER + "A\nB\n" + CourseSession.ROSTER_REPORT_FOOT + "2\n" , rosterReport);
 	}
 }

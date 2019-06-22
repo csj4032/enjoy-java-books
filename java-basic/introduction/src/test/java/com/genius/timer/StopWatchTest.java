@@ -1,37 +1,39 @@
 package com.genius.timer;
 
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.TestMethodOrder;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 @Slf4j
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StopWatchTest {
 
-    @Test
-    public void creatTest() {
-        StopWatch stopWatch = new StopWatch();
-    }
+	private StopWatch stopWatch;
 
-    @Test
-    public void elapsedTime() throws InterruptedException {
-        StopWatch stopWatch = new StopWatch();
-        stopWatch.startTime = System.nanoTime();
+	@Test
+	@Order(1)
+	public void creatTest() {
+		stopWatch = new StopWatch();
+	}
 
-        Thread.sleep(1000);
+	@Test
+	public void elapsedTime() throws InterruptedException {
+		stopWatch = new StopWatch();
+		stopWatch.setStartTime(System.nanoTime());
+		Thread.sleep(5000);
+		stopWatch.setEndTime(System.nanoTime());
 
-        stopWatch.endTime = System.nanoTime();
-        System.out.println("Elapsed Time : " + (stopWatch.endTime - stopWatch.startTime));
-
-        stopWatch.startTime = System.nanoTime();
-        Thread.sleep(1000);
-        stopWatch.endTime = System.nanoTime();
-        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getNanoTime());
-
-        stopWatch.setStartTime(System.nanoTime());
-        Thread.sleep(1000);
-        stopWatch.setEndTime(System.nanoTime());
-        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getNanoTime());
-        System.out.println("Elapsed Time : " + stopWatch.getElapsedTime().getMillTime());
-
-    }
+		Time time = stopWatch.getElapsedTime();
+		System.out.println("Elapsed Time Nano : " + time.getNanoTime());
+		System.out.println("Elapsed Time Mill : " + time.getMillTime());
+		System.out.println("Elapsed Time Second : " + time.getSecondTime());
+		System.out.println("Elapsed Time Second : " + Duration.of(time.getNanoTime(), ChronoUnit.NANOS).getSeconds());
+	}
 }
