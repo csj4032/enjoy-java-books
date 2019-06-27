@@ -52,8 +52,8 @@ public class ArrayListTest {
 	@DisplayName("새로운 아티클 객체를 리스트에 추가")
 	public void addAll() {
 		Article article2 = Article.builder().id(2).subject("제목2").contents("내용2").build();
-		Article article3 = Article.builder().id(3).subject("제목3").contents("내용2").build();
-		Article article4 = Article.builder().id(4).subject("제목4").contents("내용2").build();
+		Article article3 = Article.builder().id(3).subject("제목3").contents("내용3").build();
+		Article article4 = Article.builder().id(4).subject("제목4").contents("내용4").build();
 		arrayList.addAll(Arrays.asList(article2, article3, article4));
 		Assertions.assertEquals(4, arrayList.size());
 	}
@@ -142,7 +142,7 @@ public class ArrayListTest {
 	@DisplayName("특정 리스트의 다른 아티클 객체 삭제")
 	public void retailAll() {
 		Article article = Article.builder().id(0).subject("제목0").contents("내용0").build();
-		Article article1 = Article.builder().id(1).subject("제목0").contents("내용0").build();
+		Article article1 = Article.builder().id(1).subject("제목1").contents("내용1").build();
 		List retail = List.of(article, article1);
 		boolean bool = retailAll.retainAll(retail);
 		Assertions.assertTrue(bool);
@@ -154,8 +154,8 @@ public class ArrayListTest {
 	@DisplayName("지정한 범위의 아티클 리스트 반환")
 	public void subList() {
 		Article article2 = Article.builder().id(2).subject("제목2").contents("내용2").build();
-		Article article3 = Article.builder().id(3).subject("제목3").contents("내용2").build();
-		Article article4 = Article.builder().id(4).subject("제목4").contents("내용2").build();
+		Article article3 = Article.builder().id(3).subject("제목3").contents("내용3").build();
+		Article article4 = Article.builder().id(4).subject("제목4").contents("내용4").build();
 		List sub = subList.subList(2, 5);
 		Assertions.assertEquals(3, sub.size());
 		Assertions.assertEquals(List.of(article2, article3, article4), sub);
