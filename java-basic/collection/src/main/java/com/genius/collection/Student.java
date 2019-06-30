@@ -13,5 +13,5 @@ public class Student {
 	private long id;
 	private String name;
 	private Grade grade;
-	private int point;
+	private Integer point;
 }
