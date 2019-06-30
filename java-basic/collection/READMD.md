@@ -40,3 +40,5 @@
     * IdentityHashMap
     * WeakHashMap
     * EunmMap
+## Comparable
+ * compareTo 메소드의 일은 두 객체 중 어느 것이 먼저 위치해야 하는 지를결정하는 것

@@ -2,7 +2,8 @@ package com.genius.collection;
 
 import org.junit.jupiter.api.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AdvancedTest {
@@ -63,44 +64,26 @@ public class AdvancedTest {
 	@Test
 	@Order(1)
 	@DisplayName("전체 학생 중 1등")
-	public void top1ByPoints() {
-		Integer top1Point = 0;
-		Student top1Student = new Student();
-		for (Student student : students) {
-			if (top1Point < student.getPoint()) {
-				top1Point = student.getPoint();
-				top1Student = student;
-			}
-		}
-		Assertions.assertEquals("가길동", top1Student.getName());
+	public void top1ByAll() {
 	}
 
 	@Test
 	@Order(2)
 	@DisplayName("전체 학생 중 1,2,3등")
-	public void top3ByPoints() {
-		List<Student> top3Students;
-		students.sort(new Comparator<Student>() {
-			@Override
-			public int compare(Student o1, Student o2) {
-				return o2.getPoint().compareTo(o1.getPoint());
-			}
-		});
-		top3Students = students.subList(0, 3);
-		Assertions.assertEquals("가길동", top3Students.get(0).getName());
-		Assertions.assertEquals("가철수", top3Students.get(1).getName());
-		Assertions.assertEquals("가영희", top3Students.get(2).getName());
+	public void top3ByAll() {
+	}
+
+	@Test
+	@Order(3)
+	@DisplayName("학년별 학생 리스트")
+	public void listByGrade() {
 	}
 
 	@Test
 	@Order(4)
-	@DisplayName("학년별 학생 리스트")
-	public void mapByGrade() {
-		Map<Grade, List<Student>> gradeListMap = new HashMap<>();
-		for (Student student : students) {
-			gradeListMap.putIfAbsent(student.getGrade(), new ArrayList<>());
-			gradeListMap.get(student.getGrade()).add(student);
-		}
-		Assertions.assertEquals("[Sophomore, Junior, Senior, Freshman]", gradeListMap.keySet().toString());
+	@DisplayName("학년별 1,2,3등")
+	public void top3ByGrade() {
 	}
 }
+
+

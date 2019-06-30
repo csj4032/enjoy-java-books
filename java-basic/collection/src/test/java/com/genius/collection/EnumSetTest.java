@@ -2,6 +2,7 @@ package com.genius.collection;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -15,5 +16,6 @@ public class EnumSetTest {
 	public void enumSet() {
 		Set<CollectionEnumSet> set = EnumSet.allOf(CollectionEnumSet.class);
 		Assertions.assertEquals(10, set.size());
+		Assertions.assertTrue(set.contains(CollectionEnumSet.List));
 	}
 }
