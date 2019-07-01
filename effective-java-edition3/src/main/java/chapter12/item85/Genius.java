@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Genius implements Serializable {
 
+	static final long serialVersionUID = 1L;
+
 	private String name;
 	private int age;
 
