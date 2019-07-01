@@ -1,65 +1,85 @@
 package com.genius.calendar;
 
+import com.genius.course.Student;
+
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.List;
 
 public class Calendar {
 
-    private static final int[] normalMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private static final int[] leapMonth = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    private static final LocalDate startDate = LocalDate.of(1, 1, 1);
-    private final int year;
-    private final int month;
-    private final int dayOfWeek = 7;
-    private final int dayOfYear = 365;
+	private static final LocalDate startDate = LocalDate.of(1, 1, 1);
+	private static LocalDate currentDate;
+	private final int dayOfWeek = 7;
+	private final int dayOfYear = 365;
 
-    public Calendar() {
-        this(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
-    }
+	public Calendar() {
+		this(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
+	}
 
-    public Calendar(int year, int month) {
-        this.year = year;
-        this.month = month;
-    }
+	public Calendar(int year, int month) {
+		currentDate = LocalDate.of(year, month, 1);
+	}
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+	public LocalDate getStartDate() {
+		Arrays.asList();
+		return startDate;
+	}
 
-    public int getYear() {
-        return year;
-    }
+	public long getDayOfMonth() {
+		return (getDaysUntil() + 1) % dayOfWeek;
+	}
 
-    public int getMonth() {
-        return month;
-    }
+	public long getDaysUntil() {
+		return getDayOfYears() + getDayOfYear();
+	}
 
-    public int getDayOfMonthFirstDay() {
-        return (getSumOfDays() + getSumOfDaysOnYear() + 1) % dayOfWeek;
-    }
+	public long getDayOfYear() {
+		long dayOfYear = 0;
+		for (int i = 0; i < currentDate.getMonthValue() - 1; i++) {
+			dayOfYear += getMonthLength(Month.of(i + 1));
+		}
+		return dayOfYear;
+	}
 
-    public int getSumOfDays() {
-        int normal = (year - startDate.getYear());
-        int leap = (normal / 4) - ((normal / 100) - (normal / 400));
-        return (normal * dayOfYear) + leap;
-    }
+	public boolean isLeapYear() {
+		return ((currentDate.getYear() & 3) == 0) && ((currentDate.getYear() % 100 != 0 || currentDate.getYear() % 400 == 0));
+	}
 
-    public int getSumOfDaysOnYear() {
-        int sumOfDays = 0;
-        int[] dayOfMonth = isLeap() ? leapMonth : normalMonth;
-        for (int i = 0; i < month - 1; i++) {
-            sumOfDays += dayOfMonth[i];
-        }
-        return sumOfDays;
-    }
+	public int getCurrentMonthLength() {
+		return getMonthLength(currentDate.getMonth());
+	}
 
-    public boolean isLeap() {
-        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
-            return true;
-        }
-        return false;
-    }
+	private int getMonthLength(Month month) {
+		switch (month) {
+			case FEBRUARY:
+				return (isLeapYear() ? 29 : 28);
+			case APRIL:
+			case JUNE:
+			case SEPTEMBER:
+			case NOVEMBER:
+				return 30;
+			default:
+				return 31;
+		}
+	}
 
-    public int currentMonthEndDay() {
-        return isLeap() ? leapMonth[month-1] : normalMonth[month-1];
-    }
+	public int getYear() {
+		return currentDate.getYear();
+	}
+
+	public int getMonth() {
+		return currentDate.getMonthValue();
+	}
+
+	public long getDayOfYears() {
+		long until = getYearsUntil();
+		return (until * dayOfYear) + (until / 4) - ((until / 100) - (until / 400));
+	}
+
+	private long getYearsUntil() {
+		return startDate.until(currentDate, ChronoUnit.YEARS);
+	}
 }
