@@ -1,5 +1,8 @@
 package com.genius.jooq;
 
+import org.jooq.lambda.Seq;
+
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -79,17 +82,17 @@ public class JOOλExample {
             "1955-56     Bob Pettit, St. Louis Hawks";
 
     public static void main(String[] args) {
-        //int max = 3;
-        //List<String> alphabet = Seq.rangeClosed('A', 'Z').map(Object::toString).toList();
-        //Seq.rangeClosed(1, max).flatMap(length -> Seq.rangeClosed(1, length - 1).foldLeft(Seq.seq(alphabet), (s, i) -> s.crossJoin(Seq.seq(alphabet)).map(t -> t.v1 + t.v2))).forEach(System.out::println);
+        int max = 3;
+        List<String> alphabet = Seq.rangeClosed('A', 'Z').map(Object::toString).toList();
+        Seq.rangeClosed(1, max).flatMap(length -> Seq.rangeClosed(1, length - 1).foldLeft(Seq.seq(alphabet), (s, i) -> s.crossJoin(Seq.seq(alphabet)).map(t -> t.v1 + t.v2))).forEach(System.out::println);
 
-        String[] lines = MVPS.split("\\n");
-        Long mvpCount = Stream.of(lines).collect(teeing(
-                groupingBy(e -> e.substring(12, e.indexOf(",")), summingLong(e -> 1L)),
-                groupingBy(e -> e.substring(12, e.indexOf(",")), groupingBy(e -> e.substring(e.indexOf(",") + 1), counting())),
-                (c, s) -> c.entrySet().stream().sorted(comparingByValue(reverseOrder())).peek(e -> out.println(e.getKey() + " " + e.getValue() + " " + s.get(e.getKey())))))
-                .mapToLong(Map.Entry::getValue).sum();
-
-        out.println(lines.length == mvpCount);
+//        String[] lines = MVPS.split("\\n");
+//        Long mvpCount = Stream.of(lines).collect(teeing(
+//                groupingBy(e -> e.substring(12, e.indexOf(",")), summingLong(e -> 1L)),
+//                groupingBy(e -> e.substring(12, e.indexOf(",")), groupingBy(e -> e.substring(e.indexOf(",") + 1), counting())),
+//                (c, s) -> c.entrySet().stream().sorted(comparingByValue(reverseOrder())).peek(e -> out.println(e.getKey() + " " + e.getValue() + " " + s.get(e.getKey())))))
+//                .mapToLong(Map.Entry::getValue).sum();
+//
+//        out.println(lines.length == mvpCount);
     }
 }

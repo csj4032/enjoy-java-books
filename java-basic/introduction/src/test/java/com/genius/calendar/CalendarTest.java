@@ -71,7 +71,7 @@ public class CalendarTest {
 	@DisplayName("출력 확인")
 	public void printTest() {
 		Calendar calendar = new Calendar(2017, 5);
-		Print print = new Print(calendar);
-		print.print();
+		Printer printer = new Printer(calendar);
+        printer.print();
 	}
 }

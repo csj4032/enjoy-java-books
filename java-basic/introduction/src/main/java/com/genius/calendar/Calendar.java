@@ -1,19 +1,15 @@
 package com.genius.calendar;
 
-import com.genius.course.Student;
-
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
-import java.util.List;
 
 public class Calendar {
 
 	private static final LocalDate startDate = LocalDate.of(1, 1, 1);
-	private static LocalDate currentDate;
-	private final int dayOfWeek = 7;
-	private final int dayOfYear = 365;
+	private static final int dayOfWeek = 7;
+	private static final int dayOfYear = 365;
+	private final LocalDate currentDate;
 
 	public Calendar() {
 		this(LocalDate.now().getYear(), LocalDate.now().getMonth().getValue());
@@ -24,7 +20,6 @@ public class Calendar {
 	}
 
 	public LocalDate getStartDate() {
-		Arrays.asList();
 		return startDate;
 	}
 

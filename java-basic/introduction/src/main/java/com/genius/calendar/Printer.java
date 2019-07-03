@@ -1,6 +1,6 @@
 package com.genius.calendar;
 
-public class Print {
+public class Printer {
 
 	private final Calendar calendar;
 	private final static int MonthStart = 1;
@@ -8,7 +8,7 @@ public class Print {
 	private final static int DaysOfWeek = 7;
 	private final static int MonthEnd = 35;
 
-	public Print(Calendar calendar) {
+	public Printer(Calendar calendar) {
 		this.calendar = calendar;
 	}
 
