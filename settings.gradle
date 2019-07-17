@@ -22,6 +22,8 @@ include 'agile-software-development:refactoring'
 findProject(':agile-software-development:refactoring')?.name = 'refactoring'
 include 'agile-software-development:bowling-game'
 findProject(':agile-software-development:bowling-game')?.name = 'bowling-game'
+include 'agile-software-development:transformation'
+findProject(':agile-software-development:transformation')?.name = 'transformation'
 
 include 'beginning-java-objects:ch06'
 findProject(':beginning-java-objects:ch06')?.name = 'ch06'
