@@ -21,12 +21,10 @@ java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
 java-8-other/out
-java-basic/aspect/out
 java-basic/collection/out
-java-basic/database/out
-java-basic/duality/out
-java-basic/introduction/out
-java-basic/thread/out
+java-basic/generic/out
+java-basic/jdbc/out
+java-basic/oop/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build
