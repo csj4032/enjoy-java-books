@@ -1,6 +1,6 @@
 package com.genius.calendar;
 
-public class PrinterKorean extends PrinterLanguage {
+public class PrinterKorean extends AbstractPrinter {
 
 	public PrinterKorean(Calendar calendar) {
 		super(calendar);

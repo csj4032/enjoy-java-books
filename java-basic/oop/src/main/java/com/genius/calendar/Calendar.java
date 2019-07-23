@@ -5,6 +5,10 @@ public class Calendar {
 	private final Year year;
 	private final Month month;
 
+	public Calendar() {
+		this(1,1);
+	}
+
 	public Calendar(int yearValue, int monthValue) {
 		this.year = new Year(yearValue);
 		this.month = new Month(yearValue, monthValue);
@@ -24,10 +28,5 @@ public class Calendar {
 
 	public int monthLength() {
 		return month.length();
-	}
-
-	public static void main(String[] args) {
-		Calendar calendar = new Calendar(2017, 5);
-		new PrinterKorean(calendar).print();
 	}
 }

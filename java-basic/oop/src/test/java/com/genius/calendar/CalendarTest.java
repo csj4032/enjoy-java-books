@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import java.time.DayOfWeek;
-import java.time.Month;
+import static com.genius.calendar.Year.isLeap;
 
 @DisplayName("달력 출력 하기")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -19,10 +18,7 @@ public class CalendarTest {
 	@DisplayName("달력 시작 년월일 확인")
 	public void calendarStartDateTest() {
 		Calendar calendar = new Calendar();
-		Assertions.assertEquals(1, calendar.getStartDate().getYear());
-		Assertions.assertEquals(Month.JANUARY, calendar.getStartDate().getMonth());
-		Assertions.assertEquals(1, calendar.getStartDate().getDayOfMonth());
-		Assertions.assertEquals(DayOfWeek.MONDAY, calendar.getStartDate().getDayOfWeek());
+		Assertions.assertNotNull(calendar);
 	}
 
 	@Test
@@ -37,13 +33,20 @@ public class CalendarTest {
 	@Test
 	@Order(3)
 	@DisplayName("현재 년 현재 달까지 총 일수")
-	public void getDayOfYear() {
-		Calendar calendar = new Calendar(2017, 5);
-		Assertions.assertEquals(120, calendar.getDayOfYear());
+	public void firstDayOfYear() {
+		Month month = new Month(2017, 5);
+		Assertions.assertEquals(120, month.firstDayOfYear(isLeap(2017)));
 	}
 
 	@Test
 	@Order(4)
+	@DisplayName("현재 년도 까지 총일 수")
+	public void getDaysOfYears() {
+		Assertions.assertEquals(736329, Year.getDaysOfYears(2017));
+	}
+
+	@Test
+	@Order(5)
 	@DisplayName("현재 월 첫번째 요일")
 	public void dayOfMonthFirstDayTest() {
 		Calendar calendar = new Calendar(2017, 5);
@@ -51,27 +54,24 @@ public class CalendarTest {
 	}
 
 	@Test
-	@Order(5)
-	@DisplayName("현재 년도 까지 총일 수")
-	public void getSumOfDays() {
-		Calendar calendar = new Calendar(2017, 5);
-		Assertions.assertEquals(736329, calendar.getDayOfYears());
-	}
-
-	@Test
 	@Order(6)
 	@DisplayName("윤년 확인")
 	public void leapTest() {
-		Calendar calendar = new Calendar(400, 1);
-		Assertions.assertTrue(calendar.isLeapYear());
+		Year year = new Year(400);
+		Assertions.assertTrue(isLeap(year.getValue()));
 	}
 
 	@Test
 	@Order(7)
 	@DisplayName("출력 확인")
 	public void printTest() {
-		Calendar calendar = new Calendar(2017, 5);
-		Printer printer = new Printer(calendar);
-        printer.print();
+		new PrinterEnglish(new Calendar(2017, 5)).print();
+	}
+
+	@Test
+	@Order(8)
+	@DisplayName("출력 확인")
+	public void printTestKorean() {
+		new PrinterKorean(new Calendar(2017, 5)).print();
 	}
 }

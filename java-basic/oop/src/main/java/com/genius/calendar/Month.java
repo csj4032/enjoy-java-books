@@ -1,6 +1,7 @@
 package com.genius.calendar;
 
-import static com.genius.calendar.CalendarUtils.getDaysOfYears;
+import static com.genius.calendar.Year.getDaysOfYears;
+import static com.genius.calendar.Year.isLeap;
 
 public class Month {
 
@@ -13,18 +14,22 @@ public class Month {
 	}
 
 	public int getDayOfMonth() {
-		return (getDaysOfYears(year) + firstDayOfYear(CalendarUtils.isLeap(year)) + 1) % 7;
+		return (getDaysOfYearsAndFirstDayOfYear() + 1) % 7;
 	}
 
 	public int length() {
-		return length(CalendarUtils.isLeap(year));
+		return length(isLeap(year));
 	}
 
 	public int getValue() {
 		return month;
 	}
 
-	private int firstDayOfYear(boolean isLeap) {
+	public int getDaysOfYearsAndFirstDayOfYear() {
+		return getDaysOfYears(year) + firstDayOfYear(isLeap(year));
+	}
+
+	public int firstDayOfYear(boolean isLeap) {
 		int leap = isLeap ? 1 : 0;
 		switch (month) {
 			case 1:
