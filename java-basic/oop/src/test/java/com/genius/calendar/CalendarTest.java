@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.List;
+
 import static com.genius.calendar.Year.isLeap;
 
 @DisplayName("달력 출력 하기")
@@ -64,14 +66,9 @@ public class CalendarTest {
 	@Test
 	@Order(7)
 	@DisplayName("출력 확인")
-	public void printTest() {
-		new PrinterEnglish(new Calendar(2017, 5)).print();
-	}
-
-	@Test
-	@Order(8)
-	@DisplayName("출력 확인")
 	public void printTestKorean() {
-		new PrinterKorean(new Calendar(2017, 5)).print();
+		List.of(new PrinterKorean(
+		        new Calendar(2017, 5)),
+                new PrinterEnglish(new Calendar(2019, 8))).forEach(Printer::print);
 	}
 }
