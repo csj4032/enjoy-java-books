@@ -10,22 +10,19 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public enum CafeCategoryManager {
 
 	INSTANCE;
 
-	private Category[] categoryArray;
 	private Map<String, CafeCategoryNode> categoryMap = new HashMap<>();
 
 	private void load() {
-		log.info("load");
-		categoryArray = new Gson().fromJson(getJson(), new TypeToken<Category[]>() {}.getType());
-		for (int i = 0; i < categoryArray.length; i++) {
-			Category cate = categoryArray[i];
-			categoryMap.put(cate.cateid, new CafeCategoryNode(cate));
+		log.info("CafeCategory Load");
+		Category[] categoryArray = new Gson().fromJson(getJson(), new TypeToken<Category[]>() {}.getType());
+		for (Category category : categoryArray) {
+			categoryMap.put(category.cateid, new CafeCategoryNode(category));
 		}
 	}
 
@@ -34,10 +31,8 @@ public enum CafeCategoryManager {
 		return node == null ? null : node.getCategory();
 	}
 
-	public synchronized CafeCategoryNode getNode(String categoryId) {
-		if (categoryArray == null) {
-			load();
-		}
+	private synchronized CafeCategoryNode getNode(String categoryId) {
+		if (categoryMap.isEmpty()) load();
 		return categoryMap.get(categoryId);
 	}
 
@@ -48,11 +43,6 @@ public enum CafeCategoryManager {
 		if (parent != null) buf.append(parent.getName()).append(" > ");
 		buf.append(node.getName());
 		return buf.toString();
-	}
-
-	public synchronized Category[] getAll() {
-		if (categoryArray == null) load();
-		return categoryArray == null ? null : categoryArray.clone();
 	}
 
 	private InputStreamReader getJson() {

@@ -23,14 +23,14 @@ class CafeCategoryManagerTest {
 	@Disabled
 	void getAll_A() throws InterruptedException {
 		log.info("A");
-		Assertions.assertNotNull(cafeCategoryManager.getAll());
+		//Assertions.assertNotNull(cafeCategoryManager.getAll());
 	}
 
 	@Test
 	@Disabled
 	void getAll_B() {
 		log.info("B");
-		Assertions.assertNotNull(cafeCategoryManager.getAll());
+		//Assertions.assertNotNull(cafeCategoryManager.getAll());
 	}
 
 	@RepeatedTest(10)
@@ -44,12 +44,22 @@ class CafeCategoryManagerTest {
 	}
 
 	@RepeatedTest(10)
-	void get_A() {
-		Assertions.assertEquals("영화", cafeCategoryManager.get("2").catename);
+	void getFullName_C() {
+		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}
 
 	@RepeatedTest(10)
+	void getFullName_D() {
+		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
+	}
+
+	@Disabled
+	void get_A() {
+		//Assertions.assertEquals("영화", cafeCategoryManager.get("2").catename);
+	}
+
+	@Disabled
 	void get_B() {
-		Assertions.assertEquals("영화", cafeCategoryManager.get("2").catename);
+		//Assertions.assertEquals("영화", cafeCategoryManager.get("2").catename);
 	}
 }
