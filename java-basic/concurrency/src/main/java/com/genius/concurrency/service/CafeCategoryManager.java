@@ -1,13 +1,10 @@
 package com.genius.concurrency.service;
 
+import com.genius.concurrency.service.dao.CategoryHandler;
 import com.genius.concurrency.service.entity.Category;
 import com.genius.concurrency.service.model.CafeCategoryNode;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,20 +17,13 @@ public enum CafeCategoryManager {
 
 	private void load() {
 		log.info("CafeCategory Load");
-		Category[] categoryArray = new Gson().fromJson(getJson(), new TypeToken<Category[]>() {}.getType());
-		for (Category category : categoryArray) {
+		for (Category category : CategoryHandler.getInstance().selectAll("category.json")) {
 			categoryMap.put(category.cateid, new CafeCategoryNode(category));
 		}
 	}
 
 	public Category get(String categoryId) {
-		CafeCategoryNode node = getNode(categoryId);
-		return node == null ? null : node.getCategory();
-	}
-
-	private synchronized CafeCategoryNode getNode(String categoryId) {
-		if (categoryMap.isEmpty()) load();
-		return categoryMap.get(categoryId);
+		return getNode(categoryId).getCategory();
 	}
 
 	public String getFullName(String categoryId) {
@@ -45,12 +35,8 @@ public enum CafeCategoryManager {
 		return buf.toString();
 	}
 
-	private InputStreamReader getJson() {
-		try {
-			return new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream("category.json"), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return null;
+	private synchronized CafeCategoryNode getNode(String categoryId) {
+		if (categoryMap.isEmpty()) load();
+		return categoryMap.get(categoryId);
 	}
 }
