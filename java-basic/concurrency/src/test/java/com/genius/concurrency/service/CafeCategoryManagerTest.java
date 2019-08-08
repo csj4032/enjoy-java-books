@@ -18,22 +18,22 @@ class CafeCategoryManagerTest {
 		Assertions.assertNotNull(cafeCategoryManager);
 	}
 
-	@RepeatedTest(10)
+	@RepeatedTest(1000)
 	void getFullName_A() {
 		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}
 
-	@RepeatedTest(10)
+	@RepeatedTest(1000)
 	void getFullName_B() {
 		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}
 
-	@RepeatedTest(10)
+	@RepeatedTest(1000)
 	void getFullName_C() {
 		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}
 
-	@RepeatedTest(10)
+	@RepeatedTest(1000)
 	void getFullName_D() {
 		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}

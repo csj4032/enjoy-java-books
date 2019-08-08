@@ -13,10 +13,11 @@ public enum CafeCategoryManager {
 
 	INSTANCE;
 
-	private Map<String, CafeCategoryNode> categoryMap = new HashMap<>();
+	private Map<String, CafeCategoryNode> categoryMap;
 
 	private void load() {
 		log.info("CafeCategory Load");
+		categoryMap = new HashMap<>();
 		for (Category category : CategoryHandler.getInstance().selectAll("category.json")) {
 			categoryMap.put(category.cateid, new CafeCategoryNode(category));
 		}
@@ -36,7 +37,7 @@ public enum CafeCategoryManager {
 	}
 
 	private synchronized CafeCategoryNode getNode(String categoryId) {
-		if (categoryMap.isEmpty()) load();
+		if (categoryMap == null) load();
 		return categoryMap.get(categoryId);
 	}
 }
