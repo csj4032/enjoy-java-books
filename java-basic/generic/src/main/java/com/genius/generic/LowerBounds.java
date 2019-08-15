@@ -15,17 +15,7 @@ public class LowerBounds {
 		strings.forEach((String s) -> System.out.printf("%s in all caps is %s%n", s, s.toUpperCase()));
 		strings.forEach((Object o) -> System.out.printf("%s in all caps is %s%n", o, o.hashCode()));
 
-		//List<B> as = Stream.of(new A()).peek((A a) -> new B()).collect(Collectors.toUnmodifiableList());
-		List<B> bs = Stream.of(new B()).peek((A b) -> ((B) b).getAge()).collect(Collectors.toUnmodifiableList());
+		//List<Employee> employees = Stream.of(new Person()).peek((Person p) -> new Employee()).collect(Collectors.toUnmodifiableList());
+		//List<Employee> employees = Stream.of(new Employee()).peek((Person p) -> ((Employee) p).getID()).collect(Collectors.toUnmodifiableList());
 	}
-}
-
-@Data
-class A {
-	String name;
-}
-
-@Data
-class B extends A {
-	String age;
 }
