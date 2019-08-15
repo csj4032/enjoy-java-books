@@ -1,4 +1,4 @@
-# Database 소개
+# JDBC
 
 ### JDBC 작업 일반적 순서
 * Database Connection

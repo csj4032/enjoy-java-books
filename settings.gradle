@@ -65,6 +65,8 @@ include 'java-basic:oop'
 findProject(':java-basic:oop')?.name = 'oop'
 include 'java-basic:jdbc'
 findProject(':java-basic:jdbc')?.name = 'jdbc'
+include 'java-basic:jpa'
+findProject(':java-basic:jpa')?.name = 'jpa'
 include 'java-basic:generic'
 findProject(':java-basic:generic')?.name = 'generic'
 
