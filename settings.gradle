@@ -42,7 +42,7 @@ rootProject.name = 'enjoy-java-books'
 //
 //include 'effective-java-edition2'
 //include 'effective-java-edition3'
-//include 'goos'
+include 'goos'
 //include 'java-8-in-action'
 //include 'java-8-other'
 //include 'java-coding-with-pmd'
