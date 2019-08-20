@@ -32,6 +32,7 @@ public class MemberTest {
 		member.setName("Genius");
 		member.setEmail("genius@genius.com");
 		member.setAge(10);
+		member.setTeam(new Team());
 		entityManager.persist(member);
 		Member findMember = entityManager.find(Member.class, ID);
 		Assertions.assertEquals(member.getAge(), findMember.getAge());

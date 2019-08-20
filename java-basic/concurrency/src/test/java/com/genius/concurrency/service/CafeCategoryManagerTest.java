@@ -1,7 +1,9 @@
 package com.genius.concurrency.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.parallel.Execution;
 
 import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
@@ -18,7 +20,7 @@ class CafeCategoryManagerTest {
 		Assertions.assertNotNull(cafeCategoryManager);
 	}
 
-	@RepeatedTest(1000)
+	@RepeatedTest(1)
 	void getFullName_A() {
 		Assertions.assertEquals("컴퓨터/인터넷", cafeCategoryManager.getFullName("1"));
 	}

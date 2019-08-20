@@ -6,31 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "TEAM")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
-
+public class Team {
 	@Id
-	@Column(name = "ID")
-	private String id;
-
-	@Column(name = "PASSWORD")
-	private String password;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
 	@Column(name = "NAME")
 	private String name;
 
-	@Column(name = "EMAIL")
-	private String email;
-
-	@Column(name = "AGE")
-	private int age;
-
-	@ManyToOne
-	private Team team;
+	@OneToMany
+	private Collection<Member> player;
 }

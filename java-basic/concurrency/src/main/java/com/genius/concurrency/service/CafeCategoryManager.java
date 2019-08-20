@@ -13,11 +13,10 @@ public enum CafeCategoryManager {
 
 	INSTANCE;
 
-	private Map<String, CafeCategoryNode> categoryMap;
+	private final Map<String, CafeCategoryNode> categoryMap = new HashMap<>();
 
 	private void load() {
 		log.info("CafeCategory Load");
-		categoryMap = new HashMap<>();
 		for (Category category : CategoryHandler.getInstance().selectAll("category.json")) {
 			categoryMap.put(category.cateid, new CafeCategoryNode(category));
 		}
@@ -28,6 +27,7 @@ public enum CafeCategoryManager {
 	}
 
 	public String getFullName(String categoryId) {
+		log.info(Thread.currentThread().getName());
 		StringBuilder buf = new StringBuilder();
 		CafeCategoryNode node = getNode(categoryId);
 		CafeCategoryNode parent = node.getParent();
@@ -37,7 +37,7 @@ public enum CafeCategoryManager {
 	}
 
 	private synchronized CafeCategoryNode getNode(String categoryId) {
-		if (categoryMap == null) load();
+		if (categoryMap.isEmpty()) load();
 		return categoryMap.get(categoryId);
 	}
 }
