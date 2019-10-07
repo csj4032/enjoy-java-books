@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import auctionsniper.ui.MainWindow;
+import lombok.extern.slf4j.Slf4j;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
@@ -9,6 +10,7 @@ import org.jivesoftware.smack.packet.Message;
 
 import javax.swing.*;
 
+@Slf4j
 public class Main {
 
 	private static final int ARG_HOSTNAME = 0;
@@ -30,6 +32,7 @@ public class Main {
 
 	public static void main(String... args) throws Exception {
 		Main main = new Main();
+		log.info("Main 생성");
 		main.joinAuction(connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
 	}
 

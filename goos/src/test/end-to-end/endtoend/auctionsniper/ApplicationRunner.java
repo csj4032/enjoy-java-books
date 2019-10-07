@@ -2,20 +2,24 @@ package endtoend.auctionsniper;
 
 import auctionsniper.Main;
 import auctionsniper.ui.MainWindow;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ApplicationRunner {
 
 	public static final String SNIPER_ID = "sniper";
 	public static final String SNIPER_PASSWORD = "sniper";
-	public static final String XMPP_HOSTNAME = "csj4032-file.ipdisk.co.kr";
+	public static final String XMPP_HOSTNAME = "localhost";
 	private AuctionLogDriver logDriver = new AuctionLogDriver();
   	private AuctionSniperDriver driver;
 
 	public void startBiddingIn(final FakeAuctionServer auction) throws InterruptedException {
+		log.info("2단계");
 		startSniper(auction);
 	}
 
 	public void showsSniperHasLostAuction() {
+		log.info("5단계");
 		driver.showsSniperStatus(MainWindow.STATUS_LOST);
 	}
 
