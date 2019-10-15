@@ -1,15 +1,13 @@
 package com.genius.timer;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 @Slf4j
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -37,3 +35,4 @@ public class StopWatchTest {
 		System.out.println("Elapsed Time Second : " + Duration.of(time.getNanoTime(), ChronoUnit.NANOS).getSeconds());
 	}
 }
+

@@ -35,7 +35,7 @@ rootProject.name = 'enjoy-java-books'
 //findProject(':beginning-java-objects:ch15')?.name = 'ch15'
 //include 'beginning-java-objects:ch16'
 //findProject(':beginning-java-objects:ch16')?.name = 'ch16'
-//
+include 'clean-code'
 //include 'cracking-the-coding-interview'
 //include 'cracking-the-coding-interview:ch01'
 //findProject(':cracking-the-coding-interview:ch01')?.name = 'ch01'

@@ -1,0 +1,45 @@
+package com.genius.contact;
+
+import java.math.BigDecimal;
+
+public class Money {
+	public static final Money ZERO = Money.wons(0);
+
+	private final BigDecimal amount;
+
+	private static Money wons(long amount) {
+		return new Money(BigDecimal.valueOf(amount));
+	}
+
+	private static Money wons(double amount) {
+		return new Money(BigDecimal.valueOf(amount));
+	}
+
+	private Money(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public Money plus(Money amount) {
+		return new Money(this.amount.add(amount.amount));
+	}
+
+	public Money minus(Money amount) {
+		return new Money(this.amount.subtract(amount.amount));
+	}
+
+	public boolean isLessThan(Money other) {
+		return amount.compareTo(other.amount) < 0;
+	}
+
+	public boolean isLessThanOrEqual(Money other) {
+		return amount.compareTo(other.amount) <= 0;
+	}
+
+	public boolean isGreaterThan(Money other) {
+		return amount.compareTo(other.amount) >= 0;
+	}
+
+	public Money times(double times) {
+		return new Money(this.amount.multiply(BigDecimal.valueOf(times)));
+	}
+}

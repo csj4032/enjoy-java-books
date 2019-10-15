@@ -16,10 +16,8 @@ public abstract class AbstractPrinter implements Printer {
     protected void printBody() {
         int dayOfMonth = calendar.getDayOfMonth();
         int endOfMonth = calendar.monthLength() + dayOfMonth;
-        for (int i = 1; i <= endOfMonth; i++) {
-            int k = i - dayOfMonth;
-            printDate(k);
-            if (isNextLine(i)) System.out.println();
+        for (int i = 0; i < 10; i++) {
+
         }
         System.out.println();
     }
