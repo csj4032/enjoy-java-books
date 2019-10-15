@@ -4,11 +4,11 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jmock.junit5.JUnit5Mockery;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-@RunWith(JMock.class)
+@ExtendWith(JUnit5Mockery.class)
 public class AuctionMessageTranslatorTest {
 
 	private static final String SNIPER_ID = "genius";
