@@ -1,5 +1,7 @@
 package com.genius.shorter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.stream.Stream;
 
 public class Shorten {
@@ -7,7 +9,7 @@ public class Shorten {
 	private ShortenValidation shortenValidation;
 	private ShortenPriorityPolicy shortenPriorityPolicy;
 
-	public Shorten(ShortenValidation shortenValidation, ShortenPriorityPolicy shortenPriorityPolicy) {
+	public Shorten(@NotNull ShortenValidation shortenValidation, @NotNull ShortenPriorityPolicy shortenPriorityPolicy) {
 		this.shortenValidation = shortenValidation;
 		this.shortenPriorityPolicy = shortenPriorityPolicy;
 	}

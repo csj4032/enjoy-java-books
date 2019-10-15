@@ -9,7 +9,7 @@ public class ShorterTest {
 	@Test
 	@DisplayName("단축 URL")
 	void shorting() {
-		Shorten shorter = new Shorten();
+		Shorten shorter = new Shorten(null, null);
 		Assertions.assertEquals("http://www.naver.com", shorter.shorting("http://www.naver.com", AlgorithmType.CRC));
 	}
 }

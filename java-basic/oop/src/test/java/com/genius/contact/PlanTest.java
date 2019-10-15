@@ -2,9 +2,6 @@ package com.genius.contact;
 
 import org.junit.jupiter.api.*;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PlanTest {
 
@@ -21,7 +18,8 @@ public class PlanTest {
 	@DisplayName("Policy 없을 경우 계산 시도 : IllegalArgumentException")
 	public void policyByZero() {
 		Plan plan = new Plan();
-		plan.addCall(new Call(LocalDateTime.of(2016, Month.APRIL, 30, 0, 0), LocalDateTime.of(2016, Month.APRIL, 30, 0, 0)));
+		//plan.addCall(new Call(LocalDateTime.of(2016, Month.APRIL, 30, 0, 0), LocalDateTime.of(2016, Month.APRIL, 30, 0, 0)));
+		plan.addCall(new Call(null, null));
 		Assertions.assertThrows(IllegalArgumentException.class, () -> plan.calculateFee());
 	}
 }
