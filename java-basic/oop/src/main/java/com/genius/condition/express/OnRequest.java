@@ -1,9 +1,15 @@
 package com.genius.condition.express;
 
-public class OnRequest implements Express {
+import com.genius.condition.SafetyNumberCondition;
+
+public class OnRequest extends AbstractExpress {
+
+	public OnRequest(SafetyNumberCondition safetyNumberCondition) {
+		super(safetyNumberCondition);
+	}
 
 	@Override
-	public ExpressType express() {
+	protected ExpressType onExpress() {
 		return ExpressType.ON_REQUEST;
 	}
 }

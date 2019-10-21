@@ -76,10 +76,20 @@ public class SafetyNumberTest {
 
 	@Test
 	@Order(8)
-	@DisplayName("false, WAITING, FAILURE, AFTER 경우 발급실패")
+	@DisplayName("false, WAITING, FAILURE, AFTER 경우 발급요청중")
 	public void getSafetyNumberFalseWaitingFailureAfter_OnRequest() {
 		SafetyNumber safetyNumber = new SafetyNumber();
 		Express express = safetyNumber.getExpress(false, IssueType.WAITING, IssueStatus.FAILURE, ExpiredType.AFTER, "000-0000-1111");
+		Assertions.assertEquals(ExpressType.ON_REQUEST, express.express());
+		Assertions.assertEquals("발급요청중", express.express().getMessage());
+	}
+
+	@Test
+	@Order(9)
+	@DisplayName("false, WAITING, FAILURE, AFTER 경우 발급실패")
+	public void getSafetyNumberFalseNewFailureAfter_FAILURE() {
+		SafetyNumber safetyNumber = new SafetyNumber();
+		Express express = safetyNumber.getExpress(false, IssueType.NEW, IssueStatus.FAILURE, ExpiredType.AFTER, "000-0000-1111");
 		Assertions.assertEquals(ExpressType.FAILURE, express.express());
 		Assertions.assertEquals("발급실패", express.express().getMessage());
 	}

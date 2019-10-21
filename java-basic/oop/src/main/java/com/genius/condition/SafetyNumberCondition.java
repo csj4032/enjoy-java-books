@@ -13,14 +13,14 @@ public class SafetyNumberCondition {
 	@NotNull
 	private final ExpiredType expiredType;
 	@NotNull
-	private final String issuePhone;
+	private final String number;
 
-	public SafetyNumberCondition(@NotNull boolean safetyNoUseYn, @NotNull IssueType issueType, @NotNull IssueStatus issueStatus, @NotNull ExpiredType expiredType, @NotNull String issuePhone) {
+	public SafetyNumberCondition(@NotNull boolean safetyNoUseYn, @NotNull IssueType issueType, @NotNull IssueStatus issueStatus, @NotNull ExpiredType expiredType, @NotNull String number) {
 		this.safetyNoUseYn = safetyNoUseYn;
 		this.issueType = issueType;
 		this.issueStatus = issueStatus;
 		this.expiredType = expiredType;
-		this.issuePhone = issuePhone;
+		this.number = number;
 	}
 
 	public boolean isSafetyNoUseYn() {
@@ -39,7 +39,7 @@ public class SafetyNumberCondition {
 		return expiredType;
 	}
 
-	public String getIssuePhone() {
-		return issuePhone;
+	public String getNumber() {
+		return number;
 	}
 }

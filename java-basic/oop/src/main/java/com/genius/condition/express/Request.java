@@ -2,21 +2,21 @@ package com.genius.condition.express;
 
 import com.genius.condition.ExpiredType;
 import com.genius.condition.IssueType;
+import com.genius.condition.SafetyNumberCondition;
 import org.jetbrains.annotations.NotNull;
 
-public class Request implements Express {
+public class Request extends AbstractExpress {
 
 	private final ExpiredType expiredType;
-	private final IssueType issueType;
 
-	public Request(@NotNull ExpiredType expiredType, @NotNull IssueType issueType) {
-		this.expiredType = expiredType;
-		this.issueType = issueType;
+	public Request(@NotNull SafetyNumberCondition safetyNumberCondition) {
+		super(safetyNumberCondition);
+		this.expiredType = safetyNumberCondition.getExpiredType();
 	}
 
 	@Override
-	public ExpressType express() {
-		if (issueType.equals(IssueType.UPDATE)) {
+	protected ExpressType onExpress() {
+		if (getIssueType().equals(IssueType.UPDATE)) {
 			if (expiredType.equals(ExpiredType.BEFORE)) {
 				return ExpressType.ON_MODIFY;
 			} else {

@@ -10,16 +10,15 @@ public class SafetyNumber {
 	}
 
 	private Express getExpress(SafetyNumberCondition safetyNumberCondition) {
-		if (safetyNumberCondition.isSafetyNoUseYn()) return new NoRequest();
 		return switch (safetyNumberCondition.getIssueStatus()) {
 			case REQUEST:
-				yield new Request(safetyNumberCondition.getExpiredType(), safetyNumberCondition.getIssueType());
+				yield new Request(safetyNumberCondition);
 			case COMPETE:
-				yield new Complete(safetyNumberCondition.getExpiredType(), safetyNumberCondition.getIssueType(), safetyNumberCondition.getIssuePhone());
+				yield new Complete(safetyNumberCondition);
 			case FAILURE:
-				yield new Failure();
+				yield new Failure(safetyNumberCondition);
 			default:
-				yield new OnRequest();
+				yield new OnRequest(safetyNumberCondition);
 		};
 	}
 }
