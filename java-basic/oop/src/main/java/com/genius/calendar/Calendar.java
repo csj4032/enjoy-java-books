@@ -1,5 +1,7 @@
 package com.genius.calendar;
 
+import com.genius.contact.Calculator;
+
 public class Calendar {
 
 	private final Year year;
