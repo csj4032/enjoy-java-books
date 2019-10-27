@@ -9,6 +9,7 @@ import java.util.Set;
 public class Tex extends Policy {
 
 	private final double ratio;
+	private  double var;
 
 	public Tex(double ratio) {
 		this.ratio = ratio;

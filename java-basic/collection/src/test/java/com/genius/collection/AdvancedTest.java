@@ -2,10 +2,7 @@ package com.genius.collection;
 
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AdvancedTest {
@@ -61,10 +58,7 @@ public class AdvancedTest {
 		students.add(se3);
 		students.add(se4);
 		students.add(se5);
-
-		Map map  = new HashMap();
 	}
-
 
 	@Test
 	@Order(1)
@@ -89,6 +83,10 @@ public class AdvancedTest {
 	@DisplayName("학년별 1,2,3등")
 	public void top3ByGrade() {
 	}
+
+	@Test
+	@Order(5)
+	public void sortIdNameGradePoint() {
+		students.sort(Comparator.comparing(Student::getId).thenComparing(Student::getName).thenComparing(Student::getGrade).thenComparing(Student::getPoint));
+	}
 }
-
-
