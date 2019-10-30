@@ -12,7 +12,7 @@ public class SafetyNumberTest {
 	@DisplayName("Parameter Null Valid")
 	public void getSafetyNumberNullValid() {
 		SafetyNumber safetyNumber = new SafetyNumber();
-		Assertions.assertThrows(IllegalArgumentException.class, () -> safetyNumber.getExpress(true, null, null, null, null));
+		Assertions.assertThrows(NullPointerException.class, () -> safetyNumber.getExpress(true, null, null, null, null));
 	}
 
 	@Test
