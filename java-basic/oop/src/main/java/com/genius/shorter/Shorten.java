@@ -1,5 +1,7 @@
 package com.genius.shorter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.stream.Stream;
 
 public class Shorten {
