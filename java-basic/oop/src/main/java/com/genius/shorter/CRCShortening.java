@@ -4,10 +4,12 @@ import java.util.zip.CRC32C;
 
 public class CRCShortening extends AbstractShorting {
 
+	public CRCShortening() {
+		System.out.println("CRC");
+	}
+
 	@Override
 	public String shorting(String url) {
-		CRC32C crc32C = new CRC32C();
-		crc32C.update(url.getBytes());
-		return crc32C.toString();
+		return url + " CRC";
 	}
 }
