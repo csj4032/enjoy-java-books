@@ -17,7 +17,7 @@ public class WeAreTheFutureTest {
 	public void getFuture() throws ExecutionException, InterruptedException {
 		CompletableFuture<Integer> f = new CompletableFuture<>();
 		f.completeExceptionally(new RuntimeException());
-		//System.out.println(f.get());
+		System.out.println(f.get());
 	}
 
 	@Test
