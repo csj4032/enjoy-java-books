@@ -69,6 +69,8 @@ include 'java-basic:jpa'
 findProject(':java-basic:jpa')?.name = 'jpa'
 include 'java-basic:generic'
 findProject(':java-basic:generic')?.name = 'generic'
+include 'java-basic:reactive'
+findProject(':java-basic:reactive')?.name = 'reactive'
 include 'java-basic:stream'
 findProject(':java-basic:stream')?.name = 'stream'
 
