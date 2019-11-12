@@ -22,10 +22,14 @@ java-8-in-action/out
 java-8-other/build
 java-8-other/out
 java-basic/collection/out
+java-basic/concurrency/out
 java-basic/generic/out
 java-basic/jdbc/out
 java-basic/jpa/out
+java-basic/oop/build
 java-basic/oop/out
+java-basic/reactive/build
+java-basic/reactive/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build
@@ -39,6 +43,7 @@ java-refactoring-for-beginner/out
 junit-in-action/out
 netty/example/out
 pro-java-7-nio-2/out
+reactive-programming-with-rxjava/out
 technique-of-java-programmimg/gilbut-java-session3/build
 technique-of-java-programmimg/gilbut-java-session3/out
 the-object-oriented-thought-process/build
