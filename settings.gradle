@@ -101,3 +101,5 @@ findProject(':java-basic:stream')?.name = 'stream'
 //include 'java-design-pattern-multithread'
 //include 'java-design-pattern-multithread:introduction1'
 //findProject(':java-design-pattern-multithread:introduction1')?.name = 'introduction1'
+
+include 'this-is-redis'
