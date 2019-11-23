@@ -24,7 +24,7 @@ rootProject.name = 'enjoy-java-books'
 //findProject(':agile-software-development:bowling-game')?.name = 'bowling-game'
 //include 'agile-software-development:transformation'
 //findProject(':agile-software-development:transformation')?.name = 'transformation'
-//
+
 //include 'beginning-java-objects:ch06'
 //findProject(':beginning-java-objects:ch06')?.name = 'ch06'
 //include 'beginning-java-objects:ch13'
@@ -39,17 +39,21 @@ rootProject.name = 'enjoy-java-books'
 //include 'cracking-the-coding-interview'
 //include 'cracking-the-coding-interview:ch01'
 //findProject(':cracking-the-coding-interview:ch01')?.name = 'ch01'
-//
+
 //include 'effective-java-edition2'
 //include 'effective-java-edition3'
 //include 'goos'
+
+include 'hands-on-reactive-programming-in-spring-5:chapter01'
+include 'hands-on-reactive-programming-in-spring-5:chapter02'
+
 //include 'java-8-in-action'
 //include 'java-8-other'
 //include 'java-coding-with-pmd'
 //include 'java-concurrency-in-practice'
 //include 'java-jungsuk'
 //include 'java-network-programming'
-//
+
 //include 'java-refactoring-for-beginner'
 //include 'java-refactoring-for-beginner:removeControlFlag:findIntAfter1'
 //findProject(':java-refactoring-for-beginner:removeControlFlag:findIntAfter1')?.name = 'findIntAfter1'

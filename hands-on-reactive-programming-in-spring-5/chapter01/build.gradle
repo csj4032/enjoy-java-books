@@ -1,0 +1,3 @@
+dependencies {
+    implementation('org.reactivestreams:reactive-streams:1.0.3')
+}
