@@ -46,6 +46,7 @@ rootProject.name = 'enjoy-java-books'
 
 include 'hands-on-reactive-programming-in-spring-5:chapter01'
 include 'hands-on-reactive-programming-in-spring-5:chapter02'
+include 'hands-on-reactive-programming-in-spring-5:chapter04'
 
 //include 'java-8-in-action'
 //include 'java-8-other'
