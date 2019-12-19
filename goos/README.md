@@ -7,9 +7,15 @@
 ## Openfire(XMPP) Creating a Container
 
 ```bash
-docker pull sameersbn/openfire
+docker pull gizmotronic/openfire:4.4.4
 
-docker build -t sameersbn/openfire github.com/sameersbn/docker-openfire
+docker build -t gizmotronic/openfire github.com/gizmotronic/docker-openfire
 
-docker run --name openfire -d --publish 9090:9090 --publish 5222:5222 --publish 7777:7777 --volume /var/lib/openfire sameersbn/openfire:3.10.3-19
+docker run --name openfire -d --restart=always --publish 9090:9090 --publish 5222:5222 --publish 7777:7777 --volume /tmp/docker/openfire:/var/lib/openfire gizmotronic/openfire:4.4.4
 ```
+
+## Openfire
+### Create New User 
+* auction-item-65432 / auction
+* auction-item-54321 / auction
+* sniper / sniper
