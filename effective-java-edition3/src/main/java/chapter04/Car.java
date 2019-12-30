@@ -21,8 +21,6 @@ public class Car extends Bar {
 
 	static String[] arrayString = {"a", "b", "c"};
 	static List<String> strings = Arrays.asList(arrayString);
-
-
 	static IntFunction<String[]> k = (e) -> new String[e];
 
 	public static void main(String[] args) {
