@@ -11,7 +11,7 @@ import java.util.function.Function;
 @NoArgsConstructor
 @ToString
 public class Original {
-	static Function<String, Function<String, Function<String, Original>>> ORIGINAL_CREATOR = firstName -> lastName -> email -> new Original(firstName, lastName, email);
+	public static Function<String, Function<String, Function<String, Original>>> ORIGINAL_CREATOR = firstName -> lastName -> email -> new Original(firstName, lastName, email);
 	private String firstName;
 	private String lastName;
 	private String email;
