@@ -3,9 +3,12 @@ package com.genius.srs;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 @Getter
 @Setter
 @ToString
@@ -13,39 +16,45 @@ public class Professor extends Person {
 
 	private String title;
 	private String department;
-	private Vector teaches;
+	private List<Section> teaches;
 
 	public Professor(String name, String ssn, String title, String department) {
 		super(name, ssn);
 		setTitle(title);
 		setDepartment(department);
+		teaches = new ArrayList<>();
 	}
 
+	@Override
 	public void display() {
 		super.display();
-		System.out.println("Professor-Specific Information:");
-		System.out.println("\tTitle:  " + getTitle());
-		System.out.println("\tTeaches for Dept.:  " + getDepartment());
+		log.info("Professor-Specific Information:");
+		log.info("\tTitle:  " + getTitle());
+		log.info("\tTeaches for Dept.:  " + getDepartment());
 		displayTeachingAssignments();
 	}
 
 	private void displayTeachingAssignments() {
-		System.out.println("Teaching Assignments for " + getName() + ":");
-		if (teaches.size() == 0)
-			System.out.println("\t(none)");
-		else for (int i = 0; i < teaches.size(); i++) {
-
-			Section s = (Section) teaches.elementAt(i);
-
-			System.out.println("\tCourse No.:  " + s.getRepresentedCourse().getCourseNo());
-			System.out.println("\tSection No.:  " + s.getSectionNo());
-			System.out.println("\tCourse Name:  " + s.getRepresentedCourse().getCourseName());
-			System.out.println("\tDay and Time:  " + s.getDayOfWeek() + " - " + s.getTimeOfDay());
-			System.out.println("\t-----");
+		log.info("Teaching Assignments for " + getName() + ":");
+		if (teaches.isEmpty()) {
+			log.info("\t(none)");
+		} else {
+			for (Section section : teaches) {
+				log.info("\tCourse No.:  " + section.getRepresentedCourse().getCourseNo());
+				log.info("\tSection No.:  " + section.getSectionNo());
+				log.info("\tCourse Name:  " + section.getRepresentedCourse().getCourseName());
+				log.info("\tDay and Time:  " + section.getDayOfWeek() + " - " + section.getTimeOfDay());
+				log.info("\t-----");
+			}
 		}
 	}
 
 	public String toString() {
 		return getName() + " (" + getTitle() + ", " + getDepartment() + ")";
+	}
+
+	public void agreeToTeach(Section section) {
+		teaches.add(section);
+		section.setInstructor(this);
 	}
 }

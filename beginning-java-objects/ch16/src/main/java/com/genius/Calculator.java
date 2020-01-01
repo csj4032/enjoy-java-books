@@ -75,8 +75,4 @@ public class Calculator extends JFrame {
 
 		this.addWindowListener(windowListener);
 	}
-
-	public static void main(String[] args) {
-		Calculator calculator = new Calculator();
-	}
 }

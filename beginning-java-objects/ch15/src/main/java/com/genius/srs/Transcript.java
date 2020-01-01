@@ -2,34 +2,26 @@ package com.genius.srs;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 @Getter
 @Setter
 public class Transcript {
 
-	private Vector transcriptEntries;
+	private List<TranscriptEntry> transcriptEntries;
 	private Student studentOwner;
 
-	public Transcript(Student s) {
-		setStudentOwner(s);
-		transcriptEntries = new Vector();
+	public Transcript(Student student) {
+		setStudentOwner(student);
+		transcriptEntries = new ArrayList();
 	}
 
-	public boolean verifyCompletion(Course c) {
-		boolean outcome = false;
-		for (int i = 0; i < transcriptEntries.size(); i++) {
-			TranscriptEntry te = (TranscriptEntry) transcriptEntries.elementAt(i);
-			Section s = te.getSection();
-			if (s.isSectionOf(c)) {
-				if (TranscriptEntry.passingGrade(te.getGrade())) {
-					outcome = true;
-					break;
-				}
-			}
-		}
-		return outcome;
+	public boolean verifyCompletion(Course course) {
+		return transcriptEntries.stream().anyMatch(e -> (e.getSection().isSectionOf(course) && TranscriptEntry.passingGrade(e.getGrade())));
 	}
 
 	public void addTranscriptEntry(TranscriptEntry te) {
@@ -37,21 +29,20 @@ public class Transcript {
 	}
 
 	public void display() {
-		System.out.println("Transcript for:  " + getStudentOwner().toString());
-
-		if (transcriptEntries.size() == 0) System.out.println("\t(no entries)");
-
-		else for (int i = 0; i < transcriptEntries.size(); i++) {
-			TranscriptEntry te = (TranscriptEntry) transcriptEntries.elementAt(i);
-			Section sec = te.getSection();
-			Course c = sec.getRepresentedCourse();
-			ScheduleOfClasses soc = sec.getOfferedIn();
-
-			System.out.println("\tSemester:        " + soc.getSemester());
-			System.out.println("\tCourse No.:      " + c.getCourseNo());
-			System.out.println("\tCredits:         " + c.getCredits());
-			System.out.println("\tGrade Received:  " + te.getGrade());
-			System.out.println("\t-----");
+		log.info("Transcript for:  " + getStudentOwner().toString());
+		if (transcriptEntries.isEmpty()) {
+			log.info("\t(no entries)");
+		} else {
+			transcriptEntries.forEach(transcriptEntry -> {
+				Section sec = transcriptEntry.getSection();
+				Course course = sec.getRepresentedCourse();
+				ScheduleOfClasses soc = sec.getOfferedIn();
+				log.info("\tSemester:        " + soc.getSemester());
+				log.info("\tCourse No.:      " + course.getCourseNo());
+				log.info("\tCredits:         " + course.getCredits());
+				log.info("\tGrade Received:  " + transcriptEntry.getGrade());
+				log.info("\t-----");
+			});
 		}
 	}
 }

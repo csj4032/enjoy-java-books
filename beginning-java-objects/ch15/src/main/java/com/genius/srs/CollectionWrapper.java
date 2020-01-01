@@ -1,10 +1,12 @@
 package com.genius.srs;
 
+import lombok.Getter;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+@Getter
 public abstract class CollectionWrapper {
 
 	private String pathToFile;
@@ -14,18 +16,16 @@ public abstract class CollectionWrapper {
 		String line;
 		boolean outcome = true;
 
-		try (BufferedReader bIn = new BufferedReader(new FileReader(pathToFile))) {
+		try (BufferedReader bIn = new BufferedReader(new FileReader(getClass().getClassLoader().getResource(pathToFile).getFile()))) {
 			line = bIn.readLine();
 			while (line != null) {
 				if (primary) {
-					parseData(line);
+					parseDataPrimary(line);
 				} else {
-					parseData2(line);
-					line = bIn.readLine();
+					parseDataSecondary(line);
 				}
+				line = bIn.readLine();
 			}
-		} catch (FileNotFoundException e) {
-			outcome = false;
 		} catch (IOException e) {
 			outcome = false;
 		}
@@ -33,7 +33,8 @@ public abstract class CollectionWrapper {
 		return outcome;
 	}
 
-	protected abstract void parseData2(String line);
+	protected abstract void parseDataPrimary(String line);
 
-	protected abstract void parseData(String line);
+	protected abstract void parseDataSecondary(String line);
+
 }

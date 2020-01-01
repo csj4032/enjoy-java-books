@@ -1,36 +1,29 @@
 package com.genius.srs;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 
-public class Faculty extends CollectionWrapper {
+public class Faculty {
 
-	private Hashtable professors;
+	private HashMap<String, Professor> professors;
 
 	public Faculty() {
-		professors = new Hashtable();
+		professors = new HashMap<>();
 	}
 
 	public void display() {
-		System.out.println("Faculty");
-		System.out.println("");
-
-		Enumeration enumeration = professors.elements();
-
-		while (enumeration.hasMoreElements()) {
-			Professor professor = (Professor) enumeration.nextElement();
-			professor.display();
-			System.out.println("");
-		}
+		professors.values().forEach(p -> p.display());
 	}
 
-	@Override
-	protected void parseData2(String line) {
-
+	public void addProfessor(Professor p) {
+		professors.put(p.getSsn(), p);
 	}
 
-	@Override
-	protected void parseData(String line) {
+	public Professor findProfessor(String ssn) {
+		return professors.get(ssn);
+	}
 
+	public boolean isEmpty() {
+		if (professors.size() == 0) return true;
+		else return false;
 	}
 }

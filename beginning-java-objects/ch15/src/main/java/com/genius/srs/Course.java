@@ -2,11 +2,14 @@ package com.genius.srs;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.joining;
+
+@Slf4j
 @Getter
 @Setter
 public class Course {
@@ -26,29 +29,18 @@ public class Course {
 	}
 
 	public void display() {
-		System.out.println("Course Information:");
-		System.out.println("\tCourse No.:  " + getCourseNo());
-		System.out.println("\tCourse Name:  " + getCourseName());
-		System.out.println("\tCredits:  " + getCredits());
-		System.out.println("\tPrerequisite Courses:");
-
+		log.info("Course Information:");
+		log.info("\tCourse No.:  " + getCourseNo());
+		log.info("\tCourse Name:  " + getCourseName());
+		log.info("\tCredits:  " + getCredits());
+		log.info("\tPrerequisite Courses:");
 		if (hasPrerequisites()) {
 			List<Course> courses = getPrerequisites();
-			for (Course course : courses) {
-				System.out.println("\t\t" + course.toString());
-			}
+			for (Course course : courses) log.info("\t\t" + course.toString());
 		} else {
-			System.out.println("\t\t(none)");
+			log.info("\t\t(none)");
 		}
-
-		System.out.print("\tOffered As Section(s):  ");
-
-		for (int i = 0; i < offeredAsSection.size(); i++) {
-			Section s = offeredAsSection.get(i);
-			System.out.print(s.getSectionNo() + " ");
-		}
-
-		System.out.println("");
+		log.info("\tOffered As Section(s): {}", offeredAsSection.stream().map(s -> s.getSectionNo() + " ").collect(joining()));
 	}
 
 	public String toString() {
@@ -60,11 +52,10 @@ public class Course {
 	}
 
 	public boolean hasPrerequisites() {
-		if (prerequisites.size() > 0) return true;
-		else return false;
+		return !prerequisites.isEmpty();
 	}
 
-	public List getPrerequisites() {
+	public List<Course> getPrerequisites() {
 		return prerequisites;
 	}
 
@@ -72,5 +63,9 @@ public class Course {
 		Section s = new Section(secNo, day, time, this, room, capacity);
 		offeredAsSection.add(s);
 		return s;
+	}
+
+	public void addSection(Section section) {
+		offeredAsSection.add(section);
 	}
 }

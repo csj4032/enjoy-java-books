@@ -15,8 +15,12 @@ effective-java-edition2/build
 effective-java-edition2/out
 effective-java-edition3/build
 effective-java-edition3/out
+geniusFX/build
+geniusFX/out
 goos/build
 goos/out
+hands-on-reactive-programming-in-spring-5/*/build
+hands-on-reactive-programming-in-spring-5/*/out
 java-8-in-action/build
 java-8-in-action/out
 java-8-other/build
@@ -30,6 +34,8 @@ java-basic/oop/build
 java-basic/oop/out
 java-basic/reactive/build
 java-basic/reactive/out
+java-basic/stream/build
+java-basic/stream/out
 java-chatting-programming/build
 java-chatting-programming/out
 java-concurrency-in-practice/build
@@ -48,3 +54,5 @@ technique-of-java-programmimg/gilbut-java-session3/build
 technique-of-java-programmimg/gilbut-java-session3/out
 the-object-oriented-thought-process/build
 the-object-oriented-thought-process/out
+this-is-redis/build
+this-is-redis/out

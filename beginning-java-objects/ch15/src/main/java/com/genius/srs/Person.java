@@ -2,7 +2,9 @@ package com.genius.srs;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @Setter
 public abstract class Person {
@@ -14,16 +16,9 @@ public abstract class Person {
 		setSsn(ssn);
 	}
 
-	public Person() {
-		setName("?");
-		setSsn("???-??-????");
-	}
-
-	public abstract String toString();
-
 	public void display() {
-		System.out.println("Person Information:");
-		System.out.println("\tName:  " + getName());
-		System.out.println("\tSoc. Security No.:  " + getSsn());
+		log.info("Person Information:");
+		log.info("\tName:  " + getName());
+		log.info("\tSoc. Security No.:  " + getSsn());
 	}
 }

@@ -1,4 +1,4 @@
-package com.genius.src;
+package com.genius.srs;
 
 import com.genius.srs.Student;
 import com.genius.srs.Transcript;

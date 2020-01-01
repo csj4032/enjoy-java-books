@@ -20,10 +20,10 @@ public class StaticFunctionInterfaceTest {
 	public void converting() {
 		var originals = List.of(
 				defaultOriginal(a -> b -> c -> new Original(a, b, c)),
-				Original.builder().firstName("22").lastName("33").email("1").build(),
-				Original.builder().firstName("@@").lastName("##").email("!").build(),
-				Original.builder().firstName("22").lastName("33").email("2").build(),
-				Original.builder().firstName("22").lastName("33").email("1").build()
+				Original.builder().firstName("1").lastName("A").email("가").build(),
+				Original.builder().firstName("2").lastName("B").email("나").build(),
+				Original.builder().firstName("3").lastName("C").email("다").build(),
+				Original.builder().firstName("4").lastName("D").email("다").build()
 		);
 
 		var destinations1 = originals.stream().map(converter()).collect(Collectors.toList());
@@ -40,6 +40,6 @@ public class StaticFunctionInterfaceTest {
 	}
 
 	public Original defaultOriginal(Function<String, Function<String, Function<String, Original>>> function) {
-		return function.apply("1").apply("2").apply("3");
+		return function.apply("0").apply("Z").apply("하");
 	}
 }

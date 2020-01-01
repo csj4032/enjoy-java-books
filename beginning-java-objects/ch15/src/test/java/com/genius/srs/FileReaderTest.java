@@ -1,4 +1,4 @@
-package com.genius.src;
+package com.genius.srs;
 
 import org.junit.jupiter.api.Test;
 

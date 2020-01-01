@@ -2,32 +2,30 @@ package com.genius.srs;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 @Getter
 @Setter
-public class ScheduleOfClasses  extends CollectionWrapper {
+public class ScheduleOfClasses {
 	private String semester;
-	private Hashtable sections;
+	private Map<String, Section> sections;
 
 	public ScheduleOfClasses(String semester) {
 		setSemester(semester);
-		sections = new Hashtable();
+		sections = new HashMap<>();
+	}
+
+	public ScheduleOfClasses() {
+		this("");
 	}
 
 	public void display() {
-		System.out.println("Schedule of Classes for " + getSemester());
-		System.out.println("");
-
-		Enumeration e = sections.elements();
-
-		while (e.hasMoreElements()) {
-			Section s = (Section) e.nextElement();
-			s.display();
-			System.out.println("");
-		}
+		log.info("Schedule of Classes for " + getSemester());
+		sections.values().forEach(Section::display);
 	}
 
 	public void addSection(Section s) {
@@ -36,39 +34,11 @@ public class ScheduleOfClasses  extends CollectionWrapper {
 		s.setOfferedIn(this);
 	}
 
-	public void parseData(String line) {
-		String restOfLine = line;
-		int index = restOfLine.indexOf("\t");
-		String courseNo = restOfLine.substring(0, index);
-		restOfLine = restOfLine.substring(index+1);
-		index = restOfLine.indexOf("\t");
-
-		String sectionNumber = restOfLine.substring(0, index);
-		int sectionNo = Integer.parseInt(sectionNumber);
-		restOfLine = restOfLine.substring(index+1);
-
-		index = restOfLine.indexOf("\t");
-		String dayOfWeek = restOfLine.substring(0, index);
-		restOfLine = restOfLine.substring(index+1);
-		index = restOfLine.indexOf("\t");
-		String timeOfDay = restOfLine.substring(0, index);
-		restOfLine = restOfLine.substring(index+1);
-		index = restOfLine.indexOf("\t");
-		String room = restOfLine.substring(0, index);
-
-		String capacityValue = restOfLine.substring(index+1);
-		int capacity = Integer.parseInt(capacityValue);
-
-		Course c = StudentRegistrationSystem.courseCatalog.findCourse(courseNo);
-
-		Section s = c.scheduleSection(sectionNo, dayOfWeek.charAt(0), timeOfDay, room, capacity);
-		String key = courseNo + " - " + s.getSectionNo();
-		addSection(s);
-	}
-
 	public Section findSection(String fullSectionNo) {
-		return (Section) sections.get(fullSectionNo);
+		return sections.get(fullSectionNo);
 	}
 
-	public void parseData2(String line) { }
+	public boolean isEmpty() {
+		return sections.isEmpty();
+	}
 }

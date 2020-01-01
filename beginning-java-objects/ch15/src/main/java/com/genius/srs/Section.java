@@ -2,11 +2,13 @@ package com.genius.srs;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 @Getter
 @Setter
 public class Section {
@@ -19,8 +21,8 @@ public class Section {
 	private Course representedCourse;
 	private ScheduleOfClasses offeredIn;
 	private Professor instructor;
-	private Hashtable enrolledStudents;
-	private Hashtable assignedGrades;
+	private Map<String, Student> enrolledStudents;
+	private Map<Student, TranscriptEntry> assignedGrades;
 
 	public static final int SUCCESSFULLY_ENROLLED = 0;
 	public static final int SECTION_FULL = 1;
@@ -36,8 +38,8 @@ public class Section {
 		setSeatingCapacity(capacity);
 		setInstructor(null);
 
-		enrolledStudents = new Hashtable();
-		assignedGrades = new Hashtable();
+		enrolledStudents = new HashMap<>();
+		assignedGrades = new HashMap<>();
 	}
 
 	public String toString() {
@@ -48,12 +50,10 @@ public class Section {
 		return getRepresentedCourse().getCourseNo() + " - " + getSectionNo();
 	}
 
-	public int enroll(Student s) {
-
-		Transcript transcript = s.getTranscript();
-
-		if (s.isEnrolledIn(this) || transcript.verifyCompletion(this.getRepresentedCourse())) return PREVIOUSLY_ENROLLED;
-
+	public int enroll(Student student) {
+		Transcript transcript = student.getTranscript();
+		if (student.isEnrolledIn(this) || transcript.verifyCompletion(this.getRepresentedCourse()))
+			return PREVIOUSLY_ENROLLED;
 		Course c = getRepresentedCourse();
 		if (c.hasPrerequisites()) {
 			List<Course> courses = c.getPrerequisites();
@@ -64,13 +64,13 @@ public class Section {
 
 		if (!confirmSeatAvailability()) return SECTION_FULL;
 
-		enrolledStudents.put(s.getSsn(), s);
-		s.addSection(this);
+		enrolledStudents.put(student.getSsn(), student);
+		student.addSection(this);
 		return SUCCESSFULLY_ENROLLED;
 	}
 
 	private boolean confirmSeatAvailability() {
-		return (enrolledStudents.size() < getSeatingCapacity()) ? true : false;
+		return enrolledStudents.size() < getSeatingCapacity();
 	}
 
 	public boolean drop(Student s) {
@@ -88,50 +88,41 @@ public class Section {
 	}
 
 	public void display() {
-		System.out.println("Section Information:");
-		System.out.println("\tSemester:  " + getOfferedIn().getSemester());
-		System.out.println("\tCourse No.:  " + getRepresentedCourse().getCourseNo());
-		System.out.println("\tSection No:  " + getSectionNo());
-		System.out.println("\tOffered:  " + getDayOfWeek() + " at " + getTimeOfDay());
-		System.out.println("\tIn Room:  " + getRoom());
-		if (getInstructor() != null) System.out.println("\tProfessor:  " + getInstructor().getName());
+		log.info("Section Information:");
+		log.info("\tSemester:  " + getOfferedIn().getSemester());
+		log.info("\tCourse No.:  " + getRepresentedCourse().getCourseNo());
+		log.info("\tSection No:  " + getSectionNo());
+		log.info("\tOffered:  " + getDayOfWeek() + " at " + getTimeOfDay());
+		log.info("\tIn Room:  " + getRoom());
+		if (getInstructor() != null) log.info("\tProfessor:  " + getInstructor().getName());
 		displayStudentRoster();
 	}
 
 	public void displayStudentRoster() {
-		System.out.print("\tTotal of " + getTotalEnrollment() + " students enrolled");
-
-		if (getTotalEnrollment() == 0) System.out.println(".");
-		else System.out.println(", as follows:");
-
-		Enumeration e = enrolledStudents.elements();
-		while (e.hasMoreElements()) {
-			Student s = (Student) e.nextElement();
-			System.out.println("\t\t" + s.getName());
+		log.info("\tTotal of " + getTotalEnrollment() + " students enrolled");
+		if (enrolledStudents.isEmpty()) {
+			log.info(".");
+		} else {
+			log.info(", as follows:");
 		}
+		enrolledStudents.values().forEach(e -> log.info("\t\t" + e.getName()));
 	}
 
 	public String getGrade(Student s) {
-
-		TranscriptEntry te = (TranscriptEntry) assignedGrades.get(s);
+		TranscriptEntry te = assignedGrades.get(s);
 		if (te != null) {
-			String grade = te.getGrade();
-			return grade;
+			return te.getGrade();
 		} else return null;
 	}
 
 	public boolean postGrade(Student s, String grade) {
-
 		if (assignedGrades.get(s) != null) return false;
-
 		TranscriptEntry te = new TranscriptEntry(s, grade, this);
-
 		assignedGrades.put(s, te);
-
 		return true;
 	}
 
 	public boolean isSectionOf(Course c) {
-		return c == representedCourse ? true : false;
+		return c == representedCourse;
 	}
 }
