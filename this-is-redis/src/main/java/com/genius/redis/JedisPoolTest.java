@@ -6,7 +6,6 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.Map;
 
-
 public class JedisPoolTest {
 
 	public static void main(String[] args) {
