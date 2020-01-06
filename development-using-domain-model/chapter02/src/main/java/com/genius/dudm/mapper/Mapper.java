@@ -8,9 +8,9 @@ public interface Mapper<T> {
 
 	T findByKey();
 
-	int insert();
+	int insert(T t);
 
-	int update();
+	int update(T t);
 
-	int delete();
+	int delete(T t);
 }

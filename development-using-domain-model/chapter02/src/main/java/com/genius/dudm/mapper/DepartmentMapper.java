@@ -21,17 +21,17 @@ public class DepartmentMapper implements Mapper<Department> {
 	}
 
 	@Override
-	public int insert() {
+	public int insert(Department department) {
 		return 0;
 	}
 
 	@Override
-	public int update() {
+	public int update(Department department) {
 		return 0;
 	}
 
 	@Override
-	public int delete() {
+	public int delete(Department department) {
 		return 0;
 	}
 

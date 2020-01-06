@@ -46,17 +46,17 @@ public class EmployeeMapper implements Mapper<Employee> {
 	}
 
 	@Override
-	public int insert() {
+	public int insert(Employee employee) {
 		return 0;
 	}
 
 	@Override
-	public int update() {
+	public int update(Employee employee) {
 		return 0;
 	}
 
 	@Override
-	public int delete() {
+	public int delete(Employee employee) {
 		return 0;
 	}
 
