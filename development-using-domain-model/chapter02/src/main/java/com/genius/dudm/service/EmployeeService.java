@@ -10,10 +10,10 @@ import java.util.List;
 public class EmployeeService {
 
 	public List<Employee> findAllEmployee() {
-		return new EmployeeMapper().findAllEmployee();
+		return new EmployeeMapper().findAll();
 	}
 
 	public List<Employee> findAllEmployeeByDepartment(@NotNull Department department) {
-		return new EmployeeMapper().findAllEmployeeByDepartment(department);
+		return new EmployeeMapper().findByDepartment(department);
 	}
 }

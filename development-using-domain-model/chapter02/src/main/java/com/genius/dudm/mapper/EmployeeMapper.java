@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeMapper {
+public class EmployeeMapper implements Mapper<Employee> {
 
 	private static final String SELECT_EMPLOYEE = """
 			SELECT
@@ -31,12 +31,33 @@ public class EmployeeMapper {
 
 	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = SELECT_EMPLOYEE + " AND D.NO = ?";
 
-	public List<Employee> findAllEmployee() {
+	public List<Employee> findByDepartment(Department department) {
+		return find(SELECT_EMPLOYEE_BY_DEPARTMENT, new Object[]{department.getNo()});
+	}
+
+	@Override
+	public List<Employee> findAll() {
 		return find(SELECT_EMPLOYEE, null);
 	}
 
-	public List<Employee> findAllEmployeeByDepartment(@NotNull Department department) {
-		return find(SELECT_EMPLOYEE_BY_DEPARTMENT, new Object[]{department.getNo()});
+	@Override
+	public Employee findByKey() {
+		return new Employee(0, "", "", null);
+	}
+
+	@Override
+	public int insert() {
+		return 0;
+	}
+
+	@Override
+	public int update() {
+		return 0;
+	}
+
+	@Override
+	public int delete() {
+		return 0;
 	}
 
 	private List<Employee> find(String query, @Nullable Object[] params) {
