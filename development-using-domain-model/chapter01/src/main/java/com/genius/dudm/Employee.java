@@ -4,7 +4,6 @@ public class Employee {
 	private long no;
 	private String name;
 	private String position;
-
 	private Department department;
 
 	public void setDepartment(Department department) {
