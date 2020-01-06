@@ -1,5 +1,8 @@
 package com.genius.dudm;
 
+import com.genius.dudm.domain.Department;
+import com.genius.dudm.domain.Employee;
+import com.genius.dudm.service.EmployeeService;
 import org.junit.jupiter.api.*;
 
 import java.util.List;

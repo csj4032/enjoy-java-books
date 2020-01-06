@@ -1,5 +1,8 @@
-package com.genius.dudm;
+package com.genius.dudm.mapper;
 
+import com.genius.dudm.domain.Department;
+import com.genius.dudm.domain.Employee;
+import com.genius.dudm.infrastructure.DatabaseManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,10 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.reducing;
-import static java.util.stream.Collectors.toList;
-
-public class EmployeeService {
+public class EmployeeMapper {
 
 	private static final String SELECT_EMPLOYEE = """
 			SELECT
@@ -26,29 +26,16 @@ public class EmployeeService {
 			FROM
 				EMPLOYEE AS E, DEPARTMENT AS D
 			WHERE
-				E.DEPARTMENT_NO = D.NO;
+				E.DEPARTMENT_NO = D.NO
 			""";
 
-	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = """
-			SELECT
-				E.NO AS EMPLOYEE_NO,
-				E.NAME AS EMPLOYEE_NAME,
-				E.POSITION,
-				D.NO AS DEPARTMENT_NO,
-				D.NAME AS DEPARTMENT_NAME,
-				D.ADDRESS
-			FROM
-				EMPLOYEE AS E, DEPARTMENT AS D
-			WHERE
-				E.DEPARTMENT_NO = D.NO
-				AND D.NO = ?;
-			""";
+	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = SELECT_EMPLOYEE + " AND D.NO = ?";
 
 	public List<Employee> findAllEmployee() {
 		return find(SELECT_EMPLOYEE, null);
 	}
 
-	public List<Employee> findAllEmployeeByDepartment(Department department) {
+	public List<Employee> findAllEmployeeByDepartment(@NotNull Department department) {
 		return find(SELECT_EMPLOYEE_BY_DEPARTMENT, new Object[]{department.getNo()});
 	}
 

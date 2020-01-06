@@ -1,4 +1,4 @@
-package com.genius.dudm;
+package com.genius.dudm.domain;
 
 import java.util.Objects;
 
