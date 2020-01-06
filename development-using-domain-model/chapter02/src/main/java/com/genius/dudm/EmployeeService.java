@@ -21,7 +21,23 @@ public class EmployeeService {
 				D.ADDRESS
 			FROM
 				EMPLOYEE AS E, DEPARTMENT AS D
-			WHERE E.DEPARTMENT_NO = D.NO;
+			WHERE
+				E.DEPARTMENT_NO = D.NO;
+			""";
+
+	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = """
+			SELECT
+				E.NO AS EMPLOYEE_NO,
+				E.NAME AS EMPLOYEE_NAME,
+				E.POSITION,
+				D.NO AS DEPARTMENT_NO,
+				D.NAME AS DEPARTMENT_NAME,
+				D.ADDRESS
+			FROM
+				EMPLOYEE AS E, DEPARTMENT AS D
+			WHERE
+				E.DEPARTMENT_NO = D.NO
+				AND D.NO = ?;
 			""";
 
 	public List<Employee> findAllEmployee() {
@@ -46,6 +62,24 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findAllEmployeeByDepartment(Department department) {
-		return findAllEmployee().stream().filter(e -> e.isBelongsTo(department)).collect(toList());
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Employee> employees = new ArrayList<>();
+		try {
+			connection = DatabaseManager.getConnection();
+			preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_BY_DEPARTMENT);
+			preparedStatement.setLong(1, department.getNo());
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Department depart = new Department(resultSet.getLong("DEPARTMENT_NO"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
+				employees.add(new Employee(resultSet.getLong("EMPLOYEE_NO"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), depart));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseManager.close(connection, preparedStatement, resultSet);
+		}
+		return employees;
 	}
 }
