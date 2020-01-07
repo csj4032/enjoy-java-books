@@ -6,7 +6,7 @@ public interface Mapper<T> {
 
 	List<T> findAll();
 
-	T findByKey();
+	T findById(long id);
 
 	int insert(T t);
 

@@ -29,4 +29,15 @@ public class EmployeeServiceTest {
 		List<Employee> employees = employee.findAllEmployeeByDepartment(department);
 		Assertions.assertEquals(3, employees.size());
 	}
+
+	@Test
+	@Order(3)
+	@DisplayName("특정 직원 조회 테스트")
+	public void EmployeeFindByIdTest() {
+		EmployeeService employeeService = new EmployeeService();
+		Employee employee = employeeService.findById(1l);
+		Assertions.assertEquals(1, employee.getNo());
+		Assertions.assertEquals("가길동", employee.getName());
+		Assertions.assertEquals("과장", employee.getPosition());
+	}
 }

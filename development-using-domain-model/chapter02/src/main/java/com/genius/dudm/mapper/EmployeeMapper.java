@@ -15,7 +15,7 @@ import java.util.List;
 
 public class EmployeeMapper implements Mapper<Employee> {
 
-	private static final String SELECT_EMPLOYEE = """
+	private static final String SELECT_SQL = """
 			SELECT
 				E.NO AS EMPLOYEE_NO,
 				E.NAME AS EMPLOYEE_NAME,
@@ -29,7 +29,7 @@ public class EmployeeMapper implements Mapper<Employee> {
 				E.DEPARTMENT_NO = D.NO
 			""";
 
-	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = SELECT_EMPLOYEE + " AND D.NO = ?";
+	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = SELECT_SQL + " AND D.NO = ?";
 
 	public List<Employee> findByDepartment(Department department) {
 		return find(SELECT_EMPLOYEE_BY_DEPARTMENT, new Object[]{department.getNo()});
@@ -37,12 +37,28 @@ public class EmployeeMapper implements Mapper<Employee> {
 
 	@Override
 	public List<Employee> findAll() {
-		return find(SELECT_EMPLOYEE, null);
+		return find(SELECT_SQL, null);
 	}
 
 	@Override
-	public Employee findByKey() {
-		return new Employee(0, "", "", null);
+	public Employee findById(long id) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = DatabaseManager.getConnection();
+			preparedStatement = connection.prepareStatement(SELECT_SQL + " AND D.NO = ?");
+			preparedStatement.setObject(1, id);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return load(resultSet);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseManager.close(connection, preparedStatement, resultSet);
+		}
+		return new Employee();
 	}
 
 	@Override

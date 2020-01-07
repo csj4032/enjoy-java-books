@@ -15,8 +15,28 @@ public class Employee {
 		this.department = department;
 	}
 
+	public Employee() {
+		this(0, "Anonymous", "N/A", null);
+	}
+
 	public boolean isBelongsTo(Department department) {
 		return this.department.equals(department);
+	}
+
+	public long getNo() {
+		return no;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public Department getDepartment() {
+		return department;
 	}
 
 	@Override
