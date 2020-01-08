@@ -6,5 +6,5 @@ public interface Mapper<T> {
 
 	List<T> findAll();
 
-	T findById(long id);
+	T findByKey(long id);
 }

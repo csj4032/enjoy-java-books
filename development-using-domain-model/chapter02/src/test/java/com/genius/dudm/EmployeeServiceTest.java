@@ -17,7 +17,7 @@ public class EmployeeServiceTest {
 	public void allEmployeeTest() {
 		EmployeeService employee = new EmployeeService();
 		List<Employee> employees = employee.findAllEmployee();
-		Assertions.assertEquals(5, employees.size());
+		Assertions.assertEquals(6, employees.size());
 	}
 
 	@Test

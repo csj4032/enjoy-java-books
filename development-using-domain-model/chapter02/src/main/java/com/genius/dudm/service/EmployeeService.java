@@ -10,7 +10,7 @@ import java.util.List;
 public class EmployeeService {
 
 	public Employee findById(long id) {
-		return new EmployeeMapper().findById(id);
+		return new EmployeeMapper().findByKey(id);
 	}
 
 	public List<Employee> findAllEmployee() {

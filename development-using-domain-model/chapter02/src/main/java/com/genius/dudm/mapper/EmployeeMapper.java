@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeMapper implements Mapper<Employee> {
+public class EmployeeMapper extends AbstractMapper<Employee> {
 
 	private static final String SELECT_SQL = """
 			SELECT
@@ -29,10 +29,13 @@ public class EmployeeMapper implements Mapper<Employee> {
 				E.DEPARTMENT_NO = D.NO
 			""";
 
-	private static final String SELECT_EMPLOYEE_BY_DEPARTMENT = SELECT_SQL + " AND D.NO = ?";
+	@Override
+	protected String getFindByKey() {
+		return SELECT_SQL + " AND E.NO = ?";
+	}
 
 	public List<Employee> findByDepartment(Department department) {
-		return find(SELECT_EMPLOYEE_BY_DEPARTMENT, new Object[]{department.getNo()});
+		return find(SELECT_SQL + " AND D.NO = ?", new Object[]{department.getNo()});
 	}
 
 	@Override
@@ -40,52 +43,7 @@ public class EmployeeMapper implements Mapper<Employee> {
 		return find(SELECT_SQL, null);
 	}
 
-	@Override
-	public Employee findById(long id) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = DatabaseManager.getConnection();
-			preparedStatement = connection.prepareStatement(SELECT_SQL + " AND D.NO = ?");
-			preparedStatement.setObject(1, id);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				return load(resultSet);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DatabaseManager.close(connection, preparedStatement, resultSet);
-		}
-		return new Employee();
-	}
-
-	private List<Employee> find(String query, @Nullable Object[] params) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		List<Employee> employees = new ArrayList<>();
-		try {
-			connection = DatabaseManager.getConnection();
-			preparedStatement = connection.prepareStatement(query);
-			int size = params == null ? 0 : params.length;
-			for (int i = 0; i < size; i++) {
-				preparedStatement.setObject(i + 1, params[i]);
-			}
-			resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				employees.add(load(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DatabaseManager.close(connection, preparedStatement, resultSet);
-		}
-		return employees;
-	}
-
-	private Employee load(ResultSet resultSet) throws SQLException {
+	protected Employee load(ResultSet resultSet) throws SQLException {
 		Department department = new Department(resultSet.getLong("DEPARTMENT_NO"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
 		return new Employee(resultSet.getLong("EMPLOYEE_NO"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), department);
 	}
