@@ -61,21 +61,6 @@ public class EmployeeMapper implements Mapper<Employee> {
 		return new Employee();
 	}
 
-	@Override
-	public int insert(Employee employee) {
-		return 0;
-	}
-
-	@Override
-	public int update(Employee employee) {
-		return 0;
-	}
-
-	@Override
-	public int delete(Employee employee) {
-		return 0;
-	}
-
 	private List<Employee> find(String query, @Nullable Object[] params) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

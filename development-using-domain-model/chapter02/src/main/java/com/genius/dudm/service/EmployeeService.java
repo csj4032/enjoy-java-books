@@ -20,4 +20,10 @@ public class EmployeeService {
 	public List<Employee> findAllEmployeeByDepartment(@NotNull Department department) {
 		return new EmployeeMapper().findByDepartment(department);
 	}
+
+	public void printForMove(List<Employee> employees) {
+		for (Employee employee : employees) {
+			employee.printForMove();
+		}
+	}
 }

@@ -51,4 +51,8 @@ public class Employee {
 	public int hashCode() {
 		return Objects.hash(no);
 	}
+
+	public void printForMove() {
+		System.out.printf("성명 : %s  부서 : %s  주소 : %s\n", name, department.getName(), department.getAddress());
+	}
 }
