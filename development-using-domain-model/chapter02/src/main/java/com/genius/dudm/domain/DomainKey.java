@@ -1,5 +1,8 @@
 package com.genius.dudm.domain;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public abstract class DomainKey {
 	private Object[] keyFields;
 
@@ -9,5 +12,27 @@ public abstract class DomainKey {
 
 	public Object[] getKeyFields() {
 		return keyFields;
+	}
+
+	public boolean isNull() {
+		return Objects.isNull(keyFields);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		DomainKey domainKey = (DomainKey) o;
+		return Arrays.equals(keyFields, domainKey.keyFields);
+	}
+
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(keyFields);
+	}
+
+	@Override
+	public String toString() {
+		return "DomainKey{" + "keyFields=" + Arrays.toString(keyFields) + '}';
 	}
 }
