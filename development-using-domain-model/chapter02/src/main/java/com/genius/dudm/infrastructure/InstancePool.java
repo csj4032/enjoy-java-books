@@ -2,14 +2,17 @@ package com.genius.dudm.infrastructure;
 
 import com.genius.dudm.domain.DomainKey;
 import com.genius.dudm.domain.DomainObject;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class InstancePool {
+@Slf4j
+public class InstancePool<T extends DomainObject> {
 
 	private static InstancePool instance;
 	private static ThreadLocal threadLocal = new ThreadLocal();
-	private HashMap<DomainKey, DomainObject> objectPool;
+	private Map<DomainKey, T> objectPool;
 
 	private InstancePool() {
 
@@ -27,14 +30,16 @@ public class InstancePool {
 			instancePool.initPool();
 			threadLocal.set(instancePool);
 		}
+		System.out.println();
 		return instancePool;
 	}
 
-	public void addObjectToPool(DomainObject object) {
+	public void addObjectToPool(T object) {
 		objectPool.put(object.getKey(), object);
+		log.info("objectPool : {}", objectPool);
 	}
 
-	public DomainObject getObjectFromPool(DomainKey key) {
+	public T getObjectFromPool(DomainKey key) {
 		return objectPool.get(key);
 	}
 

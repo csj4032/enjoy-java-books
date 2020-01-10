@@ -2,13 +2,14 @@ package com.genius.dudm.domain;
 
 import java.util.Objects;
 
-public class Employee {
+public class Employee extends DomainObject {
 	private long no;
 	private String name;
 	private String position;
 	private Department department;
 
-	public Employee(long no, String name, String position, Department department) {
+	public Employee(Long no, String name, String position, Department department) {
+		super(new EmployeeKey(no));
 		this.no = no;
 		this.name = name;
 		this.position = position;
@@ -16,7 +17,7 @@ public class Employee {
 	}
 
 	public Employee() {
-		this(0, "Anonymous", "N/A", null);
+		this(0L, "Anonymous", "N/A", null);
 	}
 
 	public boolean isBelongsTo(Department department) {

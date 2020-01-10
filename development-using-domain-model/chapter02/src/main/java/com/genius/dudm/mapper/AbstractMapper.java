@@ -1,5 +1,6 @@
 package com.genius.dudm.mapper;
 
+import com.genius.dudm.domain.DomainObject;
 import com.genius.dudm.infrastructure.DatabaseManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractMapper<T> implements Mapper {
+public abstract class AbstractMapper<T extends DomainObject> implements Mapper {
 
 	protected abstract String getFindByKey();
 	protected abstract T load(ResultSet resultSet) throws SQLException;

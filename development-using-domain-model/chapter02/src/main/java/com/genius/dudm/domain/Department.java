@@ -5,12 +5,13 @@ import com.genius.dudm.service.EmployeeService;
 import java.util.List;
 import java.util.Objects;
 
-public class Department {
+public class Department extends DomainObject {
 	private long no;
 	private String name;
 	private String address;
 
 	public Department(long no, String name, String address) {
+		super(new DepartmentKey(no));
 		this.no = no;
 		this.name = name;
 		this.address = address;
