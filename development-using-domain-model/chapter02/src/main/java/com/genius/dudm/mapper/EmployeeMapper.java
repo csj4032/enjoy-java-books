@@ -43,9 +43,9 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 	}
 
 	protected Employee load(ResultSet resultSet) throws SQLException {
-		if(InstancePool.getInstancePool().containsInPool(getKey(resultSet))){
+		if (InstancePool.getInstancePool().containsInPool(getKey(resultSet))) {
 			log.info("Instance Pool");
-			return (Employee) InstancePool.getInstancePool().getObjectFromPool(getKey(resultSet));
+			return InstancePool.getInstancePool().getObjectFromPool(getKey(resultSet));
 		}
 		Department department = new Department(resultSet.getLong("DEPARTMENT_NO"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
 		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_NO"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), department);

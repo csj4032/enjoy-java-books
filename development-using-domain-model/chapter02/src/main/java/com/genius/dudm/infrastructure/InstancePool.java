@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class InstancePool<T extends DomainObject> {
+public class InstancePool {
 
 	private static InstancePool instance;
 	private static ThreadLocal threadLocal = new ThreadLocal();
-	private Map<DomainKey, T> objectPool;
+	private Map<DomainKey, ? super DomainObject> objectPool;
 
 	private InstancePool() {
 
@@ -30,17 +30,16 @@ public class InstancePool<T extends DomainObject> {
 			instancePool.initPool();
 			threadLocal.set(instancePool);
 		}
-		System.out.println();
 		return instancePool;
 	}
 
-	public void addObjectToPool(T object) {
+	public <T extends DomainObject> void addObjectToPool(T object) {
 		objectPool.put(object.getKey(), object);
 		log.info("objectPool : {}", objectPool);
 	}
 
-	public T getObjectFromPool(DomainKey key) {
-		return objectPool.get(key);
+	public <T extends DomainObject> T getObjectFromPool(DomainKey key) {
+		return (T) objectPool.get(key);
 	}
 
 	public boolean containsInPool(DomainKey key) {
@@ -49,5 +48,9 @@ public class InstancePool<T extends DomainObject> {
 
 	private void initPool() {
 		objectPool = new HashMap<>();
+	}
+
+	public void unload() {
+		threadLocal.remove();
 	}
 }
