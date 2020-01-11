@@ -29,7 +29,12 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 			""";
 
 	@Override
-	protected String getFindByKey() {
+	protected String getFindAllSql() {
+		return SELECT_SQL;
+	}
+
+	@Override
+	protected String getFindByKeySql() {
 		return SELECT_SQL + " AND E.ID = ?";
 	}
 
@@ -53,7 +58,13 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 		return employee;
 	}
 
-	private DomainKey getKey(ResultSet resultSet) throws SQLException {
-		return new EmployeeKey(resultSet.getLong("ID"));
+	@Override
+	protected Employee doLoad(ResultSet resultSet) throws Exception {
+		DepartmentMapper departmentMapper = new DepartmentMapper();
+		return new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), departmentMapper.load(resultSet));
+	}
+
+	public DomainKey getKey(ResultSet resultSet) throws SQLException {
+		return new EmployeeKey(resultSet.getLong("E.ID"));
 	}
 }

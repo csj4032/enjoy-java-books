@@ -1,21 +1,37 @@
 package com.genius.dudm.mapper;
 
 import com.genius.dudm.domain.DomainKey;
+import com.genius.dudm.domain.DomainObject;
 import com.genius.dudm.infrastructure.DatabaseManager;
+import com.genius.dudm.infrastructure.InstancePool;
 import org.jetbrains.annotations.Nullable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractMapper<T> implements Mapper {
+public abstract class AbstractMapper<T extends DomainObject> implements Mapper {
 
-	protected abstract String getFindByKey();
+	protected abstract T doLoad(ResultSet resultSet) throws Exception;
 
-	protected abstract T load(ResultSet resultSet) throws SQLException;
+	protected abstract DomainKey getKey(ResultSet resultSet) throws Exception;
+
+	protected abstract String getFindAllSql();
+
+	protected abstract String getFindByKeySql();
+
+	protected T load(ResultSet resultSet) throws Exception {
+		DomainKey key = getKey(resultSet);
+		if (InstancePool.getInstancePool().containsInPool(key)) {
+			return InstancePool.getInstancePool().getObjectFromPool(key);
+		} else {
+			T result = doLoad(resultSet);
+			InstancePool.getInstancePool().addObjectToPool(result);
+			return result;
+		}
+	}
 
 	protected List<T> find(String query, @Nullable Object[] params) {
 		Connection connection = null;
@@ -33,7 +49,7 @@ public abstract class AbstractMapper<T> implements Mapper {
 			while (resultSet.next()) {
 				employees.add(load(resultSet));
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DatabaseManager.close(connection, preparedStatement, resultSet);
@@ -48,11 +64,12 @@ public abstract class AbstractMapper<T> implements Mapper {
 		ResultSet resultSet = null;
 		try {
 			connection = DatabaseManager.getConnection();
-			preparedStatement = connection.prepareStatement(getFindByKey());
-			for (int i = 0; i < key.getKeyFields().length; i++) preparedStatement.setObject(i + 1, key.getKeyFields()[i]);
+			preparedStatement = connection.prepareStatement(getFindByKeySql());
+			for (int i = 0; i < key.getKeyFields().length; i++)
+				preparedStatement.setObject(i + 1, key.getKeyFields()[i]);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) return load(resultSet);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DatabaseManager.close(connection, preparedStatement, resultSet);
