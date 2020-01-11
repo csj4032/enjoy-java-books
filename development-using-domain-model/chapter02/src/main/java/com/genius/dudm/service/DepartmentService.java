@@ -1,6 +1,7 @@
 package com.genius.dudm.service;
 
 import com.genius.dudm.domain.Department;
+import com.genius.dudm.domain.DepartmentKey;
 import com.genius.dudm.mapper.DepartmentMapper;
 
 import java.util.ArrayList;
@@ -18,5 +19,10 @@ public class DepartmentService {
 			}
 		}
 		return result;
+	}
+
+	public Department findById(DepartmentKey key) throws Exception {
+		DepartmentMapper mapper = new DepartmentMapper();
+		return mapper.findByKey(key);
 	}
 }

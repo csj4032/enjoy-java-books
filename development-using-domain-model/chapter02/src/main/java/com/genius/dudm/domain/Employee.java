@@ -3,14 +3,14 @@ package com.genius.dudm.domain;
 import java.util.Objects;
 
 public class Employee extends DomainObject {
-	private long no;
+	private long id;
 	private String name;
 	private String position;
 	private Department department;
 
-	public Employee(Long no, String name, String position, Department department) {
-		super(new EmployeeKey(no));
-		this.no = no;
+	public Employee(Long id, String name, String position, Department department) {
+		super(new EmployeeKey(id));
+		this.id = id;
 		this.name = name;
 		this.position = position;
 		this.department = department;
@@ -24,8 +24,8 @@ public class Employee extends DomainObject {
 		return this.department.equals(department);
 	}
 
-	public long getNo() {
-		return no;
+	public long getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -45,12 +45,12 @@ public class Employee extends DomainObject {
 		if (this == other) return true;
 		if (other == null || getClass() != other.getClass()) return false;
 		Employee employee = (Employee) other;
-		return no == employee.no;
+		return id == employee.id;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(no);
+		return Objects.hash(id);
 	}
 
 	public void printForMove() {

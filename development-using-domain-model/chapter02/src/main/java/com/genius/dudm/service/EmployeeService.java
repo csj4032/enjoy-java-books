@@ -1,6 +1,7 @@
 package com.genius.dudm.service;
 
 import com.genius.dudm.domain.Department;
+import com.genius.dudm.domain.DomainKey;
 import com.genius.dudm.domain.Employee;
 import com.genius.dudm.mapper.EmployeeMapper;
 import org.jetbrains.annotations.NotNull;
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class EmployeeService {
 
-	public Employee findById(long id) {
-		return new EmployeeMapper().findByKey(id);
+	public Employee findById(DomainKey key) {
+		return new EmployeeMapper().findByKey(key);
 	}
 
 	public List<Employee> findAllEmployee() {

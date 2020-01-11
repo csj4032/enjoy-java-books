@@ -1,5 +1,6 @@
 package com.genius.dudm.mapper;
 
+import com.genius.dudm.domain.DomainKey;
 import com.genius.dudm.infrastructure.DatabaseManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public abstract class AbstractMapper<T> implements Mapper {
 
 	protected abstract String getFindByKey();
+
 	protected abstract T load(ResultSet resultSet) throws SQLException;
 
 	protected List<T> find(String query, @Nullable Object[] params) {
@@ -40,18 +42,16 @@ public abstract class AbstractMapper<T> implements Mapper {
 	}
 
 	@Override
-	public T findByKey(long key) {
+	public T findByKey(DomainKey key) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		try {
 			connection = DatabaseManager.getConnection();
 			preparedStatement = connection.prepareStatement(getFindByKey());
-			preparedStatement.setObject(1, key);
+			for (int i = 0; i < key.getKeyFields().length; i++) preparedStatement.setObject(i + 1, key.getKeyFields()[i]);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				return load(resultSet);
-			}
+			if (resultSet.next()) return load(resultSet);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

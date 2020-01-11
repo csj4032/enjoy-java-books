@@ -11,7 +11,7 @@ public class DepartmentMapper extends AbstractMapper<Department> {
 
 	private static final String selectSql = """
 			SELECT
-				NO,
+				ID,
 				NAME,
 				ADDRESS
 			FROM
@@ -22,7 +22,7 @@ public class DepartmentMapper extends AbstractMapper<Department> {
 	protected String getFindByKey() {
 		return selectSql + """
 				WHERE
-					NO = ?
+					ID = ?
 				""";
 	}
 
@@ -32,6 +32,6 @@ public class DepartmentMapper extends AbstractMapper<Department> {
 	}
 
 	protected Department load(@NotNull ResultSet resultSet) throws SQLException {
-		return new Department(resultSet.getLong("NO"), resultSet.getString("NAME"), resultSet.getString("ADDRESS"));
+		return new Department(resultSet.getLong("ID"), resultSet.getString("NAME"), resultSet.getString("ADDRESS"));
 	}
 }

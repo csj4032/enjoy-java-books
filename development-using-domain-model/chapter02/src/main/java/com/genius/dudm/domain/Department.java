@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class Department extends DomainObject {
-	private long no;
+	private long id;
 	private String name;
 	private String address;
 
-	public Department(long no, String name, String address) {
-		super(new DepartmentKey(no));
-		this.no = no;
+	public Department(long id, String name, String address) {
+		super(new DepartmentKey(id));
+		this.id = id;
 		this.name = name;
 		this.address = address;
 	}
@@ -28,8 +28,8 @@ public class Department extends DomainObject {
 		return false;
 	}
 
-	public long getNo() {
-		return this.no;
+	public long getId() {
+		return this.id;
 	}
 
 	public String getName() {
@@ -49,11 +49,11 @@ public class Department extends DomainObject {
 		if (this == other) return true;
 		if (other == null || getClass() != other.getClass()) return false;
 		Department department = (Department) other;
-		return no == department.no && name.equals(department.name);
+		return id == department.id && name.equals(department.name);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(no);
+		return Objects.hash(id);
 	}
 }

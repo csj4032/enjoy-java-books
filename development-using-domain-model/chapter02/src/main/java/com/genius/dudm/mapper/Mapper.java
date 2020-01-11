@@ -1,6 +1,6 @@
 package com.genius.dudm.mapper;
 
-import com.genius.dudm.domain.DomainObject;
+import com.genius.dudm.domain.DomainKey;
 
 import java.util.List;
 
@@ -8,5 +8,5 @@ public interface Mapper<T> {
 
 	List<T> findAll();
 
-	T findByKey(long id);
+	T findByKey(DomainKey key);
 }

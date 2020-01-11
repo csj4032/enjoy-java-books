@@ -16,25 +16,25 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 
 	private static final String SELECT_SQL = """
 			SELECT
-				E.NO AS EMPLOYEE_NO,
+				E.ID AS EMPLOYEE_ID,
 				E.NAME AS EMPLOYEE_NAME,
 				E.POSITION,
-				D.NO AS DEPARTMENT_NO,
+				D.ID AS DEPARTMENT_ID,
 				D.NAME AS DEPARTMENT_NAME,
 				D.ADDRESS
 			FROM
 				EMPLOYEE AS E, DEPARTMENT AS D
 			WHERE
-				E.DEPARTMENT_NO = D.NO
+				E.DEPARTMENT_ID = D.ID
 			""";
 
 	@Override
 	protected String getFindByKey() {
-		return SELECT_SQL + " AND E.NO = ?";
+		return SELECT_SQL + " AND E.ID = ?";
 	}
 
 	public List<Employee> findByDepartment(Department department) {
-		return find(SELECT_SQL + " AND D.NO = ?", new Object[]{department.getNo()});
+		return find(SELECT_SQL + " AND D.ID = ?", new Object[]{department.getId()});
 	}
 
 	@Override
@@ -47,13 +47,13 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 			log.info("Instance Pool");
 			return InstancePool.getInstancePool().getObjectFromPool(getKey(resultSet));
 		}
-		Department department = new Department(resultSet.getLong("DEPARTMENT_NO"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
-		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_NO"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), department);
+		Department department = new Department(resultSet.getLong("DEPARTMENT_ID"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
+		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), department);
 		InstancePool.getInstancePool().addObjectToPool(employee);
 		return employee;
 	}
 
 	private DomainKey getKey(ResultSet resultSet) throws SQLException {
-		return new EmployeeKey(resultSet.getLong("NO"));
+		return new EmployeeKey(resultSet.getLong("ID"));
 	}
 }
