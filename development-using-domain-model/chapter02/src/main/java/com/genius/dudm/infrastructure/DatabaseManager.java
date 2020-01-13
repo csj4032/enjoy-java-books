@@ -17,6 +17,10 @@ public class DatabaseManager {
 		return null;
 	}
 
+	public static void close(ResultSet resultSet) {
+		if (resultSet != null) try { resultSet.close(); } catch (SQLException e) { e.printStackTrace(); }
+	}
+
 	public static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
 		if (resultSet != null) try { resultSet.close(); } catch (SQLException e) { e.printStackTrace(); }
 		if (preparedStatement != null) try { preparedStatement.close(); } catch (SQLException e) { e.printStackTrace(); }

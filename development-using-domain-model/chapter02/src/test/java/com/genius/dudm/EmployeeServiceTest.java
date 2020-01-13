@@ -6,6 +6,7 @@ import com.genius.dudm.domain.EmployeeKey;
 import com.genius.dudm.service.EmployeeService;
 import org.junit.jupiter.api.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @DisplayName("직원 관련 테스트")
@@ -34,7 +35,7 @@ public class EmployeeServiceTest {
 	@Test
 	@Order(3)
 	@DisplayName("특정 직원 조회 테스트")
-	public void EmployeeFindByIdTest() {
+	public void EmployeeFindByIdTest() throws SQLException {
 		EmployeeService employeeService = new EmployeeService();
 		Employee employee = employeeService.findById(new EmployeeKey(1l));
 		Assertions.assertEquals(1, employee.getId());

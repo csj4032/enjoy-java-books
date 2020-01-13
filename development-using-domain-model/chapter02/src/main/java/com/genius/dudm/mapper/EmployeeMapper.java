@@ -47,12 +47,16 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 		return find(SELECT_SQL, null);
 	}
 
+	@Override
+	public Employee findByKey(DomainKey key) throws SQLException {
+		return null;
+	}
+
 	protected Employee load(ResultSet resultSet) throws SQLException {
 		if (InstancePool.getInstancePool().containsInPool(getKey(resultSet))) {
 			log.info("Instance Pool");
 			return InstancePool.getInstancePool().getObjectFromPool(getKey(resultSet));
 		}
-		//Department department = new Department(resultSet.getLong("DEPARTMENT_ID"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
 		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"));
 		InstancePool.getInstancePool().addObjectToPool(employee);
 		return employee;
@@ -65,6 +69,6 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 	}
 
 	public DomainKey getKey(ResultSet resultSet) throws SQLException {
-		return new EmployeeKey(resultSet.getLong("E.ID"));
+		return new EmployeeKey(resultSet.getLong("EMPLOYEE_ID"));
 	}
 }

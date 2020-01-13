@@ -2,6 +2,7 @@ package com.genius.dudm.mapper;
 
 import com.genius.dudm.domain.DomainKey;
 import com.genius.dudm.domain.DomainObject;
+import com.genius.dudm.domain.QuerySource;
 import com.genius.dudm.infrastructure.DatabaseManager;
 import com.genius.dudm.infrastructure.InstancePool;
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,14 @@ public abstract class AbstractMapper<T extends DomainObject> implements Mapper {
 	protected abstract String getFindAllSql();
 
 	protected abstract String getFindByKeySql();
+
+	public ResultSet executeQuery(QuerySource source) throws Exception {
+		PreparedStatement preparedStatement = source.getPrepareStatement();
+		for (int i = 0; i < source.getParameterSize(); i++) {
+			preparedStatement.setObject(i + 1, source.getParameter(i));
+		}
+		return preparedStatement.executeQuery();
+	}
 
 	protected T load(ResultSet resultSet) throws Exception {
 		DomainKey key = getKey(resultSet);
@@ -55,25 +64,5 @@ public abstract class AbstractMapper<T extends DomainObject> implements Mapper {
 			DatabaseManager.close(connection, preparedStatement, resultSet);
 		}
 		return employees;
-	}
-
-	@Override
-	public T findByKey(DomainKey key) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = DatabaseManager.getConnection();
-			preparedStatement = connection.prepareStatement(getFindByKeySql());
-			for (int i = 0; i < key.getKeyFields().length; i++)
-				preparedStatement.setObject(i + 1, key.getKeyFields()[i]);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) return load(resultSet);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DatabaseManager.close(connection, preparedStatement, resultSet);
-		}
-		return null;
 	}
 }

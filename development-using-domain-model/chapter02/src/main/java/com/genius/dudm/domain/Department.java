@@ -1,10 +1,13 @@
 package com.genius.dudm.domain;
 
 import com.genius.dudm.service.EmployeeService;
+import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@ToString
 public class Department extends DomainObject {
 	private long id;
 	private String name;
@@ -57,5 +60,10 @@ public class Department extends DomainObject {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public void addEmployee(Employee employee) {
+		if(employees == null) employees = new ArrayList<>();
+		employees.add(employee);
 	}
 }
