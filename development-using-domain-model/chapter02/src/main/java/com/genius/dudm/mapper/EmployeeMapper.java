@@ -52,8 +52,8 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 			log.info("Instance Pool");
 			return InstancePool.getInstancePool().getObjectFromPool(getKey(resultSet));
 		}
-		Department department = new Department(resultSet.getLong("DEPARTMENT_ID"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
-		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), department);
+		//Department department = new Department(resultSet.getLong("DEPARTMENT_ID"), resultSet.getString("DEPARTMENT_NAME"), resultSet.getString("ADDRESS"));
+		Employee employee = new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"));
 		InstancePool.getInstancePool().addObjectToPool(employee);
 		return employee;
 	}
@@ -61,7 +61,7 @@ public class EmployeeMapper extends AbstractMapper<Employee> {
 	@Override
 	protected Employee doLoad(ResultSet resultSet) throws Exception {
 		DepartmentMapper departmentMapper = new DepartmentMapper();
-		return new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"), departmentMapper.load(resultSet));
+		return new Employee(resultSet.getLong("EMPLOYEE_ID"), resultSet.getString("EMPLOYEE_NAME"), resultSet.getString("POSITION"));
 	}
 
 	public DomainKey getKey(ResultSet resultSet) throws SQLException {

@@ -9,12 +9,14 @@ public class Department extends DomainObject {
 	private long id;
 	private String name;
 	private String address;
+	private List<Employee> employees;
 
-	public Department(long id, String name, String address) {
+	public Department(long id, String name, String address, List<Employee> employees) {
 		super(new DepartmentKey(id));
 		this.id = id;
 		this.name = name;
 		this.address = address;
+		this.employees = employees;
 	}
 
 	public boolean move(int limitsEmployeeCount, String newAddress) {

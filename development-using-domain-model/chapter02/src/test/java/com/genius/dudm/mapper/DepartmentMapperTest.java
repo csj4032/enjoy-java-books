@@ -29,6 +29,6 @@ public class DepartmentMapperTest {
 	public void testFindAll() {
 		DepartmentMapper departmentMapper = new DepartmentMapper();
 		List<Department> departments = departmentMapper.findAll();
-		assertEquals(3, departments.size());
+		assertEquals(6, departments.size());
 	}
 }

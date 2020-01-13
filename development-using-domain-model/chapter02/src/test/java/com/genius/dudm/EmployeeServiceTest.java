@@ -26,7 +26,7 @@ public class EmployeeServiceTest {
 	@DisplayName("특정 부서 직원 조회 테스트")
 	public void EmployeeByDepartmentTest() {
 		EmployeeService employee = new EmployeeService();
-		Department department = new Department(1, "경리과", "본사11층");
+		Department department = new Department(1, "경리과", "본사11층", null);
 		List<Employee> employees = employee.findAllEmployeeByDepartment(department);
 		Assertions.assertEquals(3, employees.size());
 	}

@@ -16,7 +16,7 @@ public class DepartmentTest {
 	@Order(1)
 	@DisplayName("총무과 이동")
 	public void moveTest() {
-		Department department = new Department(2, "총무과", "본사11");
+		Department department = new Department(2, "총무과", "본사11", null);
 		department.move(2, "본사13");
 	}
 
