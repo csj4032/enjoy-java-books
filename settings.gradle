@@ -84,7 +84,7 @@ findProject(':java-basic:lambdas')?.name = 'lambdas'
 //findProject(':java-basic:generic')?.name = 'generic'
 //include 'java-basic:reactive'
 //findProject(':java-basic:reactive')?.name = 'reactive'
-//include 'java-basic:stream'
+include 'java-basic:stream'
 //findProject(':java-basic:stream')?.name = 'stream'
 
 //include 'geniusFX'
