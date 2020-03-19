@@ -14,6 +14,9 @@
 ## Effective Java
 * https://github.com/marhan/effective-java-examples
 
+## Functional Programming in Java
+* https://github.com/fpinjava/fpinjava
+
 ## Growing Object-Oriented Software, Guided by Tests
 
 ## Java 8 in Action

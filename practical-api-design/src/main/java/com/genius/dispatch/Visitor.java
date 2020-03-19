@@ -1,6 +1,7 @@
 package com.genius.dispatch;
 
 public interface Visitor {
-
-	void execute(Expression expression);
+	void visitPlus(Plus s);
+	void visitMinus(Minus s);
+	void visitNumber(Number n);
 }

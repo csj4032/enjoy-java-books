@@ -46,6 +46,9 @@ rootProject.name = 'enjoy-java-books'
 
 //include 'effective-java-edition2'
 //include 'effective-java-edition3'
+
+include 'functional-programming-in-java'
+
 //include 'goos'
 
 //include 'hands-on-reactive-programming-in-spring-5:chapter01'
@@ -74,6 +77,8 @@ rootProject.name = 'enjoy-java-books'
 //include 'java-basic:jdbc'
 //findProject(':java-basic:jdbc')?.name = 'jdbc'
 //include 'java-basic:jpa'
+include 'java-basic:lambdas'
+findProject(':java-basic:lambdas')?.name = 'lambdas'
 //findProject(':java-basic:jpa')?.name = 'jpa'
 //include 'java-basic:generic'
 //findProject(':java-basic:generic')?.name = 'generic'
@@ -95,7 +100,7 @@ rootProject.name = 'enjoy-java-books'
 
 //include 'java-chatting-programming'
 //include 'growing-object-oriented-software-guided-by-tests'
-include 'practical-api-design'
+//include 'practical-api-design'
 //include 'pro-java-7-nio-2'
 
 //include 'reactive-programming-with-rxjava'
