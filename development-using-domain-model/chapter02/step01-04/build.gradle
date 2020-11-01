@@ -1,0 +1,8 @@
+group 'step01'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.2'
+    compile group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4', version: '1.16'
+    compile group: 'org.jooq', name: 'jool', version: '0.9.14'
+}

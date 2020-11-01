@@ -17,6 +17,6 @@ public class StaticFunctionInterface {
 
 	public static Function<Original, Destination> mapping() {
 		Map<Object, Boolean> map = new ConcurrentHashMap<>();
-		return o -> Destination.builder().emailOver(map.putIfAbsent(o.getEmail(), Boolean.TRUE)).name(o.getFirstName()+o.getLastName()).email(o.getEmail()).build();
+		return o -> Destination.builder().emailOver(map.putIfAbsent(o.getEmail(), Boolean.TRUE)).name(o.getFirstName() + o.getLastName()).email(o.getEmail()).build();
 	}
 }
